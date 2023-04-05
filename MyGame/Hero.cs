@@ -67,6 +67,10 @@ namespace MyGame
                 }
                 Y++;
             }
+            if ((int)elapsed == 1000)
+            { 
+            
+            }
             if (Mouse.IsButtonPressed(Mouse.Button.Left))
             {
                 Console.WriteLine("Click");
