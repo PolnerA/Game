@@ -84,9 +84,11 @@ namespace MyGame
                 {
                     Vector2f tile = middletile[i];
                     Vector2i inttile = new Vector2i((int)tile.X, (int)tile.Y);
+                    Console.WriteLine(inttile.X+","+inttile.Y);
+                    Console.WriteLine(Mouse.GetPosition());
                     if (Mouse.GetPosition() == inttile)
                     {
-                        Console.WriteLine("Tile pos found (intersect)");
+                        Console.WriteLine("intersect");
                         down = true;
                     }
                 }
