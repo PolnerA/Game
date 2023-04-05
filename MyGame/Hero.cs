@@ -4,6 +4,7 @@ using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -45,14 +46,40 @@ namespace MyGame
             Vector2f middletilepos = new Vector2f(x-22, y+32);
             float tilex = middletilepos.X;
             float tiley = middletilepos.Y;
-            List<Vector2f> middletile = new List<Vector2f>;
+            //Gets the pixels for the middle tile
+            List<Vector2f> middletile = new List<Vector2f>();
+            int Y = 1;
             for (int numofXpixels = 4; numofXpixels<=60; numofXpixels +=4)
             {
-                int x = 64-y;
+                int X = (64-numofXpixels)/2;
+                for (int Xvalues = X; X<=Xvalues+numofXpixels; X++)
+                {
+                    middletile.Add(new Vector2f(middletilepos.X+X,middletilepos.Y+ Y));
+                }
+                Y++;
             }
-            if (Mouse.IsButtonPressed(Mouse.Button.Right))
-            { 
-                if(Mouse.GetPosition() == )
+            for (int numofXpixels = 60; 4<=numofXpixels; numofXpixels -=4)
+            {
+                int X = (64-numofXpixels)/2;
+                for (int Xvalues = X; X<=Xvalues+numofXpixels; X++)
+                {
+                    middletile.Add(new Vector2f(middletilepos.X +X,middletilepos.Y+ Y));
+                }
+                Y++;
+            }
+            if (Mouse.IsButtonPressed(Mouse.Button.Left))
+            {
+                Console.WriteLine("Click");
+                for (int i = 0; i<middletile.Count; i++)
+                {
+                    Vector2f tile = middletile[i];
+                    Vector2i inttile = new Vector2i((int)tile.X, (int)tile.Y);
+                    if (Mouse.GetPosition() == inttile)
+                    {
+                        Console.WriteLine("Tile pos found (intersect)");
+                        down = true;
+                    }
+                }
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up)&&movedelay<=_movetimer)
             {//movement north 
