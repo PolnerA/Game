@@ -21,6 +21,7 @@ namespace MyGame
         private int jumpduration = 0;
         private int _jumptimer;
         private int _movetimer;
+        private int _milliseconds;
         private const int movedelay = 5;
         private readonly Sprite _sprite = new Sprite();
 
@@ -40,6 +41,7 @@ namespace MyGame
             bool down = false;
             bool left = false;
             bool right = false;
+            
             Vector2f pos = _sprite.Position;
             float x = pos.X;
             float y = pos.Y;
@@ -67,9 +69,13 @@ namespace MyGame
                 }
                 Y++;
             }
-            if ((int)elapsed == 1000)
-            { 
-            
+            if (_milliseconds == 10)
+            {
+                for (int i = 0; i<middletile.Count; i++)
+                {
+                    Vector2f tile = middletile[i];
+                    Console.WriteLine("("+tile.X+","+tile.Y+")");
+                }
             }
             if (Mouse.IsButtonPressed(Mouse.Button.Left))
             {
@@ -155,6 +161,7 @@ namespace MyGame
                     y+=16;
                 }
             }
+            _milliseconds++;
             _sprite.Position = new Vector2f(x, y);
             _movetimer++;
            /*
