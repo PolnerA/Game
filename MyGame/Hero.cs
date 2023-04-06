@@ -41,7 +41,7 @@ namespace MyGame
             bool down = false;
             bool left = false;
             bool right = false;
-            
+            bool nowhere = false;
             Vector2f pos = _sprite.Position;
             float x = pos.X;
             float y = pos.Y;
@@ -52,7 +52,7 @@ namespace MyGame
             List<Vector2f> middletile = new List<Vector2f>();
             int Y = 1;
             for (int numofXpixels = 4; numofXpixels<=60; numofXpixels +=4)
-            {
+            {//grid is a bit north east of the orginal tile (directly above)
                 int X = (64-numofXpixels)/2;
                 for (int Xvalues = X; X<=Xvalues+numofXpixels; X++)
                 {
@@ -69,31 +69,48 @@ namespace MyGame
                 }
                 Y++;
             }
-            if (_milliseconds == 10)
-            {
-                for (int i = 0; i<middletile.Count; i++)
-                {
-                    Vector2f tile = middletile[i];
-                    Console.WriteLine("("+tile.X+","+tile.Y+")");
-                }
-            }
             if (Mouse.IsButtonPressed(Mouse.Button.Left))
             {
-                Console.WriteLine("Click");
+                //Console.WriteLine("Click");
                 for (int i = 0; i<middletile.Count; i++)
                 {
                     Vector2f tile = middletile[i];
-                    Vector2i inttile = new Vector2i((int)tile.X, (int)tile.Y);
-                    Console.WriteLine(inttile.X+","+inttile.Y);
-                    Console.WriteLine(Mouse.GetPosition());
-                    if (Mouse.GetPosition() == inttile)
+                    Vector2i midtile = new Vector2i((int)tile.X, (int)tile.Y);
+                    Vector2i southtile = new Vector2i((int)tile.X+32, (int)tile.Y+16);
+                    Vector2i westtile = new Vector2i((int)tile.X-32, (int)tile.Y-16);
+                    Vector2i northtile = new Vector2i((int)tile.X-32, (int)tile.Y+16);
+                    Vector2i easttile = new Vector2i((int)tile.X+32, (int)tile.Y-16);
+
+                    //Console.WriteLine(inttile.X+","+inttile.Y);
+                    //Console.WriteLine(Mouse.GetPosition());//mouse position is on the screen not in game. to offset this I did put the window location to -11,-45 which should also get rid of the white bars on the edges
+                    if (Mouse.GetPosition() == midtile)
                     {
-                        Console.WriteLine("intersect");
+                        nowhere = true;
+                        break;
+                    }
+                    if (Mouse.GetPosition() == southtile)
+                    {
                         down = true;
+                        break;
+                    }
+                    if (Mouse.GetPosition() == westtile)
+                    {
+                        left = true;
+                        break;
+                    }
+                    if (Mouse.GetPosition() == northtile)
+                    {
+                        up = true;
+                        break;
+                    }
+                    if (Mouse.GetPosition() == easttile)
+                    {
+                        right = true;
+                        break;
                     }
                 }
             }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Up)&&movedelay<=_movetimer)
+            if (up&&movedelay<=_movetimer)
             {//movement north 
                 x -= 32;
                 y -=16;
@@ -110,7 +127,7 @@ namespace MyGame
                     y+=16;
                 }
             }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Left)&&movedelay<=_movetimer)
+            if (left&&movedelay<=_movetimer)
             { //movement west
                 x -= 32;
                 y +=16;
@@ -127,7 +144,7 @@ namespace MyGame
                     y-=16;
                 }
             }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Down)&&movedelay<=_movetimer)
+            if (down&&movedelay<=_movetimer)
             { //movement south
                 x += 32;
                 y +=16;
@@ -145,7 +162,7 @@ namespace MyGame
                 }
 
             }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Right)&&movedelay<=_movetimer) 
+            if (right&&movedelay<=_movetimer) 
             { //movement east
                 x += 32;
                 y -=16;
@@ -163,6 +180,16 @@ namespace MyGame
                     y+=16;
                 }
             }
+            if (nowhere&&movedelay<=_movetimer)
+            {
+                _sprite.Texture = Game.GetTexture("../../../Resources/John.png");
+                _movetimer=0;
+            }
+            up = false;
+            down = false;
+            left = false;
+            right= false;
+            nowhere = false;
             _milliseconds++;
             _sprite.Position = new Vector2f(x, y);
             _movetimer++;
