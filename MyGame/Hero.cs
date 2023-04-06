@@ -77,8 +77,8 @@ namespace MyGame
                     Vector2f tile = middletile[i];
                     Vector2i midtile = new Vector2i((int)tile.X, (int)tile.Y);
                     Vector2i southtile = new Vector2i((int)tile.X+32, (int)tile.Y+16);
-                    Vector2i westtile = new Vector2i((int)tile.X-32, (int)tile.Y-16);
-                    Vector2i northtile = new Vector2i((int)tile.X-32, (int)tile.Y+16);
+                    Vector2i westtile = new Vector2i((int)tile.X-32, (int)tile.Y+16);
+                    Vector2i northtile = new Vector2i((int)tile.X-32, (int)tile.Y-16);
                     Vector2i easttile = new Vector2i((int)tile.X+32, (int)tile.Y-16);
 
                     //Console.WriteLine(inttile.X+","+inttile.Y);
