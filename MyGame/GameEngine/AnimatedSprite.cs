@@ -44,7 +44,7 @@ namespace GameEngine
 
         // This controls how fast animations are by default.
         // It specifies how long each frame is displayed on the screen.
-        private const int DefaultMsPerFrame = 4;
+        private const int DefaultMsPerFrame = 50;
 
         // The sprite we draw to the screen.
         private readonly Sprite _sprite = new Sprite();

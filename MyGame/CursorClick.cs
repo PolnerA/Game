@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyGame
 {
-    class CursorClick : AnimatedSprite
+    class CursorClick : AnimatedSprite//ToDo make a cursor click animation that works
     {
         public CursorClick(Vector2f pos) : base(pos)
         {

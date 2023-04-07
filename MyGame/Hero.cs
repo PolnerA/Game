@@ -13,15 +13,14 @@ using System.Threading.Tasks;
 namespace MyGame
 {
     class Hero: GameObject
-    {
-        private const float speed = 0.3f;
+    {//ToDo make click animation make spell cast sprite, enemy and loot spawns and background
+        //draw enemies, potion, chests, background, and a wand with spells and a click animation
         private const int attackdelay = 300;
         private const int jumpdelay = 1000;
         private int _attacktimer;
         private int jumpduration = 0;
         private int _jumptimer;
         private int _movetimer;
-        private int _milliseconds;
         private const int movedelay = 50;
         private readonly Sprite _sprite = new Sprite();
 
@@ -69,9 +68,13 @@ namespace MyGame
                 }
                 Y++;
             }
-            if (Mouse.IsButtonPressed(Mouse.Button.Left))
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&movedelay<=_movetimer)
             {
                 //Console.WriteLine("Click");
+                Vector2i intclick = Mouse.GetPosition();
+                Vector2f floatclick = new Vector2f((float)intclick.X,(float)intclick.Y);
+                Explosion explosion = new Explosion(floatclick);
+                Game.CurrentScene.AddGameObject(explosion);
                 for (int i = 0; i<middletile.Count; i++)
                 {
                     Vector2f tile = middletile[i];
@@ -108,9 +111,11 @@ namespace MyGame
                         right = true;
                         break;
                     }
+
                 }
+                _movetimer=0;
             }
-            if (up&&movedelay<=_movetimer)
+            if (up)
             {//movement north 
                 x -= 32;
                 y -=16;
@@ -118,7 +123,7 @@ namespace MyGame
                 {
                     Tile_Spawner spawntiles = new Tile_Spawner();
                     spawntiles.SpawnThreetilesSouth(new Vector2f(x-22, y+32));
-                    _movetimer=0;
+                    
                     _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");
                 }
                 else 
@@ -127,7 +132,7 @@ namespace MyGame
                     y+=16;
                 }
             }
-            if (left&&movedelay<=_movetimer)
+            if (left)
             { //movement west
                 x -= 32;
                 y +=16;
@@ -135,7 +140,7 @@ namespace MyGame
                 {
                     Tile_Spawner spawntiles = new Tile_Spawner();
                     spawntiles.SpawnThreetilesEast(new Vector2f(x-22, y+32));
-                    _movetimer =0;
+                    
                     _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");
                 }
                 else 
@@ -144,7 +149,7 @@ namespace MyGame
                     y-=16;
                 }
             }
-            if (down&&movedelay<=_movetimer)
+            if (down)
             { //movement south
                 x += 32;
                 y +=16;
@@ -152,7 +157,7 @@ namespace MyGame
                 {
                     Tile_Spawner spawntiles = new Tile_Spawner();
                     spawntiles.SpawnThreetilesNorth(new Vector2f(x-22, y+32));
-                    _movetimer = 0;
+                    
                     _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
                 }
                 else
@@ -162,7 +167,7 @@ namespace MyGame
                 }
 
             }
-            if (right&&movedelay<=_movetimer) 
+            if (right) 
             { //movement east
                 x += 32;
                 y -=16;
@@ -171,7 +176,6 @@ namespace MyGame
                     Tile_Spawner spawntiles = new Tile_Spawner();
 
                     spawntiles.SpawnThreetilesWest(new Vector2f(x-22, y+32));
-                    _movetimer =0;
                     _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");
                 }
                 else
@@ -180,10 +184,9 @@ namespace MyGame
                     y+=16;
                 }
             }
-            if (nowhere&&movedelay<=_movetimer)
+            if (nowhere)
             {
                 _sprite.Texture = Game.GetTexture("../../../Resources/John.png");
-                _movetimer=0;
             }
             up = false;
             down = false;
