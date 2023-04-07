@@ -22,7 +22,7 @@ namespace MyGame
         private int _jumptimer;
         private int _movetimer;
         private int _milliseconds;
-        private const int movedelay = 5;
+        private const int movedelay = 50;
         private readonly Sprite _sprite = new Sprite();
 
         public Hero(Vector2f pos)
