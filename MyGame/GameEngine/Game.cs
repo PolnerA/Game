@@ -47,6 +47,7 @@ namespace GameEngine
             // Create the render window.
             _window = new RenderWindow(new VideoMode(windowWidth, windowHeight), windowTitle);
             _window.Position = new Vector2i(-11,-45);
+            _window.SetMouseCursorGrabbed(true);
             _window.SetFramerateLimit(FramesPerSecond);
 
             // Add a method to be called whenever the "Closed" event fires.

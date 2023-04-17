@@ -4,8 +4,8 @@ namespace MyGame
 {
     static class MyGame
     {
-        private const int WindowWidth = 1080;
-        private const int WindowHeight = 720;
+        private const int WindowWidth = 1920;
+        private const int WindowHeight = 1080;
 
         private const string WindowTitle = "Adventure Land";
 

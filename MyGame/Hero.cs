@@ -21,7 +21,7 @@ namespace MyGame
         private int jumpduration = 0;
         private int _jumptimer;
         private int _movetimer;
-        private const int movedelay = 50;
+        private const int movedelay = 25;
         private readonly Sprite _sprite = new Sprite();
 
         public Hero(Vector2f pos)
@@ -41,6 +41,10 @@ namespace MyGame
             bool left = false;
             bool right = false;
             bool nowhere = false;
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+            {
+                Game.RenderWindow.Close();
+            }    
             Vector2f pos = _sprite.Position;
             float x = pos.X;
             float y = pos.Y;
@@ -136,7 +140,7 @@ namespace MyGame
             { //movement west
                 x -= 32;
                 y +=16;
-                if (0<=x&&y<=670)
+                if (0<=x&&y<=1030)
                 {
                     Tile_Spawner spawntiles = new Tile_Spawner();
                     spawntiles.SpawnThreetilesEast(new Vector2f(x-22, y+32));
@@ -153,7 +157,7 @@ namespace MyGame
             { //movement south
                 x += 32;
                 y +=16;
-                if (x<=1060&&y<=670)
+                if (x<=1900&&y<=1030)
                 {
                     Tile_Spawner spawntiles = new Tile_Spawner();
                     spawntiles.SpawnThreetilesNorth(new Vector2f(x-22, y+32));
@@ -171,7 +175,7 @@ namespace MyGame
             { //movement east
                 x += 32;
                 y -=16;
-                if (x<=1060&&-30<=y)
+                if (x<=1900&&-30<=y)
                 {
                     Tile_Spawner spawntiles = new Tile_Spawner();
 
@@ -193,7 +197,6 @@ namespace MyGame
             left = false;
             right= false;
             nowhere = false;
-            _milliseconds++;
             _sprite.Position = new Vector2f(x, y);
             _movetimer++;
            /*
