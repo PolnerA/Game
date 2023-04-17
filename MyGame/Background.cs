@@ -16,9 +16,9 @@ namespace MyGame
         private readonly Sprite _sprite = new Sprite();
         private readonly Sprite _sprite2 = new Sprite();
         public Background()
-        {
-            _sprite.Texture = Game.GetTexture("../../../Resources/spacebackground.png");
-            _sprite2.Texture = Game.GetTexture("../../../Resources/spacebackground.png");
+        {//make tile background and remodel the animation to be at the top with clouds
+            _sprite.Texture = Game.GetTexture("../../../Resources/background.png");
+            _sprite2.Texture = Game.GetTexture("../../../Resources/background.png");
             _sprite2.Position = new Vector2f(1080, 0);
             _sprite.Position = new Vector2f(0, 0);
         }

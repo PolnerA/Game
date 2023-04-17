@@ -12,7 +12,7 @@ namespace MyGame
     class CursorClick : AnimatedSprite//ToDo make a cursor click animation that works
     {
         public CursorClick(Vector2f pos) : base(pos)
-        {
+        {//TODO make click animation
             Texture = Game.GetTexture("Resources/explosion-spritesheet.png");
             SetUpClickAnimation();
             PlayAnimation("click", AnimationMode.OnceForwards);

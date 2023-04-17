@@ -11,7 +11,7 @@ namespace MyGame
     class Enemy : GameObject
     {
         private const float Speed = 0.3f;
-        private readonly Sprite _sprite = new Sprite();
+        private readonly Sprite _sprite = new Sprite();//make enemy sprites, and the loot
         public Enemy(Vector2f pos)
         {
             _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");
