@@ -6,12 +6,12 @@ namespace MyGame
     {
         private int _lives = 3;
         private int _score;
+        public Hero hero = new Hero(new Vector2f(122, 488));
         public GameScene()
         {
             
              
-            Background background = new Background();
-             AddGameObject(background);
+             
              Tile tile = new Tile(new Vector2f(100,520));//original tile            _ 
              Tile tile1 = new Tile(new Vector2f(132, 536));//south tile +32x, + 16y  \
              Tile tile2 = new Tile(new Vector2f (132,504));//east tile +32x, -16y     |_ compared to original tile
@@ -24,17 +24,17 @@ namespace MyGame
              AddGameObject(tile4);
              Tile_Spawner tiles = new Tile_Spawner();
              AddGameObject(tiles);
-             Hero hero = new Hero(new Vector2f(122, 488));//character location +22x, -32y compared to the tile stood on
+             //character location +22x, -32y compared to the tile stood on
              AddGameObject(hero);
-
-             
-            
-            
         }
         // Get the current score
         public int GetScore()
         {
             return _score;
+        }
+        public Vector2f GetHeroPos()
+        {
+            return hero.GetPos();
         }
         // Increase the score
         public void IncreaseScore()

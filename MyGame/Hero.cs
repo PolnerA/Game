@@ -23,11 +23,16 @@ namespace MyGame
         private int _movetimer;
         private const int movedelay = 25;
         private readonly Sprite _sprite = new Sprite();
-
+        private Vector2f pos;
+        public Vector2f GetPos()
+        {
+            return pos;
+        }
         public Hero(Vector2f pos)
         {
             _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
             _sprite.Position = pos;
+            this.pos = pos;
         }
         public override void Draw()
         {
@@ -198,6 +203,7 @@ namespace MyGame
             right= false;
             nowhere = false;
             _sprite.Position = new Vector2f(x, y);
+            pos = _sprite.Position;
             _movetimer++;
            /*
             if (0<jumpduration)

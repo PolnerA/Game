@@ -18,6 +18,7 @@ namespace MyGame
         Random rng = new Random();
         private const int SpawnDelay = 1000;
         private int _timer;
+        private Vector2f position;
         public void SpawnThreetiles(Vector2f pos, Vector2f previouspos)
         {
             float x = pos.X;
@@ -57,6 +58,7 @@ namespace MyGame
         }
         public void SpawnThreetilesNorth(Vector2f pos)
         {
+            position = pos;
             bool down=true;
             bool left = true;
             bool right = true;
@@ -102,6 +104,7 @@ namespace MyGame
         }
         public void SpawnThreetilesWest(Vector2f pos)
         {
+            position = pos;
             bool down = true;
             bool up = true;
             bool right = true;
@@ -149,6 +152,7 @@ namespace MyGame
         }
         public void SpawnThreetilesSouth(Vector2f pos)
         {
+            position = pos;
             bool left = true;
             bool up = true;
             bool right = true;
@@ -196,6 +200,7 @@ namespace MyGame
         }
         public void SpawnThreetilesEast(Vector2f pos)
         {
+            position = pos;
             bool left = true;
             bool up = true;
             bool down = true;
@@ -241,8 +246,9 @@ namespace MyGame
             }
 
         }
-        public void tilehas(Vector2f tilepos)
+        public void tilehas(Vector2f spawnpos)
         {
+
             int integer = rng.Next(4);
             if (integer == 0)
             {
@@ -251,8 +257,9 @@ namespace MyGame
                 {
                     case 0:
                         //spawn enemy using the position of the tile
-                        Enemy enemy = new Enemy(tilepos);
+                        Enemy enemy = new Enemy(spawnpos,placedtiles);//pos is currently stood on tile
                         Game.CurrentScene.AddGameObject(enemy);
+
                         break;
                     case 1:
                         //spawn chest using the position of the tile
@@ -266,7 +273,7 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-            
+
         }
     }
 }
