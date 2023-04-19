@@ -54,7 +54,9 @@ namespace MyGame
                         bool move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
-                            if (placedtiles[num]==new Vector2f(x-22, y+32))
+                            float ptx = placedtiles[num].X;
+                            float pty = placedtiles[num].Y;
+                            if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
                             {
                                 if (-30<=y&&0<=x)
                                 {
@@ -79,7 +81,9 @@ namespace MyGame
                     move = false;
                     for(int num=0;num<placedtiles.Count;num++)
                     {
-                        if (placedtiles[num]==new Vector2f(x-22, y+32))
+                        float ptx = placedtiles[num].X;
+                        float pty = placedtiles[num].Y;
+                        if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
                         {
                             if (0<=x&&y<=1030)
                             {
@@ -105,7 +109,9 @@ namespace MyGame
                          move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
-                            if (placedtiles[num]==new Vector2f(x - 22, y + 32))
+                            float ptx = placedtiles[num].X;
+                            float pty = placedtiles[num].Y;
+                            if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
                             {
                                 if (x<=1900&&y<=1030)
                                 {
@@ -137,7 +143,9 @@ namespace MyGame
                         move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
-                            if (placedtiles[num]==new Vector2f(x - 22, y + 32))
+                            float ptx = placedtiles[num].X;
+                            float pty = placedtiles[num].Y;
+                            if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
                             {
                                 if (x<=1900&&-30<=y)
                                 {
