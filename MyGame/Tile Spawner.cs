@@ -65,15 +65,17 @@ namespace MyGame
             for (int i = 0; i<placedtiles.Count; i++)
             { 
                 Vector2f tilepos = placedtiles[i];
-                if (tilepos == new Vector2f(pos.X+32, pos.Y+16))
+                float tpx = tilepos.X;
+                float tpy = tilepos.Y;
+                if (tpx < pos.X+33&&pos.X+31<tpx&&tpy<pos.Y+17&&pos.Y+15<tpy)
                 {
                     down=false;
                 }
-                if (tilepos == new Vector2f(pos.X+32, pos.Y-16))
+                if (tpx < pos.X+33&&pos.X+31<tpx&&pos.Y-17<tpy&&tpy<pos.Y-15)
                 {
                     right=false;
                 }
-                if (tilepos == new Vector2f(pos.X-32, pos.Y+16))
+                if ( pos.X-33<tpx&&tpx<pos.X-31&&tpy<pos.Y+17&&pos.Y+15<tpy)
                 {
                     left=false;
                 }
@@ -111,15 +113,17 @@ namespace MyGame
             for (int i = 0; i<placedtiles.Count; i++)
             {
                 Vector2f tilepos = placedtiles[i];
-                if (tilepos == new Vector2f(pos.X+32, pos.Y+16))
+                float tpx = tilepos.X;
+                float tpy = tilepos.Y;
+                if (tpx < pos.X+33&&pos.X+31<tpx&&tpy<pos.Y+17&&pos.Y+15<tpy)
                 {
                     down=false;
                 }
-                if (tilepos == new Vector2f(pos.X+32, pos.Y-16))
+                if (tpx < pos.X+33&&pos.X+31<tpx&&pos.Y-17<tpy&&tpy<pos.Y-15)
                 {
                     right=false;
                 }
-                if (tilepos == new Vector2f(pos.X-32, pos.Y-16))
+                if (pos.X-33<tpx&&tpx<pos.X-31&&pos.Y-17<tpy&&tpy<pos.Y-15)
                 {
                     up=false;
                 }
@@ -159,15 +163,17 @@ namespace MyGame
             for (int i = 0; i<placedtiles.Count; i++)
             {
                 Vector2f tilepos = placedtiles[i];
-                if (tilepos == new Vector2f(pos.X-32, pos.Y+16))
+                float tpx = tilepos.X;
+                float tpy = tilepos.Y;
+                if (pos.X-33<tpx&&tpx<pos.X-31&&tpy<pos.Y+17&&pos.Y+15<tpy)
                 {
                     left=false;
                 }
-                if (tilepos == new Vector2f(pos.X+32, pos.Y-16))
+                if (tpx < pos.X+33&&pos.X+31<tpx&&pos.Y-17<tpy&&tpy<pos.Y-15)
                 {
                     right=false;
                 }
-                if (tilepos == new Vector2f(pos.X-32, pos.Y-16))
+                if (pos.X-33<tpx&&tpx<pos.X-31&&pos.Y-17<tpy&&tpy<pos.Y-15)
                 {
                     up=false;
                 }
@@ -207,15 +213,17 @@ namespace MyGame
             for (int i = 0; i<placedtiles.Count; i++)
             {
                 Vector2f tilepos = placedtiles[i];
-                if (tilepos == new Vector2f(pos.X-32, pos.Y+16))
+                float tpx = tilepos.X;
+                float tpy = tilepos.Y;
+                if (pos.X-33<tpx&&tpx<pos.X-31&&tpy<pos.Y+17&&pos.Y+15<tpy)
                 {
                     left=false;
                 }
-                if (tilepos == new Vector2f(pos.X+32, pos.Y+16))
+                if (tpx < pos.X+33&&pos.X+31<tpx&&tpy<pos.Y+17&&pos.Y+15<tpy)
                 {
                     down=false;
                 }
-                if (tilepos == new Vector2f(pos.X-32, pos.Y-16))
+                if (pos.X-33<tpx&&tpx<pos.X-31&&pos.Y-17<tpy&&tpy<pos.Y-15)
                 {
                     up=false;
                 }
