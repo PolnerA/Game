@@ -14,7 +14,7 @@ namespace MyGame
     class Tile_Spawner :GameObject
     {
         private List<Vector2f> isogrid= new List<Vector2f>();
-        private List<Vector2f> placedtiles = new List<Vector2f>();
+        private List<Vector2f> placedtiles = new List<Vector2f>();//creates a new instance of tilespawner each move so, placed tiles needs to be in gamescene or pass the hero classes tilespawner's to use the one in the gamescene
         Random rng = new Random();
         private const int SpawnDelay = 1000;
         private int _timer;
@@ -150,7 +150,7 @@ namespace MyGame
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
                 Game.CurrentScene.AddGameObject(1, north);
                 tilehas(new Vector2f(pos.X-32, pos.Y-16));
-
+                Console.WriteLine()
             }
 
         }
@@ -160,11 +160,14 @@ namespace MyGame
             bool left = true;
             bool up = true;
             bool right = true;
+           
             for (int i = 0; i<placedtiles.Count; i++)
             {
                 Vector2f tilepos = placedtiles[i];
                 float tpx = tilepos.X;
                 float tpy = tilepos.Y;
+                Console.WriteLine(tilepos);
+                Console.WriteLine(placedtiles.Count);//doesnt show? Tilesplaced==0
                 if (pos.X-33<tpx&&tpx<pos.X-31&&tpy<pos.Y+17&&pos.Y+15<tpy)
                 {
                     left=false;
