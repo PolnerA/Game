@@ -150,7 +150,6 @@ namespace MyGame
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
                 Game.CurrentScene.AddGameObject(1, north);
                 tilehas(new Vector2f(pos.X-32, pos.Y-16));
-                Console.WriteLine()
             }
 
         }
