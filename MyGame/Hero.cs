@@ -24,6 +24,7 @@ namespace MyGame
         private const int movedelay = 25;
         private readonly Sprite _sprite = new Sprite();
         private Vector2f pos;
+        private Tile_Spawner tilespawner = new Tile_Spawner();
         public Vector2f GetPos()
         {
             return pos;
@@ -130,8 +131,7 @@ namespace MyGame
                 y -=16;
                 if (-30<=y&&0<=x)
                 {
-                    Tile_Spawner spawntiles = new Tile_Spawner();
-                    spawntiles.SpawnThreetilesSouth(new Vector2f(x-22, y+32));
+                    tilespawner.SpawnThreetilesSouth(new Vector2f(x-22, y+32));
                     
                     _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");
                 }
@@ -147,8 +147,7 @@ namespace MyGame
                 y +=16;
                 if (0<=x&&y<=1030)
                 {
-                    Tile_Spawner spawntiles = new Tile_Spawner();
-                    spawntiles.SpawnThreetilesEast(new Vector2f(x-22, y+32));
+                    tilespawner.SpawnThreetilesEast(new Vector2f(x-22, y+32));
                     
                     _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");
                 }
@@ -164,8 +163,7 @@ namespace MyGame
                 y +=16;
                 if (x<=1900&&y<=1030)
                 {
-                    Tile_Spawner spawntiles = new Tile_Spawner();
-                    spawntiles.SpawnThreetilesNorth(new Vector2f(x-22, y+32));
+                    tilespawner.SpawnThreetilesNorth(new Vector2f(x - 22, y + 32));
                     
                     _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
                 }
@@ -182,9 +180,7 @@ namespace MyGame
                 y -=16;
                 if (x<=1900&&-30<=y)
                 {
-                    Tile_Spawner spawntiles = new Tile_Spawner();
-
-                    spawntiles.SpawnThreetilesWest(new Vector2f(x-22, y+32));
+                    tilespawner.SpawnThreetilesWest(new Vector2f(x - 22, y + 32));
                     _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");
                 }
                 else
