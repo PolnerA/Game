@@ -159,22 +159,107 @@ namespace MyGame
                     if (hy<y)
                     {
                         //movement north
-                        
+                        x -= 32;
+                        y -=16;
+                        bool move = false;
+                        for (int num = 0; num<placedtiles.Count; num++)
+                        {
+                            float ptx = placedtiles[num].X;
+                            float pty = placedtiles[num].Y;
+                            if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
+                            {
+                                if (-30<=y&&0<=x)
+                                {
+                                    move = true;
+                                    _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the north texture
+                                }
+                            }
+                        }
+                        if (!move)
+                        {
+                            x+=32;
+                            y+=16;
+                        }
                         //movement east
-                       
+
                     }
                     if (y<hy)
-                    { 
+                    {
                         //movement south
                         //movement west
+                        x -= 32;
+                        y +=16;
+                        bool move = false;
+                        for (int num = 0; num<placedtiles.Count; num++)
+                        {
+                            float ptx = placedtiles[num].X;
+                            float pty = placedtiles[num].Y;
+                            if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
+                            {
+                                if (0<=x&&y<=1030)
+                                {
+
+                                    move = true;
+                                    _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the west texture
+                                }
+                            }
+                        }
+                        if (!move)
+                        {
+                            x+=32;
+                            y-=16;
+                        }
                     }
                 }
                 if (hy==y && hx !=x)
                 {
                     if (hx<x)
-                    { 
+                    {
                         //movement north
+                        x -= 32;
+                        y -=16;
+                        bool move = false;
+                        for (int num = 0; num<placedtiles.Count; num++)
+                        {
+                            float ptx = placedtiles[num].X;
+                            float pty = placedtiles[num].Y;
+                            if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
+                            {
+                                if (-30<=y&&0<=x)
+                                {
+                                    move = true;
+                                    _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the north texture
+                                }
+                            }
+                        }
+                        if (!move)
+                        {
+                            x+=32;
+                            y+=16;
+                        }
                         //movement west
+                        x -= 32;
+                        y +=16;
+                        move = false;
+                        for (int num = 0; num<placedtiles.Count; num++)
+                        {
+                            float ptx = placedtiles[num].X;
+                            float pty = placedtiles[num].Y;
+                            if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
+                            {
+                                if (0<=x&&y<=1030)
+                                {
+
+                                    move = true;
+                                    _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the west texture
+                                }
+                            }
+                        }
+                        if (!move)
+                        {
+                            x+=32;
+                            y-=16;
+                        }
                     }
                     if (x<hx)
                     { 
