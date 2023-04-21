@@ -199,7 +199,7 @@ namespace MyGame
             right= false;
             nowhere = false;
             _sprite.Position = new Vector2f(x, y);
-            pos = _sprite.Position;
+            this.pos = _sprite.Position;
             _movetimer++;
            /*
             if (0<jumpduration)
