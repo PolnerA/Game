@@ -15,14 +15,53 @@ namespace MyGame
     {
         private const float Speed = 0.3f;
         private readonly Sprite _sprite = new Sprite();
-        Spell(Vector2f pos,int direction)
+        private int direction;
+        public Spell(Vector2f pos,int direction)//0 north 1 east 2 south 3 west
         {
             _sprite.Texture = Game.GetTexture("../../../Resources/laser.png");
-            _sprite.Position = pos;
+            _sprite.Position = new Vector2f(pos.X+10,pos.Y+25);
+            this.direction = direction;
+            AssignTag("spell");
+        }
+        public override FloatRect GetCollisionRect()
+        {
+            return _sprite.GetGlobalBounds();
+        }
+        public override void HandleCollision(GameObject otherGameObject)
+        {
+            if (otherGameObject.HasTag("spell"))
+            {
+                otherGameObject.MakeDead();
+            }
+            MakeDead();
         }
         public override void Update(Time elapsed)
         {
-
+            int msElapsed = elapsed.AsMilliseconds();
+            Vector2f pos = _sprite.Position;
+            if (pos.X < Game.RenderWindow.Size.X||Game.RenderWindow.Size.X<pos.X||pos.Y < Game.RenderWindow.Size.Y||Game.RenderWindow.Size.Y<pos.Y)
+            {
+                MakeDead();
+            }
+            else
+            {
+                if (direction == 0)//north
+                {
+                    _sprite.Position = new Vector2f(pos.X - Speed * msElapsed, pos.Y-(0.5f*Speed*msElapsed)); //left 2 up 1 
+                }
+                else if (direction ==1)//east
+                {
+                    _sprite.Position = new Vector2f(pos.X + Speed * msElapsed, pos.Y-(0.5f*Speed*msElapsed)); //right 2 up 1 
+                }
+                else if (direction ==2) //south
+                {
+                    _sprite.Position = new Vector2f(pos.X + Speed * msElapsed, pos.Y+(0.5f*Speed*msElapsed)); //right 2 down 1 
+                }
+                else if (direction ==3) //west
+                {
+                    _sprite.Position = new Vector2f(pos.X - Speed * msElapsed, pos.Y+(0.5f*Speed*msElapsed)); //left 2 down 1 
+                }
+            }
         }
     }
 }

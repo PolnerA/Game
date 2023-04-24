@@ -14,7 +14,7 @@ namespace MyGame
     {
         private int _movetimer;
         private const int movedelay = 35;
-        private readonly Sprite _sprite = new Sprite();//make enemy sprites, and the loot
+        private readonly Sprite _sprite = new Sprite();//make loot sprites spell sprites make clicks twice (4 times?) as big make clouds and background
         private List<Vector2f> placedtiles = new List<Vector2f>();
         public Enemy(Vector2f pos,List<Vector2f> tiles)
         {
@@ -281,5 +281,14 @@ namespace MyGame
         {
             return _sprite.GetGlobalBounds();
         }
+        public override void HandleCollision(GameObject otherGameObject)
+        {
+            if (otherGameObject.HasTag("spell"))
+            {
+                otherGameObject.MakeDead();
+            }
+            MakeDead();
+        }
+
     }
 }

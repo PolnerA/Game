@@ -44,6 +44,7 @@ namespace MyGame
             bool left = false;
             bool right = false;
             bool nowhere = false;
+            int direction=-1;// -1: nowehere 0:south 1:east 2:south 3:west
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
                 Game.RenderWindow.Close();
@@ -131,6 +132,7 @@ namespace MyGame
                     tilespawner.SpawnThreetilesSouth(new Vector2f(x-22, y+32));
                     
                     _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");
+                    direction =0;
                 }
                 else 
                 {
@@ -147,6 +149,7 @@ namespace MyGame
                     tilespawner.SpawnThreetilesEast(new Vector2f(x-22, y+32));
                     
                     _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");
+                    direction =3;
                 }
                 else 
                 {
@@ -163,6 +166,7 @@ namespace MyGame
                     tilespawner.SpawnThreetilesNorth(new Vector2f(x - 22, y + 32));
                     
                     _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
+                    direction =2;
                 }
                 else
                 {
@@ -179,6 +183,7 @@ namespace MyGame
                 {
                     tilespawner.SpawnThreetilesWest(new Vector2f(x - 22, y + 32));
                     _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");
+                    direction =1;
                 }
                 else
                 { 
@@ -188,7 +193,7 @@ namespace MyGame
             }
             if (nowhere)
             {
-                //nothing happens
+                direction =-1;
             }
             up = false;
             down = false;
@@ -199,9 +204,9 @@ namespace MyGame
             this.pos = _sprite.Position;
             _movetimer++;
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space)&&attackdelay<=_attacktimer)
-            { 
-                
-                
+            {
+                Spell spell = new Spell(pos, direction);
+                Game.CurrentScene.AddGameObject(spell);
                 _attacktimer= 0;
             }
             _attacktimer++;
