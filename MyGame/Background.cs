@@ -17,9 +17,9 @@ namespace MyGame
         private readonly Sprite _sprite2 = new Sprite();
         public Background()
         {//make tile background and remodel the animation to be at the top with clouds
-            _sprite.Texture = Game.GetTexture("../../../Resources/background.png");
-            _sprite2.Texture = Game.GetTexture("../../../Resources/background.png");
-            _sprite2.Position = new Vector2f(1080, 0);
+            _sprite.Texture = Game.GetTexture("../../../Resources/Clouds.png");
+            _sprite2.Texture = Game.GetTexture("../../../Resources/Clouds.png");
+            _sprite2.Position = new Vector2f(1920, 0);
             _sprite.Position = new Vector2f(0, 0);
         }
         public override void Draw()
@@ -51,21 +51,13 @@ namespace MyGame
              
             x -= Speed * msElapsed;
             x2 -= Speed * msElapsed;
-            if (x < -1080)
+            if (x < -1920)
             {
-                x+=2160;
+                x+=3840;
             }
-            if (x2 <-1080)
+            if (x2 <-1920)
             {
-                x2+=2160;
-            }
-            if (1080<x)
-            {
-                x -= 2160;
-            }
-            if (1080<x2)
-            {
-                x2-= 2160;
+                x2+=3840;
             }
             _sprite2.Position = new Vector2f(x2,y2);
             _sprite.Position = new Vector2f(x, y);

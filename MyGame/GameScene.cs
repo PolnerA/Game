@@ -1,5 +1,7 @@
 ﻿using GameEngine;
 using SFML.System;
+using System.Net.Http.Headers;
+
 namespace MyGame
 {
     class GameScene : Scene
@@ -26,6 +28,8 @@ namespace MyGame
              AddGameObject(tiles);
              //character location +22x, -32y compared to the tile stood on
              AddGameObject(hero);
+             Background background = new Background();
+            AddGameObject(background);
         }
         // Get the current score
         public int GetScore()

@@ -15,11 +15,8 @@ namespace MyGame
     class Hero: GameObject
     {//ToDo make click animation make spell cast sprite, enemy and loot spawns and background
         //draw enemies, potion, chests, background, and a wand with spells and a click animation
-        private const int attackdelay = 300;
-        private const int jumpdelay = 1000;
+        private const int attackdelay = 100;
         private int _attacktimer;
-        private int jumpduration = 0;
-        private int _jumptimer;
         private int _movetimer;
         private const int movedelay = 25;
         private readonly Sprite _sprite = new Sprite();
@@ -83,8 +80,8 @@ namespace MyGame
                 //Console.WriteLine("Click");
                 Vector2i intclick = Mouse.GetPosition();
                 Vector2f floatclick = new Vector2f((float)intclick.X,(float)intclick.Y);
-                Explosion explosion = new Explosion(floatclick);
-                Game.CurrentScene.AddGameObject(explosion);
+                CursorClick cursorclick = new CursorClick(floatclick);
+                Game.CurrentScene.AddGameObject(cursorclick);
                 for (int i = 0; i<middletile.Count; i++)
                 {
                     Vector2f tile = middletile[i];
@@ -191,7 +188,7 @@ namespace MyGame
             }
             if (nowhere)
             {
-                _sprite.Texture = Game.GetTexture("../../../Resources/John.png");
+                //nothing happens
             }
             up = false;
             down = false;
@@ -201,6 +198,13 @@ namespace MyGame
             _sprite.Position = new Vector2f(x, y);
             this.pos = _sprite.Position;
             _movetimer++;
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Space)&&attackdelay<=_attacktimer)
+            { 
+                
+                
+                _attacktimer= 0;
+            }
+            _attacktimer++;
            /*
             if (0<jumpduration)
             {

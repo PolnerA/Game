@@ -12,15 +12,13 @@ namespace MyGame
 {
     class Enemy : GameObject
     {
-        private const float Speed = 0.3f;
         private int _movetimer;
-        Random rng = new Random();
-        private const int movedelay = 70;
+        private const int movedelay = 35;
         private readonly Sprite _sprite = new Sprite();//make enemy sprites, and the loot
         private List<Vector2f> placedtiles = new List<Vector2f>();
         public Enemy(Vector2f pos,List<Vector2f> tiles)
         {
-            _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");
+            _sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");
             _sprite.Position = new Vector2f(pos.X+22,pos.Y-32);//same way of standing on tile as hero
             placedtiles=tiles;
             AssignTag("Enemy");
@@ -57,7 +55,7 @@ namespace MyGame
                             if (-30<=y&&0<=x)
                             {
                                 move = true;
-                                _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the north texture
+                                _sprite.Texture = Game.GetTexture("../../../Resources/enemy north.png");//facing to the north texture
                             }
                         }
                     }
@@ -83,7 +81,7 @@ namespace MyGame
                             {
 
                                 move = true;
-                                _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the west texture
+                                _sprite.Texture = Game.GetTexture("../../../Resources/enemy west.png");//facing to the west texture
                             }
                         }
                     }
@@ -109,7 +107,7 @@ namespace MyGame
                             {
 
                                 move = true;
-                                _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the south
+                                _sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");//facing to the south
                             }
 
                         }
@@ -140,7 +138,7 @@ namespace MyGame
                             if (x<=1900&&-30<=y)
                             {
                                 move=true;
-                                _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the east
+                                _sprite.Texture = Game.GetTexture("../../../Resources/enemy east.png");//facing to the east
                             }
                         }
                     }
@@ -171,7 +169,7 @@ namespace MyGame
                                 if (-30<=y&&0<=x)
                                 {
                                     move = true;
-                                    _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the north texture
+                                    _sprite.Texture = Game.GetTexture("../../../Resources/enemy north.png");//facing to the north texture
                                 }
                             }
                         }
@@ -200,7 +198,7 @@ namespace MyGame
                                 {
 
                                     move = true;
-                                    _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the west texture
+                                    _sprite.Texture = Game.GetTexture("../../../Resources/enemy west.png");//facing to the west texture
                                 }
                             }
                         }
@@ -228,7 +226,7 @@ namespace MyGame
                                 if (-30<=y&&0<=x)
                                 {
                                     move = true;
-                                    _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the north texture
+                                    _sprite.Texture = Game.GetTexture("../../../Resources/enemy north.png");//facing to the north texture
                                 }
                             }
                         }
@@ -251,7 +249,7 @@ namespace MyGame
                                 {
 
                                     move = true;
-                                    _sprite.Texture = Game.GetTexture("../../../Resources/Enemy.png");//facing to the west texture
+                                    _sprite.Texture = Game.GetTexture("../../../Resources/enemy west.png");//facing to the west texture
                                 }
                             }
                         }
