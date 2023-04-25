@@ -22,6 +22,8 @@ namespace MyGame
             Tile tile2 = new Tile(new Vector2f (132,504));//east tile +32x, -16y     |_ compared to original tile
             Tile tile3 = new Tile(new Vector2f(68, 504));//north tile -32x, -16y     |
             Tile tile4 = new Tile(new Vector2f(68, 536));//west tile -32x, +16y    _/
+            Tile_Spawner tilespawner = new Tile_Spawner();
+            AddGameObject(tilespawner);
             AddGameObject(tile);
             AddGameObject(tile1);
             AddGameObject(tile2);
@@ -37,6 +39,7 @@ namespace MyGame
             AddGameObject(lives);
             TilesPlaced tiles = new TilesPlaced(new Vector2f(0, 50));
             AddGameObject(tiles);
+
         }
         // Get the current score
         public int GetScore()

@@ -276,7 +276,8 @@ namespace MyGame
         {
             GameScene scene = (GameScene)Game.CurrentScene;
             scene.SetTilesPlaced(placedtiles.Count());
-            
+            Console.WriteLine("Hello world")//also doesnt happen
+            Console.WriteLine(placedtiles.Count());//doesn't happen for some reason
         }
     }
 }
