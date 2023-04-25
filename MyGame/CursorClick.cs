@@ -13,7 +13,7 @@ namespace MyGame
     {
         public CursorClick(Vector2f pos) : base(pos)
         {//TODO make click animation
-            Texture = Game.GetTexture("../../../Resources/click.png");
+            Texture = Game.GetTexture("../../../Resources/click-spritesheet.png");
             SetUpClickAnimation();
             PlayAnimation("click", AnimationMode.OnceForwards);
         }
@@ -29,11 +29,16 @@ namespace MyGame
         {
             var frames = new List<IntRect>
             {
-                new IntRect(   0, 0, 10, 10), // frame 1
-                new IntRect(  15, 0, 10, 10), // frame 2
-                new IntRect(  30, 0, 10, 10), // frame 3
-                new IntRect(  45, 0, 10, 10), // frame 4
-                new IntRect(  60, 0, 10, 10), // frame 5         
+                new IntRect(   5, 5, 40, 40), // frame 1
+                new IntRect(  55, 5, 40, 40), // frame 2
+                new IntRect( 105, 5, 40, 40), // frame 3
+                new IntRect( 155, 5, 40, 40), // frame 4
+                new IntRect( 205, 5, 40, 40), // frame 5
+                new IntRect( 255, 5, 40, 40), // frame 6
+                new IntRect( 305, 5, 40, 40), // frame 7
+                new IntRect( 355, 5, 40, 40), // frame 8
+                new IntRect( 405, 5, 40, 40), // frame 9
+
             };
             AddAnimation("click", frames);
         }

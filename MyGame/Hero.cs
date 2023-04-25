@@ -22,6 +22,7 @@ namespace MyGame
         private readonly Sprite _sprite = new Sprite();
         private Vector2f pos;
         private Tile_Spawner tilespawner = new Tile_Spawner();
+        private int direction = -1;            // -1: nowehere 0:south 1:east 2:south 3:west
         public Vector2f GetPos()
         {
             return pos;
@@ -44,7 +45,6 @@ namespace MyGame
             bool left = false;
             bool right = false;
             bool nowhere = false;
-            int direction=-1;// -1: nowehere 0:south 1:east 2:south 3:west
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
                 Game.RenderWindow.Close();

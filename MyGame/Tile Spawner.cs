@@ -274,7 +274,9 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-
+            GameScene scene = (GameScene)Game.CurrentScene;
+            scene.SetTilesPlaced(placedtiles.Count());
+            
         }
     }
 }

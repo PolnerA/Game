@@ -23,6 +23,10 @@ namespace MyGame
             this.direction = direction;
             AssignTag("spell");
         }
+        public override void Draw()
+        {
+            Game.RenderWindow.Draw(_sprite);
+        }
         public override FloatRect GetCollisionRect()
         {
             return _sprite.GetGlobalBounds();
@@ -39,7 +43,7 @@ namespace MyGame
         {
             int msElapsed = elapsed.AsMilliseconds();
             Vector2f pos = _sprite.Position;
-            if (pos.X < Game.RenderWindow.Size.X||Game.RenderWindow.Size.X<pos.X||pos.Y < Game.RenderWindow.Size.Y||Game.RenderWindow.Size.Y<pos.Y)
+            if (Game.RenderWindow.Size.X < pos.X||pos.X<0||pos.Y<0||Game.RenderWindow.Size.Y<pos.Y)
             {
                 MakeDead();
             }
