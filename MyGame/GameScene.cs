@@ -78,5 +78,10 @@ namespace MyGame
                 Game.SetScene(gameOverScene);
             }
         }
+        public void GameWon()
+        {
+            Victory victory = new Victory(_score, tilesplaced);
+            Game.SetScene(victory);
+        }
     }
 }
