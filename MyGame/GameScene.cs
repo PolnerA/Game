@@ -25,10 +25,9 @@ namespace MyGame
             Tile_Spawner tilespawner = new Tile_Spawner();
             AddGameObject(tilespawner);
             AddGameObject(tile);
-            AddGameObject(tile1);
             AddGameObject(tile2);
             AddGameObject(tile3);
-            AddGameObject(tile4);
+            AddGameObject(tile4);//2072 tiles is the screen
             //character location +22x, -32y compared to the tile stood on
             AddGameObject(hero);
             Cloud_Spawner clouds = new Cloud_Spawner();
@@ -75,7 +74,7 @@ namespace MyGame
             --_lives;
             if (_lives == 0)
             {
-                GameOverScene gameOverScene = new GameOverScene(_score);
+                GameOverScene gameOverScene = new GameOverScene(_score,tilesplaced);
                 Game.SetScene(gameOverScene);
             }
         }

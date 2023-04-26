@@ -8,9 +8,9 @@ namespace MyGame
 {
     class GameOverScene : Scene
     {
-        public GameOverScene(int score)
+        public GameOverScene(int score,int tilesplaced)
         {
-            GameOverMessage gameOverMessage = new GameOverMessage(score);
+            GameOverMessage gameOverMessage = new GameOverMessage(score,tilesplaced);
             AddGameObject(gameOverMessage);
         }
     }

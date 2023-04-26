@@ -14,14 +14,14 @@ namespace MyGame
     class GameOverMessage : GameObject
     {
         private readonly Text _text = new Text();
-        public GameOverMessage(int score)
+        public GameOverMessage(int score,int tilesplaced)
         {
             _text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
             _text.Position = new Vector2f(50.0f, 50.0f);
             _text.CharacterSize = 48;
             _text.FillColor = Color.Red;
             _text.DisplayedString = "GAME OVER\n\nYOUR SCORE: " + score +
-            "\n\nPRESS ENTER TO CONTINUE";
+            "\n"+tilesplaced+" tiles placed\nPRESS ENTER TO CONTINUE";
         }
         public override void Draw()
         {

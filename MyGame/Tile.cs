@@ -13,7 +13,6 @@ namespace MyGame
     
     class Tile : GameObject
     {
-        private int _timer;
         private readonly Sprite tile = new Sprite();
         public Tile(Vector2f pos)
         {

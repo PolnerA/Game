@@ -156,9 +156,8 @@ namespace MyGame
                 {
                     if (hy<y)
                     {
-                        //movement north
-                        x -= 32;
-                        y -=16;
+                        //movement northeast
+                        y -=32;
                         bool move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
@@ -175,18 +174,17 @@ namespace MyGame
                         }
                         if (!move)
                         {
-                            x+=32;
-                            y+=16;
+                            y+=32;
                         }
                         //movement east
 
                     }
                     if (y<hy)
                     {
-                        //movement south
-                        //movement west
-                        x -= 32;
-                        y +=16;
+                        //movement southwest
+                        
+                        
+                        y +=32;
                         bool move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
@@ -204,8 +202,7 @@ namespace MyGame
                         }
                         if (!move)
                         {
-                            x+=32;
-                            y-=16;
+                            y+=32;
                         }
                     }
                 }
@@ -213,9 +210,8 @@ namespace MyGame
                 {
                     if (hx<x)
                     {
-                        //movement north
-                        x -= 32;
-                        y -=16;
+                        //movement northwest
+                        x -= 64;
                         bool move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
@@ -232,37 +228,38 @@ namespace MyGame
                         }
                         if (!move)
                         {
-                            x+=32;
-                            y+=16;
+                            x+=64;
                         }
-                        //movement west
-                        x -= 32;
-                        y +=16;
-                        move = false;
+                       
+                    }
+                    if (x<hx)
+                    {
+                        //movement southeast
+                        //movement south
+                        x += 64;
+                        bool move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
                             float ptx = placedtiles[num].X;
                             float pty = placedtiles[num].Y;
                             if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
                             {
-                                if (0<=x&&y<=1030)
+                                if (x<=1900&&y<=1030)
                                 {
 
                                     move = true;
-                                    _sprite.Texture = Game.GetTexture("../../../Resources/enemy west.png");//facing to the west texture
+                                    _sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");//facing to the south
                                 }
+
                             }
                         }
                         if (!move)
                         {
-                            x+=32;
-                            y-=16;
+
+
+                            x-=64;
+
                         }
-                    }
-                    if (x<hx)
-                    { 
-                        //movement south
-                        //movement east
                     }
                 }
                 if (hy==y&&hx==x)
