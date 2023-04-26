@@ -34,9 +34,9 @@ namespace MyGame
             AddGameObject(clouds);
             Score score = new Score(new Vector2f(0, 0));
             AddGameObject(score);
-            Lives lives = new Lives(new Vector2f(0, 25));
+            Lives lives = new Lives(new Vector2f(0, 45));
             AddGameObject(lives);
-            TilesPlaced tiles = new TilesPlaced(new Vector2f(0, 50));
+            TilesPlaced tiles = new TilesPlaced(new Vector2f(0, 90));
             AddGameObject(tiles);
 
         }

@@ -18,10 +18,10 @@ namespace MyGame
         {
             _text.Font = Game.GetFont("../../../Resources/times new roman.ttf");
             _text.Position = new Vector2f(50.0f, 50.0f);
-            _text.CharacterSize = 48;
+            _text.CharacterSize = 50;
             _text.FillColor = Color.Red;
-            _text.DisplayedString = "GAME OVER\n\nYOUR SCORE: " + score +
-            "\n"+tilesplaced+" tiles placed\nPRESS ENTER TO CONTINUE";
+            _text.DisplayedString = "Game Over\n\nYour kills: " + score +
+            "\n"+tilesplaced+" tiles placed\nPress enter to continue";
         }
         public override void Draw()
         {
@@ -33,6 +33,10 @@ namespace MyGame
             {
                 GameScene scene = new GameScene();
                 Game.SetScene(scene);
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+            {
+                Game.RenderWindow.Close();
             }
         }
     }

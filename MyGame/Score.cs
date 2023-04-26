@@ -15,9 +15,9 @@ namespace MyGame
         {
             _text.Font = Game.GetFont("../../../Resources/times new roman.ttf");
             _text.Position = pos;
-            _text.CharacterSize = 24;
+            _text.CharacterSize = 40;
             _text.FillColor = Color.White;
-            AssignTag("score");
+            AssignTag("kills");
         }
         public override void Draw()
         {
@@ -26,7 +26,7 @@ namespace MyGame
         public override void Update(Time elapsed)
         {
             GameScene scene = (GameScene)Game.CurrentScene;
-            _text.DisplayedString = "Score: " + scene.GetScore();
+            _text.DisplayedString = "Kills: " + scene.GetScore();
         }
     }
 }

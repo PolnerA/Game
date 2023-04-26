@@ -22,7 +22,7 @@ namespace MyGame
         private readonly Sprite _sprite = new Sprite();
         private Vector2f pos;
         private Tile_Spawner tilespawner = new Tile_Spawner();
-        private int direction = -1;            // -1: nowehere 0:south 1:east 2:south 3:west
+        private int direction = -1;            // -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
         public Vector2f GetPos()
         {
             return pos;
@@ -206,6 +206,55 @@ namespace MyGame
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space)&&attackdelay<=_attacktimer)
             {
                 Spell spell = new Spell(pos, direction);
+                Game.CurrentScene.AddGameObject(spell);
+                _attacktimer= 0;
+            }
+            //direction  -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Q)&&attackdelay<=_attacktimer)
+            {
+                Spell spell = new Spell(pos, 0);
+                Game.CurrentScene.AddGameObject(spell);
+                _attacktimer= 0;
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.W)&&attackdelay<=_attacktimer)
+            {
+                Spell spell = new Spell(pos, 7);
+                Game.CurrentScene.AddGameObject(spell);
+                _attacktimer= 0;
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.E)&&attackdelay<=_attacktimer)
+            {
+                Spell spell = new Spell(pos, 1);
+                Game.CurrentScene.AddGameObject(spell);
+                _attacktimer= 0;
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A)&&attackdelay<=_attacktimer)
+            {
+                Spell spell = new Spell(pos, 4);
+                Game.CurrentScene.AddGameObject(spell);
+                _attacktimer= 0;
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.D)&&attackdelay<=_attacktimer)
+            {
+                Spell spell = new Spell(pos, 6);
+                Game.CurrentScene.AddGameObject(spell);
+                _attacktimer= 0;
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Z)&&attackdelay<=_attacktimer)
+            {
+                Spell spell = new Spell(pos, 3);
+                Game.CurrentScene.AddGameObject(spell);
+                _attacktimer= 0;
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.X)&&attackdelay<=_attacktimer)
+            {
+                Spell spell = new Spell(pos, 5);
+                Game.CurrentScene.AddGameObject(spell);
+                _attacktimer= 0;
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.C)&&attackdelay<=_attacktimer)
+            {
+                Spell spell = new Spell(pos, 2);
                 Game.CurrentScene.AddGameObject(spell);
                 _attacktimer= 0;
             }

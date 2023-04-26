@@ -15,7 +15,7 @@ namespace MyGame
         {
             _text.Font = Game.GetFont("../../../Resources/times new roman.ttf");
             _text.Position = pos;
-            _text.CharacterSize = 20;
+            _text.CharacterSize = 40;
             _text.FillColor = Color.Red;
             AssignTag("lives");
         }
