@@ -53,23 +53,39 @@ namespace MyGame
                 if (direction == 0)//north
                 {
                     _sprite.Position = new Vector2f(pos.X - Speed * msElapsed, pos.Y-(0.5f*Speed*msElapsed)); //left 2 up 1 
-                    
+
                 }
                 else if (direction ==1)//east
                 {
                     _sprite.Position = new Vector2f(pos.X + Speed * msElapsed, pos.Y-(0.5f*Speed*msElapsed)); //right 2 up 1 
-                    
+
 
                 }
                 else if (direction ==2) //south
                 {
                     _sprite.Position = new Vector2f(pos.X + Speed * msElapsed, pos.Y+(0.5f*Speed*msElapsed)); //right 2 down 1 
-                   
+
                 }
                 else if (direction ==3) //west
                 {
                     _sprite.Position = new Vector2f(pos.X - Speed * msElapsed, pos.Y+(0.5f*Speed*msElapsed)); //left 2 down 1 
-                    
+
+                }
+                else if (direction ==4)//northwest
+                {
+                    _sprite.Position = new Vector2f(pos.X-Speed*msElapsed,pos.Y);//left
+                }
+                else if (direction ==5)//southwest
+                {
+                    _sprite.Position = new Vector2f(pos.X,pos.Y+Speed*msElapsed);//down
+                }
+                else if (direction ==6)//southeast
+                {
+                    _sprite.Position = new Vector2f(pos.X+Speed*msElapsed,pos.Y);//right
+                }
+                else if (direction ==7)//northeast
+                {
+                    _sprite.Position = new Vector2f(pos.X, pos.Y-Speed*msElapsed);//up
                 }
                 if (_sprite.Position == pos)
                 {
