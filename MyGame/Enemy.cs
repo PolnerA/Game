@@ -40,7 +40,7 @@ namespace MyGame
 
             if (movedelay<=_movetimer)
             {
-                if (hx < x&&hy<y)
+                /*if (hx < x&&hy<y)
                 {
                     //movement north 
                     x -= 32;
@@ -271,7 +271,197 @@ namespace MyGame
                     scene.DecreaseLives();
                   
                 }
+                */
+                float dx = 0f;
+                float dy = 0f;
+                if (x<hx)
+                {
+                    dx = hx -x;
+                }
+                else if (hx<x)
+                {
+                    dx = x-hx;
+                }
+                if (y<hy)
+                {
+                    dy = hy -y;
+                }
+                else if (hy<y)
+                {
+                    dy = hy-y;
+                }
+                float fdx = 0f;
+                float fdy = 0f;
+                //movement north 
+                x -= 32;
+                y -=16;
+                bool move = false;
+                for (int num = 0; num<placedtiles.Count; num++)
+                {
+                    float ptx = placedtiles[num].X;
+                    float pty = placedtiles[num].Y;
+                    if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
+                    {
+                        if (-30<=y&&0<=x)
+                        {
+                            if (x<hx)
+                            {
+                                fdx = hx -x;
+                            }
+                            else if (hx<x)
+                            {
+                                fdx = x-hx;
+                            }
+                            if (y<hy)
+                            {
+                                fdy = hy -y;
+                            }
+                            else if (hy<y)
+                            {
+                                fdy = hy-y;
+                            }
+                            if (fdx<dx&&fdy<dy)
+                            {
+                                move = true;
+                                _sprite.Texture = Game.GetTexture("../../../Resources/enemy north.png");//facing to the north texture
+                            }
+                        }
+                    }
+                }
+                if (!move)
+                {
+                    x+=32;
+                    y+=16;
+                }
+                //movement west
+                x -= 32;
+                y +=16;
+                move = false;
+                for (int num = 0; num<placedtiles.Count; num++)
+                {
+                    float ptx = placedtiles[num].X;
+                    float pty = placedtiles[num].Y;
+                    if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
+                    {
+                        if (0<=x&&y<=1030)
+                        {
+                            if (x<hx)
+                            {
+                                fdx = hx -x;
+                            }
+                            else if (hx<x)
+                            {
+                                fdx = x-hx;
+                            }
+                            if (y<hy)
+                            {
+                                fdy = hy -y;
+                            }
+                            else if (hy<y)
+                            {
+                                fdy = hy-y;
+                            }
+                            if (fdx<dx&&fdy<dy)
+                            {
+                                move = true;
+                                _sprite.Texture = Game.GetTexture("../../../Resources/enemy west.png");//facing to the west texture
+                            }
+                        }
+                    }
+                }
+                if (!move)
+                {
+                    x+=32;
+                    y-=16;
+                }
+                //movement south
+                x += 32;
+                y +=16;
+                move = false;
+                for (int num = 0; num<placedtiles.Count; num++)
+                {
+                    float ptx = placedtiles[num].X;
+                    float pty = placedtiles[num].Y;
+                    if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
+                    {
+                        if (x<=1900&&y<=1030)
+                        {
+                            if (x<hx)
+                            {
+                                fdx = hx -x;
+                            }
+                            else if (hx<x)
+                            {
+                                fdx = x-hx;
+                            }
+                            if (y<hy)
+                            {
+                                fdy = hy -y;
+                            }
+                            else if (hy<y)
+                            {
+                                fdy = hy-y;
+                            }
+                            if (fdx < dx && fdy < dy)
+                            {
+                                move = true;
+                                _sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");//facing to the south
+                            }
+                        }
+
+                    }
+                }
+                if (!move)
+                {
+
+
+                    x-=32;
+                    y-=16;
+
+                }
+                //movement east
+                x += 32;
+                y -=16;
+                move = false;
+                for (int num = 0; num<placedtiles.Count; num++)
+                {
+                    float ptx = placedtiles[num].X;
+                    float pty = placedtiles[num].Y;
+                    if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
+                    {
+                        if (x<=1900&&-30<=y)
+                        {
+                            if (x<hx)
+                            {
+                                fdx = hx -x;
+                            }
+                            else if (hx<x)
+                            {
+                                fdx = x-hx;
+                            }
+                            if (y<hy)
+                            {
+                                fdy = hy -y;
+                            }
+                            else if (hy<y)
+                            {
+                                fdy = hy-y;
+                            }
+                            if (fdx < dx && fdy < dy)
+                            {
+                                move=true;
+                                _sprite.Texture = Game.GetTexture("../../../Resources/enemy east.png");//facing to the east
+                            }
+                        }
+                    }
+                }
+                if (!move)
+                {
+                    x-=32;
+                    y+=16;
+                }
                 _movetimer =0;
+
             }
             
              

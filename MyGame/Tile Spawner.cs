@@ -16,8 +16,6 @@ namespace MyGame
         private List<Vector2f> isogrid= new List<Vector2f>();
         private List<Vector2f> placedtiles = new List<Vector2f>();//creates a new instance of tilespawner each move so, placed tiles needs to be in gamescene or pass the hero classes tilespawner's to use the one in the gamescene
         Random rng = new Random();
-        private const int SpawnDelay = 1000;
-        private int _timer;
         private Vector2f position;
         public void SpawnThreetiles(Vector2f pos, Vector2f previouspos)
         {

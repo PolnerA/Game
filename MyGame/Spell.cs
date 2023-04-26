@@ -16,6 +16,7 @@ namespace MyGame
         private const float Speed = 0.3f;
         private readonly Sprite _sprite = new Sprite();
         private int direction;
+        private int still;
         public Spell(Vector2f pos,int direction)//0 north 1 east 2 south 3 west
         {
             _sprite.Texture = Game.GetTexture("../../../Resources/laser.png");
@@ -43,7 +44,7 @@ namespace MyGame
         {
             int msElapsed = elapsed.AsMilliseconds();
             Vector2f pos = _sprite.Position;
-            if (Game.RenderWindow.Size.X < pos.X||pos.X<0||pos.Y<0||Game.RenderWindow.Size.Y<pos.Y)
+            if (Game.RenderWindow.Size.X < pos.X||pos.X<0||pos.Y<0||Game.RenderWindow.Size.Y<pos.Y||still==1)
             {
                 MakeDead();
             }
@@ -52,18 +53,27 @@ namespace MyGame
                 if (direction == 0)//north
                 {
                     _sprite.Position = new Vector2f(pos.X - Speed * msElapsed, pos.Y-(0.5f*Speed*msElapsed)); //left 2 up 1 
+                    
                 }
                 else if (direction ==1)//east
                 {
                     _sprite.Position = new Vector2f(pos.X + Speed * msElapsed, pos.Y-(0.5f*Speed*msElapsed)); //right 2 up 1 
+                    
+
                 }
                 else if (direction ==2) //south
                 {
                     _sprite.Position = new Vector2f(pos.X + Speed * msElapsed, pos.Y+(0.5f*Speed*msElapsed)); //right 2 down 1 
+                   
                 }
                 else if (direction ==3) //west
                 {
                     _sprite.Position = new Vector2f(pos.X - Speed * msElapsed, pos.Y+(0.5f*Speed*msElapsed)); //left 2 down 1 
+                    
+                }
+                if (_sprite.Position == pos)
+                {
+                    still++;
                 }
             }
         }
