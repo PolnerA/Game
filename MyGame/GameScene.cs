@@ -8,7 +8,7 @@ namespace MyGame
     {
         private int _lives = 1;
         private int _score;
-        private int tilesplaced;
+        private int tilesplaced=5;
         public Hero hero = new Hero(new Vector2f(122, 488));
         public GameScene()
         {
