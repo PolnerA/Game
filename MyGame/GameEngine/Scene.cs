@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using SFML.Graphics;
 using SFML.System;
 
@@ -10,12 +11,17 @@ namespace GameEngine
     {
         // This holds our game objects.
         private readonly List<GameObject> _gameObjects = new List<GameObject>();
+        private readonly List<GameObject> _specialGameObjects = new List<GameObject>();
 
         // Puts a GameObject into the scene.
         public void AddGameObject(GameObject gameObject)
         {
             // This adds the game object onto the back (the end) of the list of game objects.
             _gameObjects.Add(gameObject);
+        }
+        public void AddSGameObject(GameObject gameObject) 
+        {
+            _specialGameObjects.Add(gameObject);
         }
         public void AddGameObject(int position,GameObject gameObject)
         {
@@ -42,6 +48,7 @@ namespace GameEngine
             UpdateGameObjects(time);
             RemoveDeadGameObjects();
             DrawGameObjects();
+            DrawSGameObjects();
 
             // Draw the window as updated by the game objects.
             Game.RenderWindow.Display();
@@ -91,7 +98,19 @@ namespace GameEngine
         // This function calls draw on each of our game objects.
         private void DrawGameObjects()
         {
-            foreach (var gameObject in _gameObjects) gameObject.Draw();//check pos on y to render objects with a lower y value sooner than objects with a higher y value;
+            foreach (var gameObject in _gameObjects) gameObject.Draw();
+        }
+        private void DrawSGameObjects()
+        {
+            /*
+            for (int y = 0; y<1080;y++)//specific for fullscreen program , pass value for the scene data
+            {//check pos on y to render objects with a lower y value sooner than objects with a higher y value
+                for (int i = 0; i<_specialGameObjects.Count; i++)
+                {
+                    _specialGameObjects[i].Pos//get pos for each object
+                }
+            }
+            */
         }
 
         // This function removes objects that indicate they are dead from the scene.
