@@ -264,8 +264,8 @@ namespace MyGame
                     case 0:
                         //spawn enemy using the position of the tile
                         Enemy enemy = new Enemy(spawnpos,placedtiles);//pos is currently stood on tile
-                        Game.CurrentScene.AddGameObject(enemy);
-
+                        Scene scene = (GameScene)Game.CurrentScene;
+                        Game.CurrentScene.AddGameObject(Game.CurrentScene.GameObjectAmount(),enemy);//gets current amount of game objects and puts it behind by the an amount of tiles placed to put it behind the score
                         break;
                     case 1:
                         //spawn chest using the position of the tile

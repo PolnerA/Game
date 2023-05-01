@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace MyGame
 {
-    class Loot : GameObject
+    class Potion : GameObject
     {
         private readonly Sprite _sprite = new Sprite();
-        public Loot(Vector2f pos)
+        public Potion(Vector2f pos)
         {
-            _sprite.Texture = Game.GetTexture("../../../Resources/loot.png");//create texture
-            _sprite.Position = new Vector2f(pos.X, pos.Y);
+            _sprite.Texture = Game.GetTexture("../../../Resources/potion.png");//create texture
+            _sprite.Position = new Vector2f(pos.X+0, pos.Y-0);//pixels adjusted for loot pos compared to tile pos
         }
         public override void Draw()
         {
@@ -28,10 +28,7 @@ namespace MyGame
             heropos = new Vector2f(heropos.X-22, heropos.Y+32);
             if (heropos == _sprite.Position)
             {
-                for (int i = 0; i<10; i++)
-                {
-                    scene.IncreaseScore();
-                }
+                scene.IncreaseLives();
                 MakeDead();
             }
         }

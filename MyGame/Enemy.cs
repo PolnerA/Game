@@ -13,7 +13,7 @@ namespace MyGame
     class Enemy : GameObject
     {
         private int _movetimer;
-        private const int movedelay = 50;//35
+        private const int movedelay = 80;//35
         private readonly Sprite _sprite = new Sprite();//make loot sprites spell sprites make clicks twice as big (now 4 times| half the size)
         private List<Vector2f> placedtiles = new List<Vector2f>();
         public Enemy(Vector2f pos,List<Vector2f> tiles)
@@ -282,6 +282,7 @@ namespace MyGame
         {
             return _sprite.GetGlobalBounds();
         }
+        Random rng = new Random();
         public override void HandleCollision(GameObject otherGameObject)
         {
             if (otherGameObject.HasTag("spell"))
@@ -289,6 +290,19 @@ namespace MyGame
                 otherGameObject.MakeDead();
                 GameScene scene = (GameScene)Game.CurrentScene;
                 scene.IncreaseScore();
+                int num = rng.Next(2);
+                switch (num)
+                {
+                    case 0:
+                        Potion potion = new Potion(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));
+                        scene.AddGameObject(potion);
+                        break;
+                    case 1:
+                        Loot loot = new Loot(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));
+                        scene.AddGameObject(loot);
+                        break;
+                }
+                
             }
             MakeDead();
         }

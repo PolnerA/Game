@@ -18,8 +18,13 @@ namespace GameEngine
             _gameObjects.Add(gameObject);
         }
         public void AddGameObject(int position,GameObject gameObject)
-        { 
+        {
+            //This adds the game object at a location into the list of game objects.
             _gameObjects.Insert(position, gameObject);
+        }
+        public int GameObjectAmount()
+        { 
+            return _gameObjects.Count;
         }
 
         // Called by the Game instance once per frame.

@@ -17,7 +17,7 @@ namespace MyGame
             _text.Position = pos;
             _text.CharacterSize = 40;
             _text.FillColor = Color.White;
-            AssignTag("kills");
+            AssignTag("score");
         }
         public override void Draw()
         {
@@ -26,7 +26,7 @@ namespace MyGame
         public override void Update(Time elapsed)
         {
             GameScene scene = (GameScene)Game.CurrentScene;
-            _text.DisplayedString = "Kills: " + scene.GetScore();
+            _text.DisplayedString = "Score: " + scene.GetScore();
         }
     }
 }

@@ -9,12 +9,10 @@ namespace MyGame
         private int _lives = 1;
         private int _score;
         private int tilesplaced=5;
+        private bool spellbook = false;
         public Hero hero = new Hero(new Vector2f(122, 488));
         public GameScene()
         {
-
-
-
             Background background = new Background();
             AddGameObject(background);
             Tile tile = new Tile(new Vector2f(100,520));//original tile            _ 
@@ -32,13 +30,16 @@ namespace MyGame
             AddGameObject(hero);
             Cloud_Spawner clouds = new Cloud_Spawner();
             AddGameObject(clouds);
-            Score score = new Score(new Vector2f(0, 0));
+            Score score = new Score(new Vector2f(1700,0));
             AddGameObject(score);
-            Lives lives = new Lives(new Vector2f(0, 45));
+            Lives lives = new Lives(new Vector2f(1480, 0));
             AddGameObject(lives);
-            TilesPlaced tiles = new TilesPlaced(new Vector2f(0, 90));
+            TilesPlaced tiles = new TilesPlaced(new Vector2f(1180, 0));
             AddGameObject(tiles);
-
+            Tutorial_Text tutorial = new Tutorial_Text();
+            AddGameObject(tutorial);
+            AdvancedSpellBook spellbook = new AdvancedSpellBook();
+            AddGameObject(spellbook);
         }
         // Get the current score
         public int GetScore()
@@ -61,6 +62,9 @@ namespace MyGame
         public void IncreaseScore()
         {
             ++_score;
+        }
+        public void IncreaseLives()
+        {
             ++_lives;
         }
         // Get the number of lives
@@ -82,6 +86,21 @@ namespace MyGame
         {
             Victory victory = new Victory(_score, tilesplaced);
             Game.SetScene(victory);
+        }
+        public void ToggleSpellBook()
+        {
+            if (!spellbook)
+            {
+                spellbook = true;
+            }
+            else
+            {
+                spellbook = false;
+            }
+        }
+        public bool GetSpellBook()
+        {
+            return spellbook;
         }
     }
 }
