@@ -91,7 +91,7 @@ namespace GameEngine
         // This function calls draw on each of our game objects.
         private void DrawGameObjects()
         {
-            foreach (var gameObject in _gameObjects) gameObject.Draw();
+            foreach (var gameObject in _gameObjects) gameObject.Draw();//check pos on y to render objects with a lower y value sooner than objects with a higher y value;
         }
 
         // This function removes objects that indicate they are dead from the scene.

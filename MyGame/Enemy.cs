@@ -291,7 +291,7 @@ namespace MyGame
                 GameScene scene = (GameScene)Game.CurrentScene;
                 scene.IncreaseScore();
                 int num = rng.Next(2);
-                switch (num)
+                /*switch (num)
                 {
                     case 0:
                         Potion potion = new Potion(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));
@@ -301,7 +301,7 @@ namespace MyGame
                         Loot loot = new Loot(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));
                         scene.AddGameObject(loot);
                         break;
-                }
+                }*/
                 
             }
             MakeDead();
