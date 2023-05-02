@@ -11,7 +11,6 @@ namespace GameEngine
     {
         // This holds our game objects.
         private readonly List<GameObject> _gameObjects = new List<GameObject>();
-        private readonly List<GameObject> _specialGameObjects = new List<GameObject>();
 
         // Puts a GameObject into the scene.
         public void AddGameObject(GameObject gameObject)
@@ -43,7 +42,7 @@ namespace GameEngine
             HandleCollisions();
             UpdateGameObjects(time);
             RemoveDeadGameObjects();
-            DrawGameObjects();
+            DrawGameObjects();//draw background, then tiles, objects (top-bottom rendering), then the clouds ending with the ui.
 
             // Draw the window as updated by the game objects.
             Game.RenderWindow.Display();
