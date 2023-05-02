@@ -34,6 +34,7 @@ namespace MyGame
                 }
                 MakeDead();
             }
+            AssignPosY((int)_sprite.Position.Y);
         }
     }
 }

@@ -19,9 +19,35 @@ namespace MyGame
         private int still;
         public Spell(Vector2f pos,int direction)//0 north 1 east 2 south 3 west
         {
-            _sprite.Texture = Game.GetTexture("../../../Resources/laser.png");
             _sprite.Position = new Vector2f(pos.X+10,pos.Y+25);
             this.direction = direction;
+            switch (this.direction)
+            {//direction  -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
+                case 0:
+                    _sprite.Texture = Game.GetTexture("../../../Resources/spell north.png");
+                    break;
+                case 1:
+                    _sprite.Texture = Game.GetTexture("../../../Resources/spell east.png");
+                    break;
+                case 2:
+                    _sprite.Texture = Game.GetTexture("../../../Resources/spell south.png");
+                    break;
+                case 3:
+                    _sprite.Texture = Game.GetTexture("../../../Resources/spell west.png");
+                    break;
+                case 4:
+                    _sprite.Texture = Game.GetTexture("../../../Resources/spell northwest.png");
+                    break;
+                case 5:
+                    _sprite.Texture = Game.GetTexture("../../../Resources/spell southwest.png");
+                    break;
+                case 6:
+                    _sprite.Texture = Game.GetTexture("../../../Resources/spell southeast.png");
+                    break;
+                case 7:
+                    _sprite.Texture = Game.GetTexture("../../../Resources/spell northeast.png");
+                    break;
+            }
             AssignTag("spell");
         }
         public override void Draw()
@@ -92,6 +118,7 @@ namespace MyGame
                     still++;
                 }
             }
+            AssignPosY((int)_sprite.Position.Y+7);
         }
     }
 }

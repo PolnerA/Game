@@ -102,15 +102,19 @@ namespace GameEngine
         }
         private void DrawSGameObjects()
         {
-            /*
+            
             for (int y = 0; y<1080;y++)//specific for fullscreen program , pass value for the scene data
             {//check pos on y to render objects with a lower y value sooner than objects with a higher y value
                 for (int i = 0; i<_specialGameObjects.Count; i++)
                 {
-                    _specialGameObjects[i].Pos//get pos for each object
+                    if (_specialGameObjects[i].GetPosY()==y)
+                    {
+                        _specialGameObjects[i].Draw();
+                    }//get pos for each object
                 }
             }
-            */
+            
+            
         }
 
         // This function removes objects that indicate they are dead from the scene.

@@ -265,13 +265,15 @@ namespace MyGame
                         //spawn enemy using the position of the tile
                         Enemy enemy = new Enemy(spawnpos,placedtiles);//pos is currently stood on tile
                         Scene scene = (GameScene)Game.CurrentScene;
-                        Game.CurrentScene.AddGameObject(Game.CurrentScene.GameObjectAmount(),enemy);//gets current amount of game objects and puts it behind by the an amount of tiles placed to put it behind the score
+                        Game.CurrentScene.AddSGameObject(enemy);//gets current amount of game objects and puts it behind by the an amount of tiles placed to put it behind the score
                         break;
                     case 1:
-                        //spawn chest using the position of the tile
+                        Loot loot = new Loot(spawnpos);
+                        Game.CurrentScene.AddSGameObject(loot);
                         break;
                     case 2:
-                        //spawn potion using the position of the tile
+                        Potion potion = new Potion(spawnpos);
+                        Game.CurrentScene.AddSGameObject(potion);
                         break;
                 }
 

@@ -15,7 +15,7 @@ namespace MyGame
         public Potion(Vector2f pos)
         {
             _sprite.Texture = Game.GetTexture("../../../Resources/potion.png");//create texture
-            _sprite.Position = new Vector2f(pos.X+0, pos.Y-0);//pixels adjusted for loot pos compared to tile pos
+            _sprite.Position = new Vector2f(pos.X+25, pos.Y+2);//pixels adjusted for loot pos compared to tile pos
         }
         public override void Draw()
         {
@@ -25,12 +25,13 @@ namespace MyGame
         {
             GameScene scene = (GameScene)Game.CurrentScene;
             Vector2f heropos = scene.GetHeroPos();
-            heropos = new Vector2f(heropos.X-22, heropos.Y+32);
+            heropos = new Vector2f(heropos.X+3, heropos.Y+34);
             if (heropos == _sprite.Position)
             {
                 scene.IncreaseLives();
                 MakeDead();
             }
+            AssignPosY((int)_sprite.Position.Y-2);
         }
     }
 }

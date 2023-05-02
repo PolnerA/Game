@@ -19,8 +19,8 @@ namespace MyGame
         public AdvancedSpellBook()
         {
             
-            _sprite.Texture = Game.GetTexture("../../../Resources/explosion01.png");
-            _sprite.Position = new Vector2f(0,0);
+            _sprite.Texture = Game.GetTexture("../../../Resources/spell book2.png");//make spell book and spell book on the same area
+            _sprite.Position = new Vector2f(0,0);//make spells red so you can see them on the background
             
         }
         public override void Draw()
@@ -35,13 +35,13 @@ namespace MyGame
                 {
                     GameScene scene = (GameScene)Game.CurrentScene;
                     scene.ToggleSpellBook();
-                    if (_sprite.Texture == Game.GetTexture("../../../Resources/explosion01.png"))
+                    if (_sprite.Texture == Game.GetTexture("../../../Resources/spell book2.png"))
                     {
-                        _sprite.Texture = Game.GetTexture("../../../Resources/explosion03.png");
+                        _sprite.Texture = Game.GetTexture("../../../Resources/spell book2 on.png");
                     }
                     else
                     {
-                        _sprite.Texture = Game.GetTexture("../../../Resources/explosion01.png");
+                        _sprite.Texture = Game.GetTexture("../../../Resources/spell book2.png");
                     }
                     timer = 0;
                 }

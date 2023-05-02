@@ -93,7 +93,6 @@ namespace MyGame
                     Vector2i easttile = new Vector2i((int)tile.X+32, (int)tile.Y-16);
 
                     //Console.WriteLine(inttile.X+","+inttile.Y);
-                    //Console.WriteLine(Mouse.GetPosition());//mouse position is on the screen not in game. to offset this I did put the window location to -11,-45 which should also get rid of the white bars on the edges
                     if (Mouse.GetPosition() == midtile)
                     {
                         nowhere = true;
@@ -206,7 +205,7 @@ namespace MyGame
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space)&&attackdelay<=_attacktimer)
             {
                 Spell spell = new Spell(pos, direction);
-                Game.CurrentScene.AddGameObject(spell);
+                Game.CurrentScene.AddSGameObject(spell);
                 _attacktimer= 0;
             }
             GameScene scene = (GameScene)Game.CurrentScene;
@@ -216,99 +215,54 @@ namespace MyGame
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Q)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 0);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddSGameObject(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.W)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 7);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddSGameObject(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.E)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 1);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddSGameObject(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.A)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 4);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddSGameObject(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.D)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 6);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddSGameObject(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Z)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 3);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddSGameObject(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.X)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 5);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddSGameObject(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.C)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 2);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddSGameObject(spell);
                     _attacktimer= 0;
                 }
             }
             _attacktimer++;
-           /*
-            if (0<jumpduration)
-            {
-                y-=2f;
-                jumpduration-=1;
-            }
-            int msElapsed = elapsed.AsMilliseconds();
-            
-            if (y<320&&jumpduration==0)//if in the air and not jumping up 
-            {
-                float yincrease = 0.98f;
-                y+= yincrease;//gravity -9.8m/s/s ->  100 pixels = 1 meter ms = 0.001 seconds | speed is pixels per millisecond gravity| speed down 980 pixels per second per second -> -0.98 pixels per millisecond per second
-                if (elapsed.AsSeconds()%1 ==0)
-                {
-                    yincrease+=0.98f;
-                }
-            }
-            if (_jumptimer >0) { _jumptimer -= msElapsed; }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && _jumptimer <=0)
-            {
-                y-=2f;
-                jumpduration=25;
-                jumpduration -=1;
-                _jumptimer = 1000;
-            }
-            _sprite.Position = new Vector2f(x, y);
-           */
-            /*
-            if (-_attacktimer >0) { _attacktimer -= msElapsed; }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && _attacktimer <= 0)
-            {
-                _attacktimer = attackdelay;
-                FloatRect bounds = _sprite.GetGlobalBounds();
-                float laserX = x+bounds.Width/2.0f;
-                float laserY = y+bounds.Height / 2.0f;
-                float laser2Y = y+bounds.Height;
-                float laser3y = y;
-                Laser laser = new Laser(new Vector2f(laserX, laserY));
-                Laser laser2 = new Laser(new Vector2f(laserX, laser2Y));
-                Laser laser3 = new Laser(new Vector2f(laserX, laser3y));
-                Game.CurrentScene.AddGameObject(laser);
-                Game.CurrentScene.AddGameObject(laser2);
-                Game.CurrentScene.AddGameObject(laser3);
-            }
-            */
+            AssignPosY((int)_sprite.Position.Y+32);
         }
     }
 }
