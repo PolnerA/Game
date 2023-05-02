@@ -276,7 +276,6 @@ namespace MyGame
              
                _sprite.Position = new Vector2f(x, y);
                _movetimer++;
-            AssignPosY((int)y+32);
         }
         
         public override FloatRect GetCollisionRect()
@@ -296,11 +295,11 @@ namespace MyGame
                 {
                     case 0:
                         Potion potion = new Potion(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));
-                        scene.AddSGameObject(potion);
+                        scene.AddGameObject(potion);
                         break;
                     case 1:
                         Loot loot = new Loot(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));
-                        scene.AddSGameObject(loot);
+                        scene.AddGameObject(loot);
                         break;
                 }
                 

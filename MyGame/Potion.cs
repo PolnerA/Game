@@ -31,7 +31,6 @@ namespace MyGame
                 scene.IncreaseLives();
                 MakeDead();
             }
-            AssignPosY((int)_sprite.Position.Y-2);
         }
     }
 }

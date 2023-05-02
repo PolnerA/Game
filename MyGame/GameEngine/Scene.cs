@@ -19,10 +19,6 @@ namespace GameEngine
             // This adds the game object onto the back (the end) of the list of game objects.
             _gameObjects.Add(gameObject);
         }
-        public void AddSGameObject(GameObject gameObject) 
-        {
-            _specialGameObjects.Add(gameObject);
-        }
         public void AddGameObject(int position,GameObject gameObject)
         {
             //This adds the game object at a location into the list of game objects.
@@ -48,7 +44,6 @@ namespace GameEngine
             UpdateGameObjects(time);
             RemoveDeadGameObjects();
             DrawGameObjects();
-            DrawSGameObjects();
 
             // Draw the window as updated by the game objects.
             Game.RenderWindow.Display();
@@ -99,22 +94,6 @@ namespace GameEngine
         private void DrawGameObjects()
         {
             foreach (var gameObject in _gameObjects) gameObject.Draw();
-        }
-        private void DrawSGameObjects()
-        {
-            
-            for (int y = 0; y<1080;y++)//specific for fullscreen program , pass value for the scene data
-            {//check pos on y to render objects with a lower y value sooner than objects with a higher y value
-                for (int i = 0; i<_specialGameObjects.Count; i++)
-                {
-                    if (_specialGameObjects[i].GetPosY()==y)
-                    {
-                        _specialGameObjects[i].Draw();
-                    }//get pos for each object
-                }
-            }
-            
-            
         }
 
         // This function removes objects that indicate they are dead from the scene.

@@ -11,7 +11,6 @@ namespace GameEngine
 
         private bool _isDead;
 
-        private int positiony;
 
         // Using a set prevents duplicates.
         private readonly HashSet<string> _tags = new HashSet<string>();
@@ -21,14 +20,6 @@ namespace GameEngine
         public void AssignTag(string tag)
         {
             _tags.Add(tag);
-        }
-        public void AssignPosY(int y)
-        {
-            positiony = y;
-        }
-        public int GetPosY()
-        {
-            return positiony;
         }
         public bool HasTag(string tag)
         {

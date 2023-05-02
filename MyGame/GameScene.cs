@@ -27,7 +27,7 @@ namespace MyGame
             AddGameObject(tile3);
             AddGameObject(tile4);//2072 tiles is the screen
             //character location +22x, -32y compared to the tile stood on
-            AddSGameObject(hero);
+            AddGameObject(hero);
             Cloud_Spawner clouds = new Cloud_Spawner();
             AddGameObject(clouds);
             Score score = new Score(new Vector2f(1700,0));

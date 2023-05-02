@@ -118,7 +118,6 @@ namespace MyGame
                     still++;
                 }
             }
-            AssignPosY((int)_sprite.Position.Y+7);
         }
     }
 }
