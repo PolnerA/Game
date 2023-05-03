@@ -80,7 +80,7 @@ namespace GameEngine
         }
 
         // This method lets game objects respond to collisions.
-        private void HandleCollisions()
+        private void HandleCollisions()//handle collisions is only for _gameObjects
         {
             for (int i = 0; i < _gameObjects.Count; i++)
             {
