@@ -11,7 +11,7 @@ namespace MyGame
         public GameOverScene(int score,int tilesplaced)
         {
             GameOverMessage gameOverMessage = new GameOverMessage(score,tilesplaced);
-            AddGameObject(gameOverMessage);
+            AddBackground(gameOverMessage);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MyGame
         private readonly Text _text = new Text();
         private readonly Text _text2 = new Text();
         public Tutorial_Text()
-        {
+        {//UI
             _text.Font = Game.GetFont("../../../Resources/times new roman.ttf");
             _text2.Font = Game.GetFont("../../../Resources/times new roman.ttf");
             _text.Position = new Vector2f(200,500);

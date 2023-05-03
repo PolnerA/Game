@@ -12,7 +12,7 @@ namespace MyGame
     class TilesPlaced : GameObject
     {
         private readonly Text _text = new Text();
-        public TilesPlaced(Vector2f pos) 
+        public TilesPlaced(Vector2f pos) //UI
         {
             _text.Font = Game.GetFont("../../../Resources/times new roman.ttf");
             _text.Position = pos;

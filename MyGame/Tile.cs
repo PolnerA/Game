@@ -13,7 +13,7 @@ namespace MyGame
     
     class Tile : GameObject
     {
-        private readonly Sprite tile = new Sprite();
+        private readonly Sprite tile = new Sprite();//tile
         public Tile(Vector2f pos)
         {
             tile.Texture = Game.GetTexture("../../../Resources/64X32tile.png");

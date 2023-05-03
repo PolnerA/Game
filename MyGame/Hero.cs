@@ -28,7 +28,7 @@ namespace MyGame
             return pos;
         }
         public Hero(Vector2f pos)
-        {
+        { //S Game Object
             _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
             _sprite.Position = pos;
             this.pos = pos;
@@ -82,7 +82,7 @@ namespace MyGame
                 Vector2i intclick = Mouse.GetPosition();
                 Vector2f floatclick = new Vector2f((float)intclick.X,(float)intclick.Y);
                 CursorClick cursorclick = new CursorClick(floatclick);
-                Game.CurrentScene.AddGameObject(cursorclick);
+                Game.CurrentScene.AddUserInterface(cursorclick);
                 for (int i = 0; i<middletile.Count; i++)
                 {
                     Vector2f tile = middletile[i];
@@ -126,69 +126,44 @@ namespace MyGame
             {//movement north 
                 x -= 32;
                 y -=16;
-                if (-30<=y&&0<=x)
-                {
+                
                     tilespawner.SpawnThreetilesSouth(new Vector2f(x-22, y+32));
                     
                     _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");
                     direction =0;
-                }
-                else 
-                {
-                    x+=32;
-                    y+=16;
-                }
+                
             }
             if (left)
             { //movement west
                 x -= 32;
                 y +=16;
-                if (0<=x&&y<=1030)
-                {
+                
                     tilespawner.SpawnThreetilesEast(new Vector2f(x-22, y+32));
                     
                     _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");
                     direction =3;
-                }
-                else 
-                {
-                    x+=32;
-                    y-=16;
-                }
             }
             if (down)
             { //movement south
                 x += 32;
                 y +=16;
-                if (x<=1900&&y<=1030)
-                {
+                
                     tilespawner.SpawnThreetilesNorth(new Vector2f(x - 22, y + 32));
                     
                     _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
                     direction =2;
-                }
-                else
-                {
-                    x-=32;
-                    y-=16;
-                }
+               
 
             }
             if (right) 
             { //movement east
                 x += 32;
                 y -=16;
-                if (x<=1900&&-30<=y)
-                {
+               
                     tilespawner.SpawnThreetilesWest(new Vector2f(x - 22, y + 32));
                     _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");
                     direction =1;
-                }
-                else
-                { 
-                    x-=32;
-                    y+=16;
-                }
+                
             }
             if (nowhere)
             {
@@ -205,7 +180,7 @@ namespace MyGame
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space)&&attackdelay<=_attacktimer)
             {
                 Spell spell = new Spell(pos, direction);
-                Game.CurrentScene.AddGameObject(spell);
+                Game.CurrentScene.AddCloud(spell);
                 _attacktimer= 0;
             }
             GameScene scene = (GameScene)Game.CurrentScene;
@@ -215,53 +190,54 @@ namespace MyGame
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Q)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 0);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddCloud(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.W)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 7);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddCloud(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.E)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 1);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddCloud(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.A)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 4);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddCloud(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.D)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 6);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddCloud(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Z)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 3);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddCloud(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.X)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 5);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddCloud(spell);
                     _attacktimer= 0;
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.C)&&attackdelay<=_attacktimer)
                 {
                     Spell spell = new Spell(pos, 2);
-                    Game.CurrentScene.AddGameObject(spell);
+                    Game.CurrentScene.AddCloud(spell);
                     _attacktimer= 0;
                 }
             }
             _attacktimer++;
+            SetPosition(new Vector2f(_sprite.Position.X-22,_sprite.Position.Y+32));
         }
     }
 }

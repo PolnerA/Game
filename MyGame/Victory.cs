@@ -12,7 +12,7 @@ namespace MyGame
         public Victory(int score, int tilesplaced) 
         {
             VictoryMessage victorymessage = new VictoryMessage(score, tilesplaced);
-            AddGameObject(victorymessage);
+            AddBackground(victorymessage);
         }
     }
 }

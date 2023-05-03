@@ -15,7 +15,7 @@ namespace MyGame
     {
         Text info = new Text();
         public SpellBooktext(Vector2f pos) 
-        {
+        {//UI
             info.Font = Game.GetFont("../../../Resources/times new roman.ttf");
             info.CharacterSize = 20;
             info.FillColor = Color.White;

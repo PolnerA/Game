@@ -13,7 +13,7 @@ namespace MyGame
         private const int SpawnDelay = 1000;
         private int _timer;
         public override void Update(Time elapsed)
-        {
+        {//clouds
             int msElapsed = elapsed.AsMilliseconds();
             _timer -= msElapsed;
             if (_timer <= 0)
@@ -23,7 +23,7 @@ namespace MyGame
                 float cloudX = size.X + 201;
                 float cloudY = Game.Random.Next() % size.Y;
                 Cloud cloud= new Cloud(new Vector2f(cloudX, cloudY));
-                Game.CurrentScene.AddGameObject(cloud);
+                Game.CurrentScene.AddCloud(cloud);
             }
         }
     }

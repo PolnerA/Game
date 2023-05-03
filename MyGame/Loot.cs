@@ -13,7 +13,7 @@ namespace MyGame
     {
         private readonly Sprite _sprite = new Sprite();
         public Loot(Vector2f pos)
-        {
+        {//S Game Object
             _sprite.Texture = Game.GetTexture("../../../Resources/loot.png");//create texture
             _sprite.Position = new Vector2f(pos.X, pos.Y);
         }
@@ -34,6 +34,7 @@ namespace MyGame
                 }
                 MakeDead();
             }
+            SetPosition(_sprite.Position);
         }
     }
 }

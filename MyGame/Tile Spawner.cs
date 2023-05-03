@@ -13,7 +13,7 @@ namespace MyGame
 {
     class Tile_Spawner : GameObject
     {
-        private List<Vector2f> isogrid = new List<Vector2f>();
+        private List<Vector2f> isogrid = new List<Vector2f>();//tiles
         private List<Vector2f> placedtiles = new List<Vector2f>() { new Vector2f(100,520), new Vector2f(132, 536), new Vector2f(132, 504), new Vector2f(68, 504), new Vector2f(68, 536) };//creates a new instance of tilespawner each move so, placed tiles needs to be in gamescene or pass the hero classes tilespawner's to use the one in the gamescene
         Random rng = new Random();
         private Vector2f position;
@@ -83,14 +83,14 @@ namespace MyGame
                
                 Tile south = new Tile(new Vector2f(pos.X+32, pos.Y+16));
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y+16));
-                scene.AddGameObject(1, south);
+                scene.AddTile( south);
                 tilehas(new Vector2f(pos.X + 32, pos.Y + 16));
             }
             if (right)
             {
                 Tile east = new Tile(new Vector2f(pos.X+32, pos.Y-16));
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
-                scene.AddGameObject(1, east);
+                scene.AddTile( east);
                 tilehas(new Vector2f(pos.X + 32, pos.Y - 16));
             }
             if (left)
@@ -98,7 +98,7 @@ namespace MyGame
                 Tile west = new Tile(new Vector2f(pos.X-32, pos.Y+16));
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y+16));
 
-                scene.AddGameObject(1, west);
+                scene.AddTile(west);
                 tilehas(new Vector2f(pos.X - 32, pos.Y + 16));
             }
             scene.SetTilesPlaced(placedtiles.Count());
@@ -129,7 +129,7 @@ namespace MyGame
             if (down)
             {
                 Tile south = new Tile(new Vector2f(pos.X+32, pos.Y+16));
-                scene.AddGameObject(1, south);
+                scene.AddTile(south);
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y+16));
                 tilehas(new Vector2f(pos.X + 32, pos.Y + 16));
 
@@ -137,7 +137,7 @@ namespace MyGame
             if (right)
             {
                 Tile east = new Tile(new Vector2f(pos.X+32, pos.Y-16));
-                scene.AddGameObject(1, east);
+                scene.AddTile(east);
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
                 tilehas(new Vector2f(pos.X+32, pos.Y-16));
 
@@ -146,7 +146,7 @@ namespace MyGame
             {
                 Tile north = new Tile(new Vector2f(pos.X-32, pos.Y-16));
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
-                scene.AddGameObject(1, north);
+                scene.AddTile(north);
                 tilehas(new Vector2f(pos.X-32, pos.Y-16));
             }
             scene.SetTilesPlaced(placedtiles.Count());
@@ -178,7 +178,7 @@ namespace MyGame
             if (up)
             {
                 Tile north = new Tile(new Vector2f(pos.X-32, pos.Y-16));
-                scene.AddGameObject(1, north);
+                scene.AddTile(north);
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
                 tilehas(new Vector2f(pos.X-32, pos.Y-16));
 
@@ -186,7 +186,7 @@ namespace MyGame
             if (right)
             {
                 Tile east = new Tile(new Vector2f(pos.X+32, pos.Y-16));
-                scene.AddGameObject(1, east);
+                scene.AddTile(east);
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
                 tilehas(new Vector2f(pos.X+32, pos.Y-16));
 
@@ -194,7 +194,7 @@ namespace MyGame
             if (left)
             {
                 Tile west = new Tile(new Vector2f(pos.X-32, pos.Y+16));
-                scene.AddGameObject(1, west);
+                scene.AddTile(west);
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y+16));
                 tilehas(new Vector2f(pos.X-32, pos.Y+16));
 
@@ -228,7 +228,7 @@ namespace MyGame
             if (down)
             {
                 Tile south = new Tile(new Vector2f(pos.X+32, pos.Y+16));
-                scene.AddGameObject(1, south);
+                scene.AddTile(south);
                 placedtiles.Add(new Vector2f(pos.X+32,pos.Y+16));
                 tilehas(new Vector2f(pos.X+32, pos.Y+16));
 
@@ -236,7 +236,7 @@ namespace MyGame
             if (up)
             {
                 Tile north = new Tile(new Vector2f(pos.X-32, pos.Y-16));
-                scene.AddGameObject(1, north);
+                scene.AddTile(north);
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
                 tilehas(new Vector2f(pos.X-32, pos.Y-16));
 
@@ -244,7 +244,7 @@ namespace MyGame
             if (left)
             {
                 Tile west = new Tile(new Vector2f(pos.X-32, pos.Y+16));
-                scene.AddGameObject(1, west);
+                scene.AddTile(west);
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y+16));
                 tilehas(new Vector2f(pos.X-32,pos.Y+16));
 

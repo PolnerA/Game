@@ -17,7 +17,7 @@ namespace MyGame
         private readonly Sprite _sprite = new Sprite();//make loot sprites spell sprites make clicks twice as big (now 4 times| half the size)
         private List<Vector2f> placedtiles = new List<Vector2f>();
         public Enemy(Vector2f pos,List<Vector2f> tiles)
-        {
+        {//Enemy character s GameObject
             _sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");
             _sprite.Position = new Vector2f(pos.X+22,pos.Y-32);//same way of standing on tile as hero
             placedtiles=tiles;
@@ -275,6 +275,7 @@ namespace MyGame
             
              
                _sprite.Position = new Vector2f(x, y);
+            SetPosition(new Vector2f(x-22,y+32));
                _movetimer++;
         }
         

@@ -12,7 +12,7 @@ namespace MyGame
     class CursorClick : AnimatedSprite
     {
         public CursorClick(Vector2f pos) : base(pos)
-        {
+        {//UI
             Texture = Game.GetTexture("../../../Resources/spritesheet2px.png");
             SetUpClickAnimation();
             PlayAnimation("click", AnimationMode.OnceForwards);

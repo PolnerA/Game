@@ -13,7 +13,7 @@ namespace MyGame
     {
         private readonly Sprite _sprite = new Sprite();
         public Potion(Vector2f pos)
-        {
+        {//S Game Object
             _sprite.Texture = Game.GetTexture("../../../Resources/potion.png");//create texture
             _sprite.Position = new Vector2f(pos.X+25, pos.Y+2);//pixels adjusted for loot pos compared to tile pos
         }
@@ -31,6 +31,7 @@ namespace MyGame
                 scene.IncreaseLives();
                 MakeDead();
             }
+            SetPosition(new Vector2f(_sprite.Position.X-25,_sprite.Position.Y-2));
         }
     }
 }

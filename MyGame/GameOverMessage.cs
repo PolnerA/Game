@@ -16,6 +16,7 @@ namespace MyGame
         private readonly Text _text = new Text();
         public GameOverMessage(int score,int tilesplaced)
         {
+            //Background
             _text.Font = Game.GetFont("../../../Resources/times new roman.ttf");
             _text.Position = new Vector2f(50.0f, 50.0f);
             _text.CharacterSize = 50;

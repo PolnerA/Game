@@ -14,32 +14,32 @@ namespace MyGame
         public GameScene()
         {
             Background background = new Background();
-            AddGameObject(background);
+            AddBackground(background);
             Tile tile = new Tile(new Vector2f(100,520));//original tile            _ 
             Tile tile1 = new Tile(new Vector2f(132, 536));//south tile +32x, + 16y  \
             Tile tile2 = new Tile(new Vector2f (132,504));//east tile +32x, -16y     |_ compared to original tile
             Tile tile3 = new Tile(new Vector2f(68, 504));//north tile -32x, -16y     |
             Tile tile4 = new Tile(new Vector2f(68, 536));//west tile -32x, +16y    _/
             Tile_Spawner tilespawner = new Tile_Spawner();
-            AddGameObject(tilespawner);
-            AddGameObject(tile);
-            AddGameObject(tile2);
-            AddGameObject(tile3);
-            AddGameObject(tile4);//2072 tiles is the screen
+            AddTile(tilespawner);
+            AddTile(tile);
+            AddTile(tile2);
+            AddTile(tile3);
+            AddTile(tile4);//2072 tiles is the screen
             //character location +22x, -32y compared to the tile stood on
             AddGameObject(hero);
             Cloud_Spawner clouds = new Cloud_Spawner();
-            AddGameObject(clouds);
+            AddCloud(clouds);
             Score score = new Score(new Vector2f(1700,0));
-            AddGameObject(score);
+            AddUserInterface(score);
             Lives lives = new Lives(new Vector2f(1480, 0));
-            AddGameObject(lives);
+            AddUserInterface(lives);
             TilesPlaced tiles = new TilesPlaced(new Vector2f(1180, 0));
-            AddGameObject(tiles);
+            AddUserInterface(tiles);
             Tutorial_Text tutorial = new Tutorial_Text();
-            AddGameObject(tutorial);
+            AddUserInterface(tutorial);
             AdvancedSpellBook spellbook = new AdvancedSpellBook();
-            AddGameObject(spellbook);
+            AddUserInterface(spellbook);
         }
         // Get the current score
         public int GetScore()

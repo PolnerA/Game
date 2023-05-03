@@ -15,7 +15,7 @@ namespace MyGame
         private const float Speed = 0.3f;
         private readonly Sprite _sprite = new Sprite();
         public Background()
-        {//make tile background and remodel the animation to be at the top with clouds
+        {// background
             _sprite.Texture = Game.GetTexture("../../../Resources/Background.png");
             _sprite.Position = new Vector2f(0, 0);
         }

@@ -11,6 +11,7 @@ namespace GameEngine
 
         private bool _isDead;
 
+        private Vector2f Position;
 
         // Using a set prevents duplicates.
         private readonly HashSet<string> _tags = new HashSet<string>();
@@ -20,6 +21,11 @@ namespace GameEngine
         public void AssignTag(string tag)
         {
             _tags.Add(tag);
+        }
+        public void SetPosition(Vector2f position) { Position = position; }
+        public Vector2f GetPosition()
+        {
+            return Position;
         }
         public bool HasTag(string tag)
         {

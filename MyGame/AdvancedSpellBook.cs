@@ -18,7 +18,7 @@ namespace MyGame
         
         public AdvancedSpellBook()
         {
-            
+            //part of UI
             _sprite.Texture = Game.GetTexture("../../../Resources/spell book2.png");//make spell book and spell book on the same area
             _sprite.Position = new Vector2f(0,0);//make spells red so you can see them on the background
             
@@ -46,7 +46,7 @@ namespace MyGame
                     timer = 0;
                 }
                 SpellBooktext text = new SpellBooktext(new Vector2f(_sprite.Position.X+_sprite.Texture.Size.X, _sprite.Position.Y));
-                Game.CurrentScene.AddGameObject(text);
+                Game.CurrentScene.AddUserInterface(text);
             }
             timer++;
         }

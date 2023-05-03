@@ -15,6 +15,7 @@ namespace MyGame
         private readonly Sprite _sprite = new Sprite();
         public Cloud(Vector2f pos)
         {
+            //clouds
             _sprite.Texture = Game.GetTexture("../../../Resources/cloud.png");
             _sprite.Position = pos;
         }

@@ -12,19 +12,47 @@ namespace GameEngine
         // This holds our game objects.
         private readonly List<GameObject> _gameObjects = new List<GameObject>();
 
+        private readonly List<GameObject> _tiles = new List<GameObject>();
+
+        private readonly List<GameObject> _background = new List<GameObject>();
+
+        private readonly List<GameObject> _cloud = new List<GameObject>();
+
+        private readonly List<GameObject> _userinterface = new List<GameObject>();
+
         // Puts a GameObject into the scene.
         public void AddGameObject(GameObject gameObject)
         {
             // This adds the game object onto the back (the end) of the list of game objects.
             _gameObjects.Add(gameObject);
         }
-        public void AddGameObject(int position,GameObject gameObject)
+        public void AddGameObject(int position, GameObject gameObject)
         {
             //This adds the game object at a location into the list of game objects.
             _gameObjects.Insert(position, gameObject);
         }
+
+        public void AddTile(GameObject tile)
+        {
+            _tiles.Add(tile);
+        }
+
+        public void AddBackground(GameObject background)
+        {
+            _background.Add(background);
+        }
+
+        public void AddUserInterface(GameObject UI)
+        {
+            _userinterface.Add(UI);
+        }
+
+        public void AddCloud(GameObject cloud)
+        {
+            _cloud.Add(cloud);
+        }
         public int GameObjectAmount()
-        { 
+        {
             return _gameObjects.Count;
         }
 
@@ -42,8 +70,11 @@ namespace GameEngine
             HandleCollisions();
             UpdateGameObjects(time);
             RemoveDeadGameObjects();
+            DrawBackground();
+            DrawTiles();
             DrawGameObjects();//draw background, then tiles, objects (top-bottom rendering), then the clouds ending with the ui.
-
+            DrawClouds();
+            DrawUserInterface();
             // Draw the window as updated by the game objects.
             Game.RenderWindow.Display();
         }
@@ -86,13 +117,41 @@ namespace GameEngine
         // This function calls update on each of our game objects.
         private void UpdateGameObjects(Time time)
         {
-            for (int i = 0; i < _gameObjects.Count; i++) _gameObjects[i].Update(time);
+            for (int i = 0; i < _gameObjects.Count; i++) { _gameObjects[i].Update(time); }
+            for (int i = 0; i < _cloud.Count; i++) {_cloud[i].Update(time); }
+            for (int i = 0; i<_userinterface.Count; i++) {_userinterface[i].Update(time); }
+            for (int i = 0; i < _background.Count; i++) _background[i].Update(time);
         }
 
         // This function calls draw on each of our game objects.
         private void DrawGameObjects()
         {
-            foreach (var gameObject in _gameObjects) gameObject.Draw();
+            for (int y = 0; y<Game.RenderWindow.Size.Y; y++)
+            {
+                foreach (var GameObject in _gameObjects)
+                {
+                    if (GameObject.GetPosition().Y==y)
+                    {
+                        GameObject.Draw();
+                    }
+                }
+            }
+        }
+        private void DrawBackground()
+        { 
+            foreach (var gameobject in _background) gameobject.Draw();
+        }
+        private void DrawUserInterface()
+        {
+            foreach (var gameobject in _userinterface) gameobject.Draw();
+        }
+        private void DrawClouds()
+        {
+            foreach (var gameobject in _cloud) gameobject.Draw();
+        }
+        private void DrawTiles()
+        {
+            foreach (var gameobject in _tiles) gameobject.Draw();
         }
 
         // This function removes objects that indicate they are dead from the scene.
@@ -109,6 +168,8 @@ namespace GameEngine
             // gameObjects. If our lambda returns true, that game object ends up being
             // removed from our list.
             _gameObjects.RemoveAll(isDead);
+            _cloud.RemoveAll(isDead);
+            _userinterface.RemoveAll(isDead);
         }
     }
 }

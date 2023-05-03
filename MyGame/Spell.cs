@@ -18,7 +18,7 @@ namespace MyGame
         private int direction;
         private int still;
         public Spell(Vector2f pos,int direction)//0 north 1 east 2 south 3 west
-        {
+        {//S GameObject
             _sprite.Position = new Vector2f(pos.X+10,pos.Y+25);
             this.direction = direction;
             switch (this.direction)
@@ -118,6 +118,7 @@ namespace MyGame
                     still++;
                 }
             }
+            SetPosition(_sprite.Position);
         }
     }
 }
