@@ -37,7 +37,12 @@ namespace MyGame
             float y = pos.Y;
             float hx = heropos.X;//enemy goes to the hero spawn pos
             float hy = heropos.Y;
+            if (hy==y&&hx==x)
+            {
+                MakeDead();
+                scene.DecreaseLives();
 
+            }
             if (movedelay<=_movetimer)
             {
                 if (hx < x&&hy<y)
@@ -262,12 +267,7 @@ namespace MyGame
                         }
                     }
                 }
-                if (hy==y&&hx==x)
-                {
-                    MakeDead();
-                    scene.DecreaseLives();
-                  
-                }
+                
                
                 _movetimer =0;
 
