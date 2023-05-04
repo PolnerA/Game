@@ -1,6 +1,7 @@
 ﻿using GameEngine;
 using SFML.System;
 using System.Net.Http.Headers;
+using System.Threading;
 
 namespace MyGame
 {
@@ -78,6 +79,7 @@ namespace MyGame
             --_lives;
             if (_lives == 0)
             {
+                Thread.Sleep(200);
                 GameOverScene gameOverScene = new GameOverScene(_score,tilesplaced);
                 Game.SetScene(gameOverScene);
             }

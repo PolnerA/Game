@@ -12,32 +12,51 @@ namespace MyGame
 {
     class Tutorial_Text : GameObject
     {
+        private int clicktimer = 100;//find a way to do tutorial w/o player movement
+        private int tutorialnum;
+        private const int clickdelay = 100;
         private readonly Text _text = new Text();
-        private readonly Text _text2 = new Text();
+        private readonly Sprite sprite = new Sprite();
         public Tutorial_Text()
         {//UI
             _text.Font = Game.GetFont("../../../Resources/times new roman.ttf");
-            _text2.Font = Game.GetFont("../../../Resources/times new roman.ttf");
+            
             _text.Position = new Vector2f(200,500);
-            _text2.Position = new Vector2f(1000, 200);
             _text.CharacterSize = 40;
-            _text2.CharacterSize = 40;
+            
             _text.FillColor = Color.White;
-            _text2.FillColor = Color.White;
             _text.DisplayedString ="Click on a nearby tile to move";
-            _text2.DisplayedString = "Press space to fire a spell\nevery spell you cast decreases your health";
+            tutorialnum=0;
         }
         public override void Draw()
         {
             Game.RenderWindow.Draw(_text);
-            Game.RenderWindow.Draw(_text2);
+            Game.RenderWindow.Draw(sprite);
         }
         public override void Update(Time elapsed)
         {
-             if (Mouse.IsButtonPressed(Mouse.Button.Left))
-             {
-                MakeDead();  
-             }
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clickdelay<=clicktimer&&tutorialnum==0)
+            {
+                _text.Position = new Vector2f(1000, 200);
+                _text.DisplayedString = "Press space to fire a spell\nevery spell you cast decreases your health";
+                clicktimer=0;
+                tutorialnum=1;
+                
+            }
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clickdelay<=clicktimer&&tutorialnum==1)
+            {
+                tutorialnum=2;
+                sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");
+                _text.DisplayedString = "These are enemies you will encounter on your journey";
+                sprite.Position = new Vector2f(1000, 300);
+                clicktimer=0;
+
+            }
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clickdelay<=clicktimer&&tutorialnum==2)
+            {
+                MakeDead();
+            }
+            clicktimer++;
         }
     }
 }
