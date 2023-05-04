@@ -32,7 +32,7 @@ namespace MyGame
             AddCloud(clouds);
             Score score = new Score(new Vector2f(1700,0));
             AddUserInterface(score);
-            Lives lives = new Lives(new Vector2f(1480, 0));
+            Lives lives = new Lives(new Vector2f(1500, 0));
             AddUserInterface(lives);
             TilesPlaced tiles = new TilesPlaced(new Vector2f(1180, 0));
             AddUserInterface(tiles);

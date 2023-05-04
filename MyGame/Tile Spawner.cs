@@ -258,20 +258,20 @@ namespace MyGame
             int integer = rng.Next(4);
             if (integer == 0)
             {
-                int integer2 = rng.Next(3);
+                int integer2 = rng.Next(5);
                 switch (integer2)
                 {
-                    case 0:
+                    default:
                         //spawn enemy using the position of the tile
                         Enemy enemy = new Enemy(spawnpos,placedtiles);//pos is currently stood on tile
                         Scene scene = (GameScene)Game.CurrentScene;
                         Game.CurrentScene.AddGameObject(enemy);//gets current amount of game objects and puts it behind by the an amount of tiles placed to put it behind the score
                         break;
-                    case 1:
+                    case 0:
                         Loot loot = new Loot(spawnpos);
                         Game.CurrentScene.AddGameObject(loot);
                         break;
-                    case 2:
+                    case 1:
                         Potion potion = new Potion(spawnpos);
                         Game.CurrentScene.AddGameObject(potion);
                         break;

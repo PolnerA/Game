@@ -28,7 +28,7 @@ namespace MyGame
         {
             GameScene scene = (GameScene)Game.CurrentScene;
             _text.DisplayedString = "Tiles Placed: " + scene.GetTilesplaced();
-            if (scene.GetTilesplaced()==2072)
+            if (scene.GetTilesplaced()==2900)
             {
                 scene.GameWon();
             }

@@ -25,7 +25,7 @@ namespace MyGame
             _text.FillColor = Color.White;
             _text2.FillColor = Color.White;
             _text.DisplayedString ="Click on a nearby tile to move";
-            _text2.DisplayedString = "Press space to fire a spell";
+            _text2.DisplayedString = "Press space to fire a spell\nevery spell you cast decreases your health";
         }
         public override void Draw()
         {

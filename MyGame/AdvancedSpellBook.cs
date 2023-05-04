@@ -13,8 +13,8 @@ namespace MyGame
     class AdvancedSpellBook: GameObject
     {
         Sprite _sprite = new Sprite();
-        const int toggledelay = 10;
-        private int timer = 10;
+        const int toggledelay = 50;
+        private int timer = 50;
         
         public AdvancedSpellBook()
         {

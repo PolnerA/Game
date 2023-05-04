@@ -95,9 +95,9 @@ namespace GameEngine
                 if (collisionRect.Height == 0 || collisionRect.Width == 0) continue;
 
                 // See if this game object is colliding with any other game object.
-                for (int j = 0; j < _gameObjects.Count; j++)
+                for (int j = 0; j < _cloud.Count; j++)
                 {
-                    var otherGameObject = _gameObjects[j];
+                    var otherGameObject = _cloud[j];
 
                     // Don't check an object colliding with itself.
                     if (gameObject == otherGameObject) continue;

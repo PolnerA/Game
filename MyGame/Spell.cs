@@ -48,6 +48,8 @@ namespace MyGame
                     _sprite.Texture = Game.GetTexture("../../../Resources/spell northeast.png");
                     break;
             }
+            GameScene scene = (GameScene)Game.CurrentScene;
+            scene.DecreaseLives();
             AssignTag("spell");
         }
         public override void Draw()
