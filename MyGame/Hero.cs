@@ -1,4 +1,5 @@
 ﻿using GameEngine;
+using SFML.Audio;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -19,6 +20,9 @@ namespace MyGame
         private int _attacktimer;
         private int _movetimer;
         private const int movedelay = 25;
+        private readonly Sound music = new Sound();
+        private const int musicdelay = 8000;
+        private int musictimer = musicdelay;
         private readonly Sprite _sprite = new Sprite();
         private Vector2f pos;
         private Tile_Spawner tilespawner = new Tile_Spawner();
@@ -27,11 +31,12 @@ namespace MyGame
         {
             return pos;
         }
-        public Hero(Vector2f pos)
+        public Hero(Vector2f pos)//music implementation (one sound at a time.) exploration.wav=constant soundtrack, lock.wav new tile found, Victory.wav played on victory, Game over.wav played on game over, creeping.wav played when an enemy is on screen instead of exploration.
         { //S Game Object
             _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
             _sprite.Position = pos;
             this.pos = pos;
+            music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/exploration.wav");
         }
         public override void Draw()
         {
@@ -40,6 +45,12 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
+            musictimer++;
+            if(musicdelay<=musictimer)
+            {
+                music.Play();
+                musictimer=0;
+            }
             bool up = false;
             bool down = false;
             bool left = false;

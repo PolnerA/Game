@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine;
+using SFML.Audio;
 using SFML.Graphics;
 using SFML.System;
 
@@ -17,6 +18,12 @@ namespace MyGame
         private List<Vector2f> placedtiles = new List<Vector2f>() { new Vector2f(100,520), new Vector2f(132, 536), new Vector2f(132, 504), new Vector2f(68, 504), new Vector2f(68, 536) };
         Random rng = new Random();
         private Vector2f position;
+        private bool music=false;
+        private readonly Sound exploration = new Sound();
+        public Tile_Spawner()
+        {
+            exploration.SoundBuffer = Game.GetSoundBuffer("../../../Resources/lock.wav");
+        }
         public void SpawnThreetiles(Vector2f pos, Vector2f previouspos)
         {
             float x = pos.X;
@@ -85,6 +92,7 @@ namespace MyGame
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y+16));
                 scene.AddTile( south);
                 tilehas(new Vector2f(pos.X + 32, pos.Y + 16));
+                music=true;
             }
             if (right)
             {
@@ -92,6 +100,7 @@ namespace MyGame
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
                 scene.AddTile( east);
                 tilehas(new Vector2f(pos.X + 32, pos.Y - 16));
+                music=true;
             }
             if (left)
             {
@@ -100,7 +109,13 @@ namespace MyGame
 
                 scene.AddTile(west);
                 tilehas(new Vector2f(pos.X - 32, pos.Y + 16));
+                music=true;
             }
+            if (music)
+            {
+                exploration.Play();
+            }
+            music=false;
             scene.SetTilesPlaced(placedtiles.Count());
         }
         public void SpawnThreetilesWest(Vector2f pos)
@@ -132,7 +147,7 @@ namespace MyGame
                 scene.AddTile(south);
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y+16));
                 tilehas(new Vector2f(pos.X + 32, pos.Y + 16));
-
+                music=true;
             }
             if (right)
             {
@@ -140,7 +155,7 @@ namespace MyGame
                 scene.AddTile(east);
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
                 tilehas(new Vector2f(pos.X+32, pos.Y-16));
-
+                music=true;
             }
             if (up)
             {
@@ -148,8 +163,14 @@ namespace MyGame
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
                 scene.AddTile(north);
                 tilehas(new Vector2f(pos.X-32, pos.Y-16));
+                music= true;
             }
             scene.SetTilesPlaced(placedtiles.Count());
+            if (music)
+            {
+                exploration.Play();
+            }
+            music=false;
 
         }
         public void SpawnThreetilesSouth(Vector2f pos)
@@ -181,7 +202,7 @@ namespace MyGame
                 scene.AddTile(north);
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
                 tilehas(new Vector2f(pos.X-32, pos.Y-16));
-
+                music=true;
             }
             if (right)
             {
@@ -189,7 +210,7 @@ namespace MyGame
                 scene.AddTile(east);
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
                 tilehas(new Vector2f(pos.X+32, pos.Y-16));
-
+                music=true;
             }
             if (left)
             {
@@ -197,10 +218,14 @@ namespace MyGame
                 scene.AddTile(west);
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y+16));
                 tilehas(new Vector2f(pos.X-32, pos.Y+16));
-
+                music=true;
             }
             scene.SetTilesPlaced(placedtiles.Count());
-
+            if (music)
+            {
+                exploration.Play();
+            }
+            music=false;
         }
         public void SpawnThreetilesEast(Vector2f pos)
         {
@@ -231,7 +256,7 @@ namespace MyGame
                 scene.AddTile(south);
                 placedtiles.Add(new Vector2f(pos.X+32,pos.Y+16));
                 tilehas(new Vector2f(pos.X+32, pos.Y+16));
-
+                music=true;
             }
             if (up)
             {
@@ -239,7 +264,7 @@ namespace MyGame
                 scene.AddTile(north);
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
                 tilehas(new Vector2f(pos.X-32, pos.Y-16));
-
+                music=true;
             }
             if (left)
             {
@@ -247,10 +272,14 @@ namespace MyGame
                 scene.AddTile(west);
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y+16));
                 tilehas(new Vector2f(pos.X-32,pos.Y+16));
-
+                music=true;
             }
             scene.SetTilesPlaced(placedtiles.Count());
-
+            if (music)
+            {
+                exploration.Play();
+            }
+            music=false;
         }
         public void tilehas(Vector2f spawnpos)
         {
