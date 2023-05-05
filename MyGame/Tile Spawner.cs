@@ -14,7 +14,7 @@ namespace MyGame
     class Tile_Spawner : GameObject
     {
         private List<Vector2f> isogrid = new List<Vector2f>();//tiles
-        private List<Vector2f> placedtiles = new List<Vector2f>() { new Vector2f(100,520), new Vector2f(132, 536), new Vector2f(132, 504), new Vector2f(68, 504), new Vector2f(68, 536) };//creates a new instance of tilespawner each move so, placed tiles needs to be in gamescene or pass the hero classes tilespawner's to use the one in the gamescene
+        private List<Vector2f> placedtiles = new List<Vector2f>() { new Vector2f(100,520), new Vector2f(132, 536), new Vector2f(132, 504), new Vector2f(68, 504), new Vector2f(68, 536) };
         Random rng = new Random();
         private Vector2f position;
         public void SpawnThreetiles(Vector2f pos, Vector2f previouspos)
@@ -258,7 +258,7 @@ namespace MyGame
             int integer = rng.Next(4);
             if (integer == 0)
             {
-                int integer2 = rng.Next(5);
+                int integer2 = rng.Next(4);
                 switch (integer2)
                 {
                     default:

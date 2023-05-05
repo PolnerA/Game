@@ -12,9 +12,9 @@ namespace MyGame
 {
     class Tutorial_Text : GameObject
     {
-        private int clicktimer = 100;//find a way to do tutorial w/o player movement
+        private int clicktimer = 10;//find a way to do tutorial w/o player movement
         private int tutorialnum;
-        private const int clickdelay = 100;
+        private const int clickdelay = 10;
         private readonly Text _text = new Text();
         private readonly Sprite sprite = new Sprite();
         public Tutorial_Text()
