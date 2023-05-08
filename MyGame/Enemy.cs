@@ -35,7 +35,7 @@ namespace MyGame
             Vector2f heropos = scene.GetHeroPos();
             float x = pos.X;
             float y = pos.Y;
-            float hx = heropos.X;//enemy goes to the hero spawn pos
+            float hx = heropos.X;//enemy goes to the hero pos
             float hy = heropos.Y;
             if (hy==y&&hx==x)
             {
@@ -71,7 +71,7 @@ namespace MyGame
                         y+=16;
                     }
                 }
-                if (hx<x&&y<hy)
+                else if (hx<x&&y<hy)
                 {
                     //movement west
                     x -= 32;
@@ -97,7 +97,7 @@ namespace MyGame
                         y-=16;
                     }
                 }
-                if (x<hx&&y<hy)
+                else if (x<hx&&y<hy)
                 {
                     //movement south
                     x += 32;
@@ -129,7 +129,7 @@ namespace MyGame
 
                 }
 
-                if (x < hx&&hy<y)
+                else if (x < hx&&hy<y)
                 {
                     //movement east
                     x += 32;
@@ -158,7 +158,7 @@ namespace MyGame
 
 
                 }
-                if (hx ==x&&hy!=y)
+                else if (hx ==x&&hy!=y)
                 {
                     if (hy<y)
                     {
@@ -212,7 +212,7 @@ namespace MyGame
                         }
                     }
                 }
-                if (hy==y && hx !=x)
+                else if (hy==y && hx !=x)
                 {
                     if (hx<x)
                     {
