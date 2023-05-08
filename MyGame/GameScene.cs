@@ -37,8 +37,6 @@ namespace MyGame
             AddUserInterface(lives);
             TilesPlaced tiles = new TilesPlaced(new Vector2f(1180, 0));
             AddUserInterface(tiles);
-            Tutorial_Text tutorial = new Tutorial_Text();
-            AddUserInterface(tutorial);
             AdvancedSpellBook spellbook = new AdvancedSpellBook();
             AddUserInterface(spellbook);
         }

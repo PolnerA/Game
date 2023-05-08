@@ -17,13 +17,15 @@ namespace MyGame
         private const int clickdelay = 10;
         private readonly Text _text = new Text();
         private readonly Sprite sprite = new Sprite();
+        private readonly Sprite sprite2 = new Sprite();
         public Tutorial_Text()
         {//UI
             _text.Font = Game.GetFont("../../../Resources/times new roman.ttf");
             
             _text.Position = new Vector2f(200,500);
             _text.CharacterSize = 40;
-            
+            sprite2.Texture= Game.GetTexture("../../../Resources/64X32tile.png");
+            sprite2.Position= new Vector2f(100, 500);
             _text.FillColor = Color.White;
             _text.DisplayedString ="Click on a nearby tile to move";
             tutorialnum=0;
@@ -32,9 +34,13 @@ namespace MyGame
         {
             Game.RenderWindow.Draw(_text);
             Game.RenderWindow.Draw(sprite);
+            Game.RenderWindow.Draw(sprite2);
         }
         public override void Update(Time elapsed)
         {
+            if (0<tutorialnum)
+            {
+            }
             if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clickdelay<=clicktimer&&tutorialnum==0)
             {
                 _text.Position = new Vector2f(1000, 200);
@@ -54,6 +60,8 @@ namespace MyGame
             }
             if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clickdelay<=clicktimer&&tutorialnum==2)
             {
+                GameScene scene = new GameScene();
+                Game.SetScene(scene);
                 MakeDead();
             }
             clicktimer++;
