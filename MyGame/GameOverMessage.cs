@@ -14,7 +14,7 @@ namespace MyGame
     class GameOverMessage : GameObject
     {
         private readonly Text _text = new Text();
-        private bool spellbook = false;
+        private bool spellbook;
         public GameOverMessage(int score,int tilesplaced, bool spellbook)
         {
             //Background
@@ -34,7 +34,7 @@ namespace MyGame
         {
             if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
             {
-                GameScene scene = new GameScene();
+                GameScene scene = new GameScene(spellbook);
                 Game.SetScene(scene);
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))

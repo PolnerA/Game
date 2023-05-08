@@ -10,7 +10,7 @@ namespace MyGame
         private int _lives = 1;
         private int _score;
         private int tilesplaced=5;
-        private bool spellbook = false;
+        private bool spellbook;
         public Hero hero = new Hero(new Vector2f(122, 488));
         public GameScene()
         {
@@ -39,6 +39,7 @@ namespace MyGame
             AddUserInterface(tiles);
             AdvancedSpellBook spellbook = new AdvancedSpellBook();
             AddUserInterface(spellbook);
+            this.spellbook=false;
         }
         public GameScene(bool spellbook)
         {

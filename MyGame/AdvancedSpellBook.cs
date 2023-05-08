@@ -16,11 +16,19 @@ namespace MyGame
         const int toggledelay = 50;
         private int timer = 50;
         
-        public AdvancedSpellBook()
+        public AdvancedSpellBook(bool spellbook)
         {
             //part of UI
-            _sprite.Texture = Game.GetTexture("../../../Resources/spell book2.png");//make spell book and spell book on the same area
-            _sprite.Position = new Vector2f(0,0);//make spells red so you can see them on the background
+
+            if (!spellbook)
+            {
+                _sprite.Texture = Game.GetTexture("../../../Resources/spell book2.png");
+            }
+            else 
+            {
+                _sprite.Texture = Game.GetTexture("../../../Resources/spell book2 on.png");
+            }
+            _sprite.Position = new Vector2f(0,0);
             
         }
         public override void Draw()
