@@ -36,7 +36,7 @@ namespace MyGame
             _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
             _sprite.Position = pos;
             this.pos = pos;
-           // music.SoundBuffer = Game.GetSoundBuffer("C:/Users/polnera/source/repos/PolnerA/Game/MyGame/Resources/exploration.wav");
+            music.SoundBuffer = Game.GetSoundBuffer("C:/Users/polnera/source/repos/PolnerA/Game/MyGame/Resources/exploration.wav");
         }
         public override void Draw()
         {
