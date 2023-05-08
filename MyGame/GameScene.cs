@@ -37,7 +37,7 @@ namespace MyGame
             AddUserInterface(lives);
             TilesPlaced tiles = new TilesPlaced(new Vector2f(1180, 0));
             AddUserInterface(tiles);
-            AdvancedSpellBook spellbook = new AdvancedSpellBook();
+            AdvancedSpellBook spellbook = new AdvancedSpellBook(this.spellbook);
             AddUserInterface(spellbook);
             this.spellbook=false;
         }
@@ -66,7 +66,7 @@ namespace MyGame
             AddUserInterface(lives);
             TilesPlaced tiles = new TilesPlaced(new Vector2f(1180, 0));
             AddUserInterface(tiles);
-            AdvancedSpellBook _spellbook = new AdvancedSpellBook();
+            AdvancedSpellBook _spellbook = new AdvancedSpellBook(this.spellbook);
             AddUserInterface(_spellbook);
             this.spellbook = spellbook;
         }
