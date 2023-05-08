@@ -19,10 +19,8 @@ namespace MyGame
         Random rng = new Random();
         private Vector2f position;
         private bool music=false;
-        private readonly Sound exploration = new Sound();
         public Tile_Spawner()
         {
-            exploration.SoundBuffer = Game.GetSoundBuffer("../../../Resources/lock.wav");
         }
         public void SpawnThreetiles(Vector2f pos, Vector2f previouspos)
         {
@@ -113,7 +111,6 @@ namespace MyGame
             }
             if (music)
             {
-                exploration.Play();
             }
             music=false;
             scene.SetTilesPlaced(placedtiles.Count());
@@ -168,7 +165,6 @@ namespace MyGame
             scene.SetTilesPlaced(placedtiles.Count());
             if (music)
             {
-                exploration.Play();
             }
             music=false;
 
@@ -223,7 +219,6 @@ namespace MyGame
             scene.SetTilesPlaced(placedtiles.Count());
             if (music)
             {
-                exploration.Play();
             }
             music=false;
         }
@@ -277,7 +272,6 @@ namespace MyGame
             scene.SetTilesPlaced(placedtiles.Count());
             if (music)
             {
-                exploration.Play();
             }
             music=false;
         }
