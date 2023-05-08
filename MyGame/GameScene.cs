@@ -40,6 +40,35 @@ namespace MyGame
             AdvancedSpellBook spellbook = new AdvancedSpellBook();
             AddUserInterface(spellbook);
         }
+        public GameScene(bool spellbook)
+        {
+            Background background = new Background();
+            AddBackground(background);
+            Tile tile = new Tile(new Vector2f(100, 520));//original tile            _ 
+            Tile tile1 = new Tile(new Vector2f(132, 536));//south tile +32x, + 16y  \
+            Tile tile2 = new Tile(new Vector2f(132, 504));//east tile +32x, -16y     |_ compared to original tile
+            Tile tile3 = new Tile(new Vector2f(68, 504));//north tile -32x, -16y     |
+            Tile tile4 = new Tile(new Vector2f(68, 536));//west tile -32x, +16y    _/
+            Tile_Spawner tilespawner = new Tile_Spawner();
+            AddTile(tilespawner);
+            AddTile(tile);
+            AddTile(tile2);
+            AddTile(tile3);
+            AddTile(tile4);//2072 tiles is the screen
+            //character location +22x, -32y compared to the tile stood on
+            AddGameObject(hero);
+            Cloud_Spawner clouds = new Cloud_Spawner();
+            AddCloud(clouds);
+            Score score = new Score(new Vector2f(1700, 0));
+            AddUserInterface(score);
+            Lives lives = new Lives(new Vector2f(1500, 0));
+            AddUserInterface(lives);
+            TilesPlaced tiles = new TilesPlaced(new Vector2f(1180, 0));
+            AddUserInterface(tiles);
+            AdvancedSpellBook _spellbook = new AdvancedSpellBook();
+            AddUserInterface(_spellbook);
+            this.spellbook = spellbook;
+        }
         // Get the current score
         public int GetScore()
         {
@@ -78,7 +107,7 @@ namespace MyGame
             if (_lives == 0)
             {
                 Thread.Sleep(200);
-                GameOverScene gameOverScene = new GameOverScene(_score,tilesplaced);
+                GameOverScene gameOverScene = new GameOverScene(_score,tilesplaced,spellbook);
                 Game.SetScene(gameOverScene);
             }
         }
