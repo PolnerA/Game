@@ -1,5 +1,6 @@
 ﻿using GameEngine;
 using SFML.System;
+using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Threading;
 
@@ -12,6 +13,7 @@ namespace MyGame
         private int tilesplaced=5;
         private bool spellbook;
         public Hero hero = new Hero(new Vector2f(122, 488));
+        private List<Vector2f> isogrid = new List<Vector2f>();//tiles
         public GameScene()
         {
             Background background = new Background();
@@ -40,6 +42,14 @@ namespace MyGame
             AdvancedSpellBook spellbook = new AdvancedSpellBook(this.spellbook);
             AddUserInterface(spellbook);
             this.spellbook=false;
+            //(-28,-12) //(1892,1076)
+            for (float x = -28; x<=1892;x+=32)
+            {
+                for (float y = -12; y<=1076; y+=16)
+                {
+                    isogrid.Add(new Vector2f(x, y));
+                }
+            }
         }
         public GameScene(bool spellbook)
         {
@@ -132,6 +142,10 @@ namespace MyGame
         public bool GetSpellBook()
         {
             return spellbook;
+        }
+        public List<Vector2f> GetIsoGrid()
+        {
+            return isogrid;
         }
     }
 }

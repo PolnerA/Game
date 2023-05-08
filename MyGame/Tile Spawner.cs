@@ -14,7 +14,6 @@ namespace MyGame
 {
     class Tile_Spawner : GameObject
     {
-        private List<Vector2f> isogrid = new List<Vector2f>();//tiles
         private List<Vector2f> placedtiles = new List<Vector2f>() { new Vector2f(100,520), new Vector2f(132, 536), new Vector2f(132, 504), new Vector2f(68, 504), new Vector2f(68, 536) };
         Random rng = new Random();
         private Vector2f position;
@@ -304,7 +303,14 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-            
+            GameScene scene = (GameScene)Game.CurrentScene;
+            foreach (Vector2f tile in placedtiles)
+            {
+                foreach (Vector2f tile2 in scene.GetIsoGrid())
+                { 
+                    //if all tiles in iso grid are met game. set victory
+                }
+            }
         }
     }
 }
