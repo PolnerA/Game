@@ -66,9 +66,10 @@ namespace MyGame
             AddUserInterface(lives);
             TilesPlaced tiles = new TilesPlaced(new Vector2f(1180, 0));
             AddUserInterface(tiles);
+            this.spellbook = spellbook;
             AdvancedSpellBook _spellbook = new AdvancedSpellBook(this.spellbook);
             AddUserInterface(_spellbook);
-            this.spellbook = spellbook;
+            
         }
         // Get the current score
         public int GetScore()
