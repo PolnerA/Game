@@ -45,12 +45,13 @@ namespace MyGame
             }
             if (movedelay<=_movetimer)
             {
+                bool move = false;
                 if (hx < x&&hy<y)
                 {
                     //movement north 
                     x -= 32;
                     y -=16;
-                    bool move = false;
+                    move = false;
                     for (int num = 0; num<placedtiles.Count; num++)
                     {
                         float ptx = placedtiles[num].X;
@@ -75,7 +76,7 @@ namespace MyGame
                     //movement west
                     x -= 32;
                     y +=16;
-                    bool move = false;
+                    move = false;
                     for (int num = 0; num<placedtiles.Count; num++)
                     {
                         float ptx = placedtiles[num].X;
@@ -101,7 +102,7 @@ namespace MyGame
                     //movement south
                     x += 32;
                     y +=16;
-                    bool move = false;
+                    move = false;
                     for (int num = 0; num<placedtiles.Count; num++)
                     {
                         float ptx = placedtiles[num].X;
@@ -133,7 +134,7 @@ namespace MyGame
                     //movement east
                     x += 32;
                     y -=16;
-                    bool move = false;
+                    move = false;
                     for (int num = 0; num<placedtiles.Count; num++)
                     {
                         float ptx = placedtiles[num].X;
@@ -163,7 +164,7 @@ namespace MyGame
                     {
                         //movement northeast
                         y -=32;
-                        bool move = false;
+                       move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
                             float ptx = placedtiles[num].X;
@@ -190,7 +191,7 @@ namespace MyGame
                         
                         
                         y +=32;
-                        bool move = false;
+                        move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
                             float ptx = placedtiles[num].X;
@@ -217,7 +218,7 @@ namespace MyGame
                     {
                         //movement northwest
                         x -= 64;
-                        bool move = false;
+                       
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
                             float ptx = placedtiles[num].X;
@@ -242,7 +243,7 @@ namespace MyGame
                         //movement southeast
                         //movement south
                         x += 64;
-                        bool move = false;
+                        move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
                             float ptx = placedtiles[num].X;
@@ -267,10 +268,11 @@ namespace MyGame
                         }
                     }
                 }
-                
-               
-                _movetimer =0;
 
+                if (move)
+                {
+                    _movetimer =0;
+                }
             }
             
              
