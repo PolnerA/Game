@@ -43,14 +43,7 @@ namespace MyGame
             AdvancedSpellBook spellbook = new AdvancedSpellBook(this.spellbook);
             AddUserInterface(spellbook);
             this.spellbook=false;
-            //(-28,-12) //(1892,1076)
-            for (float x = -28; x<=1892; x+=32)
-            {
-                for (float y = -12; y<=1076; y+=16)
-                {
-                    isogrid.Add(new Vector2f(x, y));
-                }
-            }
+            //make iso grid(-28,-12) //(1892,1076)
         }
         public GameScene(bool spellbook)
         {
