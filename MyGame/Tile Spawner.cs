@@ -310,14 +310,6 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-            GameScene scene = (GameScene)Game.CurrentScene;
-            foreach (Vector2f tile in placedtiles)
-            {
-                foreach (Vector2f tile2 in scene.GetIsoGrid())
-                { 
-                    //if all tiles in iso grid are met game. set victory
-                }
-            }
         }
     }
 }
