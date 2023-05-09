@@ -45,7 +45,7 @@ namespace MyGame
                 _text.Position = new Vector2f(200, 500);
                 sprite.Texture = Game.GetTexture("../../../Resources/64X32tile.png");
                 sprite.Position = new Vector2f(100, 450);
-                _text.DisplayedString ="Click on a nearby tile to move";
+                _text.DisplayedString ="Click on a nearby tile to move\nTurn every pixel green to win";
                 
                 clicktimer=0;
                 tutorialnum=1;
