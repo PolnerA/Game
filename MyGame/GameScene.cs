@@ -15,7 +15,7 @@ namespace MyGame
         private bool spellbook;
         private int numofenemies;
         public Hero hero = new Hero(new Vector2f(122, 488));
-        private List<Vector2f> isogrid = new List<Vector2f>();//tiles
+        
         public GameScene()
         {
             Background background = new Background();
@@ -44,7 +44,7 @@ namespace MyGame
             AdvancedSpellBook spellbook = new AdvancedSpellBook(this.spellbook);
             AddUserInterface(spellbook);
             this.spellbook=false;
-            //make iso grid(-28,-12) //(1892,1076)
+            
         }
         public GameScene(bool spellbook)
         {
@@ -149,10 +149,6 @@ namespace MyGame
         public bool GetSpellBook()
         {
             return spellbook;
-        }
-        public List<Vector2f> GetIsoGrid()
-        {
-            return isogrid;
         }
     }
 }
