@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine;
+using SFML.Audio;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -15,6 +16,7 @@ namespace MyGame
     {
         private readonly Text _text = new Text();
         private bool spellbook;
+        private Sound gamelost = new Sound(); 
         public GameOverMessage(int score,int tilesplaced, bool spellbook)
         {
             //Background
@@ -22,9 +24,11 @@ namespace MyGame
             _text.Position = new Vector2f(50.0f, 50.0f);
             _text.CharacterSize = 50;
             _text.FillColor = Color.Red;
+            gamelost.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortGame over.wav");
             _text.DisplayedString = "Game Over\n\nYour kills: " + score +
             "\n"+tilesplaced+" tiles placed\nPress enter to continue";
             this.spellbook=spellbook;
+            gamelost.Play();
         }
         public override void Draw()
         {

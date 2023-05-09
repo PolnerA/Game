@@ -293,6 +293,7 @@ namespace MyGame
                 otherGameObject.MakeDead();
                 GameScene scene = (GameScene)Game.CurrentScene;
                 scene.IncreaseScore();
+                scene.DecreaseEnemyNum();
                 int num = rng.Next(2);
                 switch (num)
                 {

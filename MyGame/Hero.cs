@@ -36,19 +36,32 @@ namespace MyGame
             _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
             _sprite.Position = pos;
             this.pos = pos;
-          //  music.SoundBuffer = Game.GetSoundBuffer("C:/Users/polnera/source/repos/PolnerA/Game/MyGame/Resources/exploration.wav");
+            music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortExploration.wav");
         }
         public override void Draw()
         {
             Game.RenderWindow.Draw(_sprite);
 
         }
+        public bool IsMusicPlaying()
+        { 
+            return music.Status==SoundStatus.Playing;
+        }
         public override void Update(Time elapsed)
         {
             musictimer++;
+            GameScene scene = (GameScene)Game.CurrentScene;
+            if (0<scene.GetNumOfEnemies())
+            {
+                music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortCreeping.wav");
+            }
+            else
+            {
+                music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortExploration.wav");
+            }
             if (musicdelay<=musictimer)
             {
-               // music.Play();
+                music.Play();
                 musictimer=0;
             }
             bool up = false;
@@ -194,7 +207,6 @@ namespace MyGame
                 Game.CurrentScene.AddCloud(spell);
                 _attacktimer= 0;
             }
-            GameScene scene = (GameScene)Game.CurrentScene;
             if (scene.GetSpellBook())
             {
                 //direction  -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
