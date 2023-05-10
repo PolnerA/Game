@@ -9,50 +9,50 @@ namespace GameEngine
     // The Scene manages all the GameObjects currently in the game.
     class Scene
     {
-        // This holds our game objects.
+        // These lists hold various game objects -AP
         private readonly List<GameObject> _gameObjects = new List<GameObject>();
-
+        //_gameObjects renders for the differing y values giving us true isometric 3d -AP
         private readonly List<GameObject> _tiles = new List<GameObject>();
-
+        //_tiles gameobject list allows for us to alway render the tiles inbetween the character and the background -AP
         private readonly List<GameObject> _background = new List<GameObject>();
-
+        //_background allows for a certain game objects that are in the background to be rendered first -AP
         private readonly List<GameObject> _cloud = new List<GameObject>();
-
+        //_cloud gives game objects in between the main game object and the UI-AP
         private readonly List<GameObject> _userinterface = new List<GameObject>();
-
+        //User interface allows to render certain game objects to render last to look part of a cohesive UI-AP
         // Puts a GameObject into the scene.
         public void AddGameObject(GameObject gameObject)
         {
-            // This adds the game object onto the back (the end) of the list of game objects.
+            // This adds the game object onto the back (the end) of the list of game objects.-AP
             _gameObjects.Add(gameObject);
         }
         public void AddGameObject(int position, GameObject gameObject)
         {
-            //This adds the game object at a location into the list of game objects.
+            //This adds the game object at a location into the list of game objects. -AP
             _gameObjects.Insert(position, gameObject);
         }
 
         public void AddTile(GameObject tile)
-        {
+        {//Adds gameobjects that need to be in between the background and the main gameobjects-AP
             _tiles.Add(tile);
         }
 
         public void AddBackground(GameObject background)
-        {
+        {//allows to add background game objects to render first-AP
             _background.Add(background);
         }
 
         public void AddUserInterface(GameObject UI)
-        {
+        {//adds game objects to the back of a ui to render them last-AP
             _userinterface.Add(UI);
         }
 
         public void AddCloud(GameObject cloud)
-        {
+        {//adds game objects to teh back of the cloud list to render in between the UI and main gameobjects -AP
             _cloud.Add(cloud);
         }
         public int GameObjectAmount()
-        {
+        {//allows game objects to access the amount of game objects if needed -AP
             return _gameObjects.Count;
         }
 
@@ -72,7 +72,7 @@ namespace GameEngine
             RemoveDeadGameObjects();
             DrawBackground();
             DrawTiles();
-            DrawGameObjects();//draw background, then tiles, objects (top-bottom rendering), then the clouds ending with the ui.
+            DrawGameObjects();//draw background, then tiles, objects (top-bottom rendering), then the clouds ending with the ui. -AP
             DrawClouds();
             DrawUserInterface();
             // Draw the window as updated by the game objects.
@@ -80,7 +80,7 @@ namespace GameEngine
         }
 
         // This method lets game objects respond to collisions.
-        private void HandleCollisions()//handle collisions is only for _gameObjects
+        private void HandleCollisions()//handle collisions is only for _gameObjects-AP
         {
             for (int i = 0; i < _gameObjects.Count; i++)
             {
@@ -97,7 +97,7 @@ namespace GameEngine
                 // See if this game object is colliding with any other game object.
                 for (int j = 0; j < _cloud.Count; j++)
                 {
-                    var otherGameObject = _cloud[j];
+                    var otherGameObject = _cloud[j];//Spell for this game is part of the clouds as it needs to be below UI and above game objects Only checks for collisions between _gameObjects and _cloud Lists - AP
 
                     // Don't check an object colliding with itself.
                     if (gameObject == otherGameObject) continue;
@@ -114,7 +114,7 @@ namespace GameEngine
             }
         }
 
-        // This function calls update on each of our game objects.
+        // This function calls update on each of our game objects for most lists taht need to be updated (tiles stay still) -AP
         private void UpdateGameObjects(Time time)
         {
             for (int i = 0; i < _gameObjects.Count; i++) { _gameObjects[i].Update(time); }
@@ -123,7 +123,7 @@ namespace GameEngine
             for (int i = 0; i < _background.Count; i++) _background[i].Update(time);
         }
 
-        // This function calls draw on each of our game objects.
+        // This function calls draw on each of our game objects goes through each y value and goes from the top to the bottom  rendering objects as they apear. -AP
         private void DrawGameObjects()
         {
             for (int y = 0; y<Game.RenderWindow.Size.Y; y++)
@@ -137,6 +137,7 @@ namespace GameEngine
                 }
             }
         }
+        //Draws all of the other game object lists from the beggining to the end. -AP
         private void DrawBackground()
         { 
             foreach (var gameobject in _background) gameobject.Draw();
@@ -167,7 +168,7 @@ namespace GameEngine
             // method on List<T>, which calls our lambda once for each element in
             // gameObjects. If our lambda returns true, that game object ends up being
             // removed from our list.
-            _gameObjects.RemoveAll(isDead);
+            _gameObjects.RemoveAll(isDead);//Removes dead game objects from most lists that get made dead during the game. -AP
             _cloud.RemoveAll(isDead);
             _userinterface.RemoveAll(isDead);
         }
