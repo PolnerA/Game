@@ -25,7 +25,7 @@ namespace MyGame
             _text.CharacterSize = 50;
             _text.FillColor = Color.Red;
             gamelost.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortGame over.wav");
-            _text.DisplayedString = "Game Over\n\nYour kills: " + score +
+            _text.DisplayedString = "Game Over\n\nYour score: " + score +
             "\n"+tilesplaced+" tiles placed\nPress enter to continue";
             this.spellbook=spellbook;
             gamelost.Play();
