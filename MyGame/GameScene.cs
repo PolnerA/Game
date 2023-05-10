@@ -18,7 +18,7 @@ namespace MyGame
         
         public GameScene()
         {
-            //make an animation for movement whcih lifts up the legs on joints and moves them to walk
+          //make animations that the enemy and the hero cna use to teleport.
             Background background = new Background();
             AddBackground(background);
             Tile tile = new Tile(new Vector2f(100, 520));//original tile            _ 
