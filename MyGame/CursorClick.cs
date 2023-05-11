@@ -12,14 +12,14 @@ namespace MyGame
     class CursorClick : AnimatedSprite
     {
         public CursorClick(Vector2f pos) : base(pos)
-        {//UI
-            Texture = Game.GetTexture("../../../Resources/spritesheet2px.png");
+        {
+            Texture = Game.GetTexture("../../../Resources/spritesheet2px.png");//grabs the spritesheet of the click animation
             SetUpClickAnimation();
             PlayAnimation("click", AnimationMode.OnceForwards);
         }
         public override void Update(Time elapsed)
         {
-            base.Update(elapsed);
+            base.Update(elapsed);//goes to the next frame per default frames per second, if it is done it removes it from the list of things to render
             if (!IsPlaying())
             {
                 MakeDead();

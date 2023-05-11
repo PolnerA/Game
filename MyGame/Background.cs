@@ -12,11 +12,10 @@ namespace MyGame
 {
     class Background : GameObject
     {
-        private const float Speed = 0.3f;
         private readonly Sprite _sprite = new Sprite();
         public Background()
         {// background
-            _sprite.Texture = Game.GetTexture("../../../Resources/Background.png");
+            _sprite.Texture = Game.GetTexture("../../../Resources/Background.png");//sprite gets a texture and position and remains still
             _sprite.Position = new Vector2f(0, 0);
         }
         public override void Draw()
