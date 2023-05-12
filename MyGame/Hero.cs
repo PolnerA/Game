@@ -104,8 +104,9 @@ namespace MyGame
             {
                 //Console.WriteLine("Click");
                 Vector2i intclick = Mouse.GetPosition();
-                Vector2f floatclick = new Vector2f((float)intclick.X,(float)intclick.Y);
+                Vector2f floatclick = new Vector2f(intclick.X,intclick.Y);
                 CursorClick cursorclick = new CursorClick(floatclick);
+                
                 Game.CurrentScene.AddUserInterface(cursorclick);
                 for (int i = 0; i<middletile.Count; i++)
                 {
@@ -148,45 +149,62 @@ namespace MyGame
             }
             if (up)
             {//movement north 
+                RedPortal portal = new RedPortal(new Vector2f(x, y));
+                portal.SetPosition(new Vector2f(1920, 1079));
+                Game.CurrentScene.AddGameObject(portal);
                 x -= 32;
                 y -=16;
-                
-                    tilespawner.SpawnThreetilesSouth(new Vector2f(x-22, y+32));
-                    
-                    _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");
-                    direction =0;
+                tilespawner.SpawnThreetilesSouth(new Vector2f(x-22, y+32));
+                GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
+                destinationportal.SetPosition(new Vector2f(1920,1079));
+                Game.CurrentScene.AddGameObject(destinationportal);
+                _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");
+                direction =0;
                 
             }
             if (left)
             { //movement west
+                RedPortal portal = new RedPortal(new Vector2f(x, y));
+                portal.SetPosition(new Vector2f(1920, 1079));
+                Game.CurrentScene.AddGameObject(portal);
                 x -= 32;
                 y +=16;
-                
-                    tilespawner.SpawnThreetilesEast(new Vector2f(x-22, y+32));
-                    
-                    _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");
-                    direction =3;
+                tilespawner.SpawnThreetilesEast(new Vector2f(x-22, y+32));
+                GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
+                destinationportal.SetPosition(new Vector2f(1920, 1079));
+                Game.CurrentScene.AddGameObject(destinationportal);
+                _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");
+                direction =3;
             }
             if (down)
             { //movement south
+                RedPortal portal = new RedPortal(new Vector2f(x, y));
+                portal.SetPosition(new Vector2f(1920, 1079));
+                Game.CurrentScene.AddGameObject(portal);
                 x += 32;
                 y +=16;
-                
-                    tilespawner.SpawnThreetilesNorth(new Vector2f(x - 22, y + 32));
-                    
-                    _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
-                    direction =2;
+                tilespawner.SpawnThreetilesNorth(new Vector2f(x - 22, y + 32));
+                GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
+                destinationportal.SetPosition(new Vector2f(1920, 1079));
+                Game.CurrentScene.AddGameObject(destinationportal);
+                _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
+                direction =2;
                
 
             }
             if (right) 
             { //movement east
+                RedPortal portal = new RedPortal(new Vector2f(x, y));
+                portal.SetPosition(new Vector2f(1920, 1079));
+                Game.CurrentScene.AddGameObject(portal);
                 x += 32;
                 y -=16;
-               
-                    tilespawner.SpawnThreetilesWest(new Vector2f(x - 22, y + 32));
-                    _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");
-                    direction =1;
+                tilespawner.SpawnThreetilesWest(new Vector2f(x - 22, y + 32));
+                GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
+                destinationportal.SetPosition(new Vector2f(1920, 1079));
+                Game.CurrentScene.AddGameObject(destinationportal);
+                _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");
+                direction =1;
                 
             }
             if (nowhere)
