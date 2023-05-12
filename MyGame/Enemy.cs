@@ -239,28 +239,28 @@ namespace MyGame
                     if (x<hx)//if the enemy is to the left, move right
                     {
                         //movement southeast
-                        x += 64;
+                        x += 64;//predicts the move by adding the value but not updating sprite.Position
                         move = false;
                         for (int num = 0; num<placedtiles.Count; num++)
                         {
                             float ptx = placedtiles[num].X;
                             float pty = placedtiles[num].Y;
-                            if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)
-                            {
+                            if (ptx<x-21&&x-23<ptx&&pty<y+33&&y+31<pty)//goes through placed tiles if not on a tile the move is never true
+                            {//checks a range instead of float==float
                                 if (x<=1900&&y<=1030)
                                 {
 
-                                    move = true;
+                                    move = true;//moves
                                     _sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");//facing to the south
                                 }
 
                             }
                         }
                         if (!move)
-                        {
+                        {//if move is not true an error occured (no tiles, out of bounds etc...)
 
 
-                            x-=64;
+                            x-=64;//resets movement
 
                         }
                     }
@@ -268,42 +268,41 @@ namespace MyGame
 
                 if (move)
                 {
-                    _movetimer =0;
+                    _movetimer =0;//if the character moved it resets the move timer
                 }
             }
             
              
-               _sprite.Position = new Vector2f(x, y);
-            SetPosition(new Vector2f(x-22,y+32));
-               _movetimer++;
+            _sprite.Position = new Vector2f(x, y);//updates the sprite position
+            SetPosition(new Vector2f(x-22,y+32));//shows the tile it is on for it to get rendered
+            _movetimer++;// tracks the time it was between moves
         }
         
         public override FloatRect GetCollisionRect()
-        {
-            return _sprite.GetGlobalBounds();
+        {//gets the collision rectangle 
+            return _sprite.GetGlobalBounds();// if called upon it gives the sprite's bounds
         }
         Random rng = new Random();
-        public override void HandleCollision(GameObject otherGameObject)
+        public override void HandleCollision(GameObject otherGameObject)//in case of collision
         {
-            if (otherGameObject.HasTag("spell"))
+            if (otherGameObject.HasTag("spell"))//if it gets it by a spell
             {
-                otherGameObject.MakeDead();
+                otherGameObject.MakeDead();//removes the other game object
                 GameScene scene = (GameScene)Game.CurrentScene;
-                scene.IncreaseScore();
-                scene.DecreaseEnemyNum();
-                int num = rng.Next(2);
+                scene.IncreaseScore();//increases the score
+                scene.DecreaseEnemyNum();//decreases the number of enemies read by the game
+                int num = rng.Next(2);//50-50 choice between having a potion or coins when the enemy dies
                 switch (num)
                 {
                     case 0:
-                        Potion potion = new Potion(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));
+                        Potion potion = new Potion(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));//the sprites position is +22X -32Y so it gets the tile it needs to spawn on
                         scene.AddGameObject(potion);
                         break;
                     case 1:
-                        Loot loot = new Loot(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));
+                        Loot loot = new Loot(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));//gets the spawn tile and spawns loot there
                         scene.AddGameObject(loot);
                         break;
-                }
-                
+                }   
             }
             MakeDead();
         }
