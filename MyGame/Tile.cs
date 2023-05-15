@@ -42,8 +42,7 @@ namespace MyGame
         {
             if(tile.Texture!= Game.GetTexture("../../../Resources/64X32tile.png")&& revertdelay<=reverttimer)
             {
-                tile.Texture = Game.GetTexture("../../../Resources/64X32tile.png");
-                reverttimer = 0;
+                MakeDead();
             }
             reverttimer++;
         }
