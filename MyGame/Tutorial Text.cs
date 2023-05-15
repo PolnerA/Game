@@ -64,7 +64,7 @@ namespace MyGame
             }
             if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clickdelay<=clicktimer&&tutorialnum==2)
             {
-                GameScene scene = new GameScene();
+                GameScene scene = new GameScene(false);
                 Game.SetScene(scene);
                 MakeDead();
             }
