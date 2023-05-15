@@ -171,6 +171,7 @@ namespace GameEngine
             // removed from our list.
             _gameObjects.RemoveAll(isDead);//Removes dead game objects from most lists that get made dead during the game. -AP
             _cloud.RemoveAll(isDead);
+            _tiles.RemoveAll(isDead);
             _userinterface.RemoveAll(isDead);
         }
     }
