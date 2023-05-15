@@ -149,7 +149,7 @@ namespace MyGame
             }
             if (up)
             {//movement north 
-                Tile redtile = new Tile(new Vector2f(x-22, y+32), "red");
+                Tile redtile = new Tile(new Vector2f(x-22, y+32), "red");//make legitimate red and purple tile textures (current ones aren't pngs)
                 Game.CurrentScene.AddTile(redtile);
                 x -= 32;
                 y -=16;
