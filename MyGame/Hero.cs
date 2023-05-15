@@ -10,7 +10,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace MyGame
 {
     class Hero: GameObject
@@ -20,6 +19,7 @@ namespace MyGame
         private int _attacktimer;
         private int _movetimer;
         private const int movedelay = 25;
+        private bool _moving = false;
         private readonly Sound music = new Sound();
         private const int musicdelay = 8000;
         private int musictimer = musicdelay;
@@ -150,13 +150,13 @@ namespace MyGame
             if (up)
             {//movement north 
                 RedPortal portal = new RedPortal(new Vector2f(x, y));
-                portal.SetPosition(new Vector2f(1920, 1079));
-                Game.CurrentScene.AddGameObject(portal);
+                portal.SetPosition(new Vector2f(1920, 1079));//after 7 (210 ms) frames move hide, then after another (210ms) frames show the move for the character 
+                Game.CurrentScene.AddGameObject(portal);//30 ms per frame
                 x -= 32;
                 y -=16;
                 tilespawner.SpawnThreetilesSouth(new Vector2f(x-22, y+32));
                 GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
-                destinationportal.SetPosition(new Vector2f(1920,1079));
+                destinationportal.SetPosition(new Vector2f(1920,1));
                 Game.CurrentScene.AddGameObject(destinationportal);
                 _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");
                 direction =0;
@@ -171,7 +171,7 @@ namespace MyGame
                 y +=16;
                 tilespawner.SpawnThreetilesEast(new Vector2f(x-22, y+32));
                 GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
-                destinationportal.SetPosition(new Vector2f(1920, 1079));
+                destinationportal.SetPosition(new Vector2f(1920, 1));
                 Game.CurrentScene.AddGameObject(destinationportal);
                 _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");
                 direction =3;
@@ -185,7 +185,7 @@ namespace MyGame
                 y +=16;
                 tilespawner.SpawnThreetilesNorth(new Vector2f(x - 22, y + 32));
                 GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
-                destinationportal.SetPosition(new Vector2f(1920, 1079));
+                destinationportal.SetPosition(new Vector2f(1920, 1));
                 Game.CurrentScene.AddGameObject(destinationportal);
                 _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
                 direction =2;
@@ -201,7 +201,7 @@ namespace MyGame
                 y -=16;
                 tilespawner.SpawnThreetilesWest(new Vector2f(x - 22, y + 32));
                 GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
-                destinationportal.SetPosition(new Vector2f(1920, 1079));
+                destinationportal.SetPosition(new Vector2f(1920, 1));
                 Game.CurrentScene.AddGameObject(destinationportal);
                 _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");
                 direction =1;

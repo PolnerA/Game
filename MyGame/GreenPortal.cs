@@ -11,7 +11,7 @@ namespace MyGame
 {
     class GreenPortal: AnimatedSprite
     {
-        public GreenPortal(Vector2f pos) : base(pos)
+        public GreenPortal(Vector2f pos) : base(pos,10)
         {
             Texture = Game.GetTexture("../../../Resources/GreenPortalSpriteSheet.png");
             SetOriginMode(OriginMode.TopLeft);

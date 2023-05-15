@@ -11,9 +11,9 @@ namespace MyGame
 {
     class RedPortal:AnimatedSprite
     {
-        public RedPortal(Vector2f pos) : base(pos) 
+        public RedPortal(Vector2f pos) : base(pos,10) 
         {
-            Texture = Game.GetTexture("../../../Resources/RedPortalSpriteSheet.png");
+            Texture = Game.GetTexture("../../../Resources/RedPortalSpriteSheet.png");//portal's cause too much visual clutter use recolored tiles
             SetUpPortalAnimation();
             SetOriginMode(OriginMode.TopLeft);
             PlayAnimation("RPortal",AnimationMode.OnceForwards);
@@ -42,16 +42,12 @@ namespace MyGame
                 new IntRect( 140, 0, 20, 50), // frame 10
                 new IntRect( 120, 0, 20, 50), // frame 11
                 new IntRect( 140, 0, 20, 50), // frame 12
-                new IntRect( 120, 0, 20, 50), // frame 13
-                new IntRect( 140, 0, 20, 50), // frame 14
-                new IntRect( 120, 0, 20, 50), // frame 15
-                new IntRect( 140, 0, 20, 50), // frame 16
-                new IntRect( 100, 0, 20, 50), // frame 17
-                new IntRect(  80, 0, 20, 50), // frame 18
-                new IntRect(  60, 0, 20, 50), // frame 19
-                new IntRect(  40, 0, 20, 50), // frame 20
-                new IntRect(  20, 0, 20, 50), // frame 21
-                new IntRect(   0, 0, 20, 50), // frame 22
+                new IntRect( 100, 0, 20, 50), // frame 13
+                new IntRect(  80, 0, 20, 50), // frame 14
+                new IntRect(  60, 0, 20, 50), // frame 15
+                new IntRect(  40, 0, 20, 50), // frame 16
+                new IntRect(  20, 0, 20, 50), // frame 17
+                new IntRect(   0, 0, 20, 50), // frame 18
             };
             AddAnimation("RPortal", frames);
         }
