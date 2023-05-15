@@ -13,30 +13,45 @@ using System.Threading.Tasks;
 namespace MyGame
 {
     class Hero: GameObject
-    {//ToDo make click animation make spell cast sprite, enemy and loot spawns and background
-        //draw enemies, potion, chests, background, and a wand with spells and a click animation
+    {
+        //attack delay and attack timer for the cooldowns in between attacks (100ms)
+
         private const int attackdelay = 100;
         private int _attacktimer;
+        
+        //move delay and timer for movement (25 ms)
         private int _movetimer;
         private const int movedelay = 25;
-        private bool _moving = false;
+
+        //music delay and timer and music for period in between movment (8 seconds)
         private readonly Sound music = new Sound();
         private const int musicdelay = 8000;
         private int musictimer = musicdelay;
+        
+        //sprite for the character and a position for the enemy to know where to move
         private readonly Sprite _sprite = new Sprite();
         private Vector2f pos;
+        
+        //tilespawner to spawn tiles
         private Tile_Spawner tilespawner = new Tile_Spawner();
+
+        //direction for the spell's direction
         private int direction = -1;            // -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
+
+        //Function allows scene to get the heros position to then pass along to Enemy
         public Vector2f GetPos()
         {
             return pos;
         }
-        public Hero(Vector2f pos)//music implementation (one sound at a time.) exploration.wav=constant soundtrack, lock.wav new tile found, Victory.wav played on victory, Game over.wav played on game over, creeping.wav played when an enemy is on screen instead of exploration.
-        { //S Game Object
+
+        //creates a hero at the position it is supposed to be at in GameScene
+        public Hero(Vector2f pos)
+        { // Game Object rendering depends on Y position
             _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
             _sprite.Position = pos;
             this.pos = pos;
             music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortExploration.wav");
+            //Sets up position, texture, and the sound buffer
         }
         public override void Draw()
         {
@@ -77,8 +92,6 @@ namespace MyGame
             float x = pos.X;
             float y = pos.Y;
             Vector2f middletilepos = new Vector2f(x-22, y+32);
-            float tilex = middletilepos.X;
-            float tiley = middletilepos.Y;
             //Gets the pixels for the middle tile
             List<Vector2f> middletile = new List<Vector2f>();
             int Y = 1;
