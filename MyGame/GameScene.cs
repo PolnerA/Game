@@ -14,7 +14,7 @@ namespace MyGame
         private int tilesplaced = 5;//keeps track of tilesplaced for tilesplaced UI to track
         private bool spellbook;//keeps track of the spellbook toggle for what to display, and for different elements to be able to access it.
         private int numofenemies;//keeps track of the number of enemies for music to change
-        public Hero hero = new Hero(new Vector2f(122, 488));//sets up the heros attributes
+        public Hero hero = new Hero(new Vector2f(122, 488));//sets up the heros attributes outside of the constructor to access the heros position
         
         public GameScene(bool spellbook)
         {
@@ -27,8 +27,7 @@ namespace MyGame
             Tile tile2 = new Tile(new Vector2f(132, 504));//east tile +32x, -16y     |_ compared to original tile
             Tile tile3 = new Tile(new Vector2f(68, 504));//north tile -32x, -16y     |
             Tile tile4 = new Tile(new Vector2f(68, 536));//west tile -32x, +16y    _/
-            Tile_Spawner tilespawner = new Tile_Spawner();
-            AddTile(tilespawner);//all of them are added to the scene as tiles
+            //all of them are added to the scene as tiles
             AddTile(tile);
             AddTile(tile1);
             AddTile(tile2);
@@ -55,26 +54,32 @@ namespace MyGame
         {
             return _score;
         }
+        //Get the number of enemies
         public int GetNumOfEnemies()
         {
             return numofenemies;
         }
+        //increase the number of enemies
         public void IncreaseEnemyNum()
         {
             numofenemies++;
         }
+        //decrease the number of enemies
         public void DecreaseEnemyNum()
         {
             numofenemies--;
         }
+        //gets the amount of tiles placed (for the ui & win condition)
         public int GetTilesplaced()
         {
             return tilesplaced;
         }
+        //sets the current amount of tiles placed to sync it with the tiles placed list in tilespawner
         public void SetTilesPlaced(int tilesplaced)
         {
             this.tilesplaced = tilesplaced;
         }
+        //gets the hero's position for enemy movement
         public Vector2f GetHeroPos()
         {
             return hero.GetPos();
@@ -84,6 +89,7 @@ namespace MyGame
         {
             ++_score;
         }
+        //increases the amount of lives
         public void IncreaseLives()
         {
             ++_lives;
@@ -98,20 +104,20 @@ namespace MyGame
         {
             --_lives;
             if (_lives == 0)
-            {
+            {//if lives are at 0 then the scene changes to game over
                 Thread.Sleep(200);
                 GameOverScene gameOverScene = new GameOverScene(_score,tilesplaced,spellbook);
                 Game.SetScene(gameOverScene);
             }
         }
-        public void GameWon()
+        public void GameWon()//if triggered it changes the scene to indicate you have won
         {
             Victory victory = new Victory(_score, tilesplaced);
             Game.SetScene(victory);
         }
-        public void ToggleSpellBook()
+        public void ToggleSpellBook()//function to toggle the spellbook when clicked
         {
-            if (!spellbook)
+            if (!spellbook)//toggles the spellbook if it's on or not
             {
                 spellbook = true;
             }
@@ -121,7 +127,7 @@ namespace MyGame
             }
         }
         public bool GetSpellBook()
-        {
+        {//gets the status of the spellbook
             return spellbook;
         }
     }
