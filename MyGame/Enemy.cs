@@ -61,14 +61,9 @@ namespace MyGame
                         {
                             if (-30<=y&&0<=x)//if the move is within the game borders
                             {
-                                RedPortal portal = new RedPortal(new Vector2f(x+32, y+16));
-                                portal.SetPosition(new Vector2f(1920, 1079));
-                                Game.CurrentScene.AddGameObject(portal);
                                 move = true;//it moves
                                 _sprite.Texture = Game.GetTexture("../../../Resources/enemy north.png");//facing to the north texture
-                                GreenPortal destportal = new GreenPortal(new Vector2f(x, y));
-                                destportal.SetPosition(new Vector2f(1920, 1));
-                                Game.CurrentScene.AddGameObject(destportal);
+                               
                             }
                         }
                     }
@@ -92,15 +87,11 @@ namespace MyGame
                         {
                             if (0<=x&&y<=1030)//if it is within the game borders
                             {
-                                RedPortal portal = new RedPortal(new Vector2f(x+32, y-16));
-                                portal.SetPosition(new Vector2f(1920, 1079));
-                                Game.CurrentScene.AddGameObject(portal);
+                            
 
                                 move = true;//moves
                                 _sprite.Texture = Game.GetTexture("../../../Resources/enemy west.png");//facing to the west texture
-                                GreenPortal destportal = new GreenPortal(new Vector2f(x, y));
-                                destportal.SetPosition(new Vector2f(1920, 1));
-                                Game.CurrentScene.AddGameObject(destportal);
+                             
                             }
                         }
                     }
@@ -124,14 +115,10 @@ namespace MyGame
                         {//doesn't equate floats instead equates a range
                             if (x<=1900&&y<=1030)//if it's within the game border
                             {
-                                RedPortal portal = new RedPortal(new Vector2f(x-32, y-16));
-                                portal.SetPosition(new Vector2f(1920, 1079));
-                                Game.CurrentScene.AddGameObject(portal);
+                              
                                 move = true;//moves
                                 _sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");//facing to the south
-                                GreenPortal destportal = new GreenPortal(new Vector2f(x, y));
-                                destportal.SetPosition(new Vector2f(1920, 1));
-                                Game.CurrentScene.AddGameObject(destportal);
+                          
                             }
 
                         }
@@ -161,14 +148,10 @@ namespace MyGame
                         {
                             if (x<=1900&&-30<=y)//if it's inside the game window
                             {
-                                RedPortal portal = new RedPortal(new Vector2f(x - 32, y+16));
-                                portal.SetPosition(new Vector2f(1920, 1079));
-                                Game.CurrentScene.AddGameObject(portal);
+                             
                                 move=true;//moves
                                 _sprite.Texture = Game.GetTexture("../../../Resources/enemy east.png");//facing to the east
-                                GreenPortal destportal = new GreenPortal(new Vector2f(x, y));
-                                destportal.SetPosition(new Vector2f(1920, 1));
-                                Game.CurrentScene.AddGameObject(destportal);
+                               
                             }
                         }
                     }
@@ -197,14 +180,10 @@ namespace MyGame
                             {
                                 if (-30<=y&&0<=x)//if it is in the game window
                                 {
-                                    RedPortal portal = new RedPortal(new Vector2f(x, y+32));
-                                    portal.SetPosition(new Vector2f(1920, 1079));
-                                    Game.CurrentScene.AddGameObject(portal);
+                                   
                                     move = true;//moves
                                     _sprite.Texture = Game.GetTexture("../../../Resources/enemy north.png");//facing to the north texture
-                                    GreenPortal destportal = new GreenPortal(new Vector2f(x, y));
-                                    destportal.SetPosition(new Vector2f(1920, 1));
-                                    Game.CurrentScene.AddGameObject(destportal);
+                                    
                                 }
                             }
                         }
@@ -228,14 +207,10 @@ namespace MyGame
                             {
                                 if (0<=x&&y<=1030)//if the move isn't out of the window
                                 {
-                                    RedPortal portal = new RedPortal(new Vector2f(x, y-32));
-                                    portal.SetPosition(new Vector2f(1920, 1079));
-                                    Game.CurrentScene.AddGameObject(portal);
+                                   
                                     move = true;//moves
                                     _sprite.Texture = Game.GetTexture("../../../Resources/enemy west.png");//facing to the west texture
-                                    GreenPortal destportal = new GreenPortal(new Vector2f(x, y));
-                                    destportal.SetPosition(new Vector2f(1920, 1));
-                                    Game.CurrentScene.AddGameObject(destportal);
+                                  
                                 }
                             }
                         }
@@ -260,14 +235,10 @@ namespace MyGame
                             {
                                 if (-30<=y&&0<=x)//if in game window
                                 {
-                                    RedPortal portal = new RedPortal(new Vector2f(x+64, y));
-                                    portal.SetPosition(new Vector2f(1920, 1079));
-                                    Game.CurrentScene.AddGameObject(portal);
+                                
                                     move = true;//moves
                                     _sprite.Texture = Game.GetTexture("../../../Resources/enemy north.png");//facing to the north texture
-                                    GreenPortal destportal = new GreenPortal(new Vector2f(x, y));
-                                    destportal.SetPosition(new Vector2f(1920, 1));
-                                    Game.CurrentScene.AddGameObject(destportal);
+                                   
                                 }
                             }
                         }
@@ -290,14 +261,10 @@ namespace MyGame
                             {//checks a range instead of float==float
                                 if (x<=1900&&y<=1030)
                                 {
-                                    RedPortal portal = new RedPortal(new Vector2f(x-64, y));
-                                    portal.SetPosition(new Vector2f(1920, 1079));
-                                    Game.CurrentScene.AddGameObject(portal);
+                                 
                                     move = true;//moves
                                     _sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");//facing to the south
-                                    GreenPortal destportal = new GreenPortal(new Vector2f(x, y));
-                                    destportal.SetPosition(new Vector2f(1920, 1));
-                                    Game.CurrentScene.AddGameObject(destportal);
+                                   
                                 }
 
                             }

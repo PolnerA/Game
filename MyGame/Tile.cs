@@ -14,10 +14,24 @@ namespace MyGame
     class Tile : GameObject
     {
         private readonly Sprite tile = new Sprite();//tile
+        private const int revertdelay= 50;
+        private int reverttimer;
         public Tile(Vector2f pos)
         {
             tile.Texture = Game.GetTexture("../../../Resources/64X32tile.png");
             tile.Position = pos;
+        }
+        public Tile(Vector2f pos, string type)
+        {
+            if (type == "red")
+            {
+                tile.Texture = Game.GetTexture("../../../Resources/64X32Redtile.png");
+            }
+            else 
+            {
+                tile.Texture = Game.GetTexture("../../../Resources/64X32Purpletile.png");
+            }
+            tile.Position= pos;
         }
         public override void Draw()
         {
@@ -26,7 +40,12 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-            
+            if(tile.Texture!= Game.GetTexture("../../../Resources/64X32tile.png")&& revertdelay<=reverttimer)
+            {
+                tile.Texture = Game.GetTexture("../../../Resources/64X32tile.png");
+                reverttimer = 0;
+            }
+            reverttimer++;
         }
     }
 }

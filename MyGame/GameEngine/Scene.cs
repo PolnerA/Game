@@ -114,13 +114,14 @@ namespace GameEngine
             }
         }
 
-        // This function calls update on each of our game objects for most lists taht need to be updated (tiles stay still) -AP
+        // This function calls update on each of our game objects for most lists that need to be updated (currently all of them) -AP
         private void UpdateGameObjects(Time time)
         {
             for (int i = 0; i < _gameObjects.Count; i++) { _gameObjects[i].Update(time); }
             for (int i = 0; i < _cloud.Count; i++) {_cloud[i].Update(time); }
-            for (int i = 0; i<_userinterface.Count; i++) {_userinterface[i].Update(time); }
+            for (int i = 0; i <_userinterface.Count; i++) {_userinterface[i].Update(time); }
             for (int i = 0; i < _background.Count; i++) _background[i].Update(time);
+            for (int i = 0; i < _tiles.Count; i++) _tiles[i].Update(time);
         }
 
         // This function calls draw on each of our game objects goes through each y value and goes from the top to the bottom  rendering objects as they apear. -AP

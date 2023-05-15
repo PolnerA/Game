@@ -149,44 +149,32 @@ namespace MyGame
             }
             if (up)
             {//movement north 
-                RedPortal portal = new RedPortal(new Vector2f(x, y));
-                portal.SetPosition(new Vector2f(1920, 1079));//after 7 (210 ms) frames move hide, then after another (210ms) frames show the move for the character 
-                Game.CurrentScene.AddGameObject(portal);//30 ms per frame
+                Tile redtile = new Tile(new Vector2f(x-22, y+32), "red");
+                Game.CurrentScene.AddTile(redtile);
                 x -= 32;
                 y -=16;
                 tilespawner.SpawnThreetilesSouth(new Vector2f(x-22, y+32));
-                GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
-                destinationportal.SetPosition(new Vector2f(1920,1));
-                Game.CurrentScene.AddGameObject(destinationportal);
+                Tile purpletile = new Tile(new Vector2f(x-22, y+32),"purple");
+                Game.CurrentScene.AddTile(purpletile);
                 _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");
                 direction =0;
                 
             }
             if (left)
             { //movement west
-                RedPortal portal = new RedPortal(new Vector2f(x, y));
-                portal.SetPosition(new Vector2f(1920, 1079));
-                Game.CurrentScene.AddGameObject(portal);
                 x -= 32;
                 y +=16;
-                tilespawner.SpawnThreetilesEast(new Vector2f(x-22, y+32));
-                GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
-                destinationportal.SetPosition(new Vector2f(1920, 1));
-                Game.CurrentScene.AddGameObject(destinationportal);
+               
                 _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");
                 direction =3;
             }
             if (down)
             { //movement south
-                RedPortal portal = new RedPortal(new Vector2f(x, y));
-                portal.SetPosition(new Vector2f(1920, 1079));
-                Game.CurrentScene.AddGameObject(portal);
+                
                 x += 32;
                 y +=16;
                 tilespawner.SpawnThreetilesNorth(new Vector2f(x - 22, y + 32));
-                GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
-                destinationportal.SetPosition(new Vector2f(1920, 1));
-                Game.CurrentScene.AddGameObject(destinationportal);
+               
                 _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
                 direction =2;
                
@@ -194,15 +182,11 @@ namespace MyGame
             }
             if (right) 
             { //movement east
-                RedPortal portal = new RedPortal(new Vector2f(x, y));
-                portal.SetPosition(new Vector2f(1920, 1079));
-                Game.CurrentScene.AddGameObject(portal);
+              
                 x += 32;
                 y -=16;
                 tilespawner.SpawnThreetilesWest(new Vector2f(x - 22, y + 32));
-                GreenPortal destinationportal = new GreenPortal(new Vector2f(x, y));
-                destinationportal.SetPosition(new Vector2f(1920, 1));
-                Game.CurrentScene.AddGameObject(destinationportal);
+               
                 _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");
                 direction =1;
                 
