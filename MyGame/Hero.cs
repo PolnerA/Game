@@ -53,12 +53,12 @@ namespace MyGame
             music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortExploration.wav");
             //Sets up position, texture, and the sound buffer
         }
-        public override void Draw()
+        public override void Draw()//when asked to draw it draws the sprite into the renderwindow
         {
             Game.RenderWindow.Draw(_sprite);
 
         }
-        public bool IsMusicPlaying()
+        public bool IsMusicPlaying()//when requested it can return true or not if the music plays
         { 
             return music.Status==SoundStatus.Playing;
         }
@@ -66,7 +66,7 @@ namespace MyGame
         {
             musictimer++;
             GameScene scene = (GameScene)Game.CurrentScene;
-            if (0<scene.GetNumOfEnemies())
+            if (0<scene.GetNumOfEnemies())//if there are enemies on the scene it changes the music playing
             {
                 music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortCreeping.wav");
             }
@@ -74,37 +74,44 @@ namespace MyGame
             {
                 music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortExploration.wav");
             }
-            if (musicdelay<=musictimer)
+            if (musicdelay<=musictimer)//if it has been 8000 milliseconds since the last music it plays and restarts count
             {
                 music.Play();
                 musictimer=0;
             }
+            //boolean values for deciding the direction
             bool up = false;
             bool down = false;
             bool left = false;
             bool right = false;
             bool nowhere = false;
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))//if escape is pressed it closes the renderwindow and subsequently the game
             {
                 Game.RenderWindow.Close();
             }    
-            Vector2f pos = _sprite.Position;
+            Vector2f pos = _sprite.Position;//the sprites position is broken down to 2 floats x & y
             float x = pos.X;
             float y = pos.Y;
-            Vector2f middletilepos = new Vector2f(x-22, y+32);
+            Vector2f middletilepos = new Vector2f(x-22, y+32);//gets the tile the hero is standing on
             //Gets the pixels for the middle tile
             List<Vector2f> middletile = new List<Vector2f>();
-            int Y = 1;
-            for (int numofXpixels = 4; numofXpixels<=60; numofXpixels +=4)
-            {//grid is a bit north east of the orginal tile (directly above)
-                int X = (64-numofXpixels)/2;
-                for (int Xvalues = X; X<=Xvalues+numofXpixels; X++)
+            
+            //Top half of tile
+            
+            int Y = 1;//starts the y position of the tile at 1
+            for (int numofXpixels = 4; numofXpixels<=60; numofXpixels +=4)//tiles are 64 X 32 meaning a 2 to one ratio, the green pixels start at 4 and increase to 60 pixels, (excluding the 2 black pixels on both sides)
+            {
+                int X = (64-numofXpixels)/2;//x is  the offset compared to the position of the tile
+                for (int Xvalues = X; X<=Xvalues+numofXpixels; X++) //gets every x value at the 1 Y position then 2 etc...
                 {
-                    middletile.Add(new Vector2f(middletilepos.X+X,middletilepos.Y+ Y));
+                    middletile.Add(new Vector2f(middletilepos.X+X,middletilepos.Y+ Y));//adds the pixel to the middle tile list which contains all the pixels
                 }
-                Y++;
+                Y++;//y increases as it goes down the tile
             }
-            for (int numofXpixels = 60; 4<=numofXpixels; numofXpixels -=4)
+            
+            //Bottom half of tile
+            
+            for (int numofXpixels = 60; 4<=numofXpixels; numofXpixels -=4)//does the same thing as the top except it starts at the highest point of 60 going down while y continues to increase 
             {
                 int X = (64-numofXpixels)/2;
                 for (int Xvalues = X; X<=Xvalues+numofXpixels; X++)
@@ -113,24 +120,25 @@ namespace MyGame
                 }
                 Y++;
             }
-            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&movedelay<=_movetimer)
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&movedelay<=_movetimer)//if mouse is pressed, and the character is allowed to move
             {
-                //Console.WriteLine("Click");
-                Vector2i intclick = Mouse.GetPosition();
-                Vector2f floatclick = new Vector2f(intclick.X,intclick.Y);
-                CursorClick cursorclick = new CursorClick(floatclick);
+                Vector2i intclick = Mouse.GetPosition();//gets the mouses position at the location of the click
+                Vector2f floatclick = new Vector2f(intclick.X,intclick.Y);//typcasts it  into a float (to start the click animation at that position)
                 
-                Game.CurrentScene.AddUserInterface(cursorclick);
-                for (int i = 0; i<middletile.Count; i++)
+                CursorClick cursorclick = new CursorClick(floatclick);//starts click animation
+                Game.CurrentScene.AddUserInterface(cursorclick);//adds it to UI above everything
+                
+                for (int i = 0; i<middletile.Count; i++)//goes through every pixel in the middle tile vector2f list 
                 {
-                    Vector2f tile = middletile[i];
-                    Vector2i midtile = new Vector2i((int)tile.X, (int)tile.Y);
-                    Vector2i southtile = new Vector2i((int)tile.X+32, (int)tile.Y+16);
-                    Vector2i westtile = new Vector2i((int)tile.X-32, (int)tile.Y+16);
+                    Vector2f tile = middletile[i];//gets the first tile
+                    Vector2i midtile = new Vector2i((int)tile.X, (int)tile.Y);//makes a vector with 2 int values for the tile to compare to mouse.getposition
+                    Vector2i southtile = new Vector2i((int)tile.X+32, (int)tile.Y+16);//offsets the pixel by adding x and y values in accordance to the south tile to align with the grid
+                    Vector2i westtile = new Vector2i((int)tile.X-32, (int)tile.Y+16);//does it for the west, north and east tiles as well
                     Vector2i northtile = new Vector2i((int)tile.X-32, (int)tile.Y-16);
                     Vector2i easttile = new Vector2i((int)tile.X+32, (int)tile.Y-16);
 
                     //Console.WriteLine(inttile.X+","+inttile.Y);
+                    //if the mouses position matches any one of the pixels in any of the tiles then it turns on a direction boolean and breaks out of the loop (as it will only be on one pixel)
                     if (Mouse.GetPosition() == midtile)
                     {
                         nowhere = true;
@@ -158,124 +166,120 @@ namespace MyGame
                     }
 
                 }
-                _movetimer=0;
+                _movetimer=0;//move timer gets reset
             }
             if (up)
             {//movement north 
-                Tile redtile = new Tile(new Vector2f(x-22, y+32), "red");//make legitimate red and purple tile textures (current ones aren't pngs)
-                Game.CurrentScene.AddTile(redtile);
-                x -= 32;
+                //Tile redtile = new Tile(new Vector2f(x-22, y+32), "red");//make legitimate red and purple tile textures (current ones aren't pngs)
+                //Game.CurrentScene.AddTile(redtile);
+                x -= 32;//changes the postion of the sprite to be on a tile that is up
                 y -=16;
-                tilespawner.SpawnThreetilesSouth(new Vector2f(x-22, y+32));
-                Tile purpletile = new Tile(new Vector2f(x-22, y+32),"purple");
-                Game.CurrentScene.AddTile(purpletile);
-                _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");
-                direction =0;
+                tilespawner.SpawnThreetilesSouth(new Vector2f(x-22, y+32));//spawns three tiles around it excluding the south one (coming from a southern direction)
+                //Tile purpletile = new Tile(new Vector2f(x-22, y+32),"purple");
+                //Game.CurrentScene.AddTile(purpletile);
+                _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");//changes the sprite to be the texture facing north
+                direction =0;//direction is indicated for an attack
                 
             }
             if (left)
             { //movement west
-                x -= 32;
+                x -= 32;//moves to western tile
                 y +=16;
-               
-                _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");
-                direction =3;
+                tilespawner.SpawnThreetilesEast(new Vector2f(x-22, y+32));//comes from east, spawns three tiles excluding the east
+                _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");//changes the texture to the one where he's facing west
+                direction =3;//direction is indicated for a spell
             }
             if (down)
             { //movement south
                 
-                x += 32;
+                x += 32;//moves
                 y +=16;
-                tilespawner.SpawnThreetilesNorth(new Vector2f(x - 22, y + 32));
+                tilespawner.SpawnThreetilesNorth(new Vector2f(x - 22, y + 32));//comes from the north spawns three tiles excluding the north
                
-                _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
-                direction =2;
+                _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");//faces south
+                direction =2;//indicates direction for an attack
                
 
             }
             if (right) 
             { //movement east
               
-                x += 32;
+                x += 32;//moves there
                 y -=16;
-                tilespawner.SpawnThreetilesWest(new Vector2f(x - 22, y + 32));
+                tilespawner.SpawnThreetilesWest(new Vector2f(x - 22, y + 32));//comes from the west spawns three tiles excluding the west (already a tile there)
                
-                _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");
-                direction =1;
+                _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");//facing to the east texture
+                direction =1;//direction for spell
                 
             }
             if (nowhere)
             {
-                direction =-1;
+                direction =-1;//direction for spell (Rather lack thereov)
             }
-            up = false;
-            down = false;
-            left = false;
-            right= false;
-            nowhere = false;
-            _sprite.Position = new Vector2f(x, y);
-            this.pos = _sprite.Position;
-            _movetimer++;
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Space)&&attackdelay<=_attacktimer)
-            {
-                Spell spell = new Spell(pos, direction);
-                Game.CurrentScene.AddCloud(spell);
-                _attacktimer= 0;
-            }
-            if (scene.GetSpellBook())
+            _sprite.Position = new Vector2f(x, y);//updates the sprite position for the rendering
+            this.pos = _sprite.Position;//updates the position for enemy targeting
+            _movetimer++;//updates the time in between moves
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Space)&&attackdelay<=_attacktimer)//if space is pressed
             {
                 //direction  -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
-                if (Keyboard.IsKeyPressed(Keyboard.Key.Q)&&attackdelay<=_attacktimer)
+                Spell spell = new Spell(pos, direction);//creates a new spell with the indicated direction it's travelling and the position it's starting at
+                Game.CurrentScene.AddCloud(spell);//spell is above the game objects (up in the clouds)
+                _attacktimer= 0;//attack tiemr is reset
+            }
+            if (scene.GetSpellBook())//if the scene indicates that the spellbook is on 
+            {
+                //direction  -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
+                if (Keyboard.IsKeyPressed(Keyboard.Key.Q)&&attackdelay<=_attacktimer)//checks if the q key is pressed and if the attack is possible
                 {
-                    Spell spell = new Spell(pos, 0);
-                    Game.CurrentScene.AddCloud(spell);
-                    _attacktimer= 0;
+                    Spell spell = new Spell(pos, 0);// makes a new spell going north (q is north of s) (compass is slanted)
+                    Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud
+                    _attacktimer= 0;//resets attack timer
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.W)&&attackdelay<=_attacktimer)
+                if (Keyboard.IsKeyPressed(Keyboard.Key.W)&&attackdelay<=_attacktimer)//checks if the w key is pressed and if the attack is possible
                 {
-                    Spell spell = new Spell(pos, 7);
-                    Game.CurrentScene.AddCloud(spell);
-                    _attacktimer= 0;
+                    Spell spell = new Spell(pos, 7);//creates a new spell going northeast (w is northeast of s)
+                    Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud
+                    _attacktimer= 0;//resets the attack timer
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.E)&&attackdelay<=_attacktimer)
+                if (Keyboard.IsKeyPressed(Keyboard.Key.E)&&attackdelay<=_attacktimer)//checks if the e key is pressed and if the attack is possible
                 {
-                    Spell spell = new Spell(pos, 1);
-                    Game.CurrentScene.AddCloud(spell);
-                    _attacktimer= 0;
+                    Spell spell = new Spell(pos, 1);//makes a spell going east (e is east of s)
+                    Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud above game objects
+                    _attacktimer= 0;//attack timer is reset
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.A)&&attackdelay<=_attacktimer)
+                if (Keyboard.IsKeyPressed(Keyboard.Key.A)&&attackdelay<=_attacktimer)//checks if the a key is pressed and if the attack is possible
                 {
-                    Spell spell = new Spell(pos, 4);
-                    Game.CurrentScene.AddCloud(spell);
-                    _attacktimer= 0;
+                    Spell spell = new Spell(pos, 4);//makes a spell going northwest (a is northwest of s)
+                    Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud above the game objects
+                    _attacktimer= 0;//resets the attack timer
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.D)&&attackdelay<=_attacktimer)
+                if (Keyboard.IsKeyPressed(Keyboard.Key.D)&&attackdelay<=_attacktimer)//checks if the d key is pressed and if the attack is possible (more time in between attacks than the 100)
                 {
-                    Spell spell = new Spell(pos, 6);
-                    Game.CurrentScene.AddCloud(spell);
-                    _attacktimer= 0;
+                    Spell spell = new Spell(pos, 6);//makes a spell going southeast (d is southeast of s)
+                    Game.CurrentScene.AddCloud(spell);//adds it as a cloud
+                    _attacktimer= 0;//resets the attack timer
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.Z)&&attackdelay<=_attacktimer)
+                if (Keyboard.IsKeyPressed(Keyboard.Key.Z)&&attackdelay<=_attacktimer)//checks if the z key is pressed and if the attack is possible (more time in between attacks than the 100)
                 {
-                    Spell spell = new Spell(pos, 3);
-                    Game.CurrentScene.AddCloud(spell);
-                    _attacktimer= 0;
+                    Spell spell = new Spell(pos, 3);//makes a spell going west (z is west of s)
+                    Game.CurrentScene.AddCloud(spell);//adds it as a cloud
+                    _attacktimer= 0;//resets the attack timer
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.X)&&attackdelay<=_attacktimer)
+                if (Keyboard.IsKeyPressed(Keyboard.Key.X)&&attackdelay<=_attacktimer)//checks if the x key is pressed and if the attack is possible (more time in between attacks than the 100)
                 {
-                    Spell spell = new Spell(pos, 5);
-                    Game.CurrentScene.AddCloud(spell);
-                    _attacktimer= 0;
+                    Spell spell = new Spell(pos, 5);//makes a spell going southwest (x is southwest of s)
+                    Game.CurrentScene.AddCloud(spell);//adds it as a cloud
+                    _attacktimer= 0;//resets the attack timer
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.C)&&attackdelay<=_attacktimer)
+                if (Keyboard.IsKeyPressed(Keyboard.Key.C)&&attackdelay<=_attacktimer)//checks if the c key is pressed and if the attack is possible (more time in between attacks than the 100)
                 {
-                    Spell spell = new Spell(pos, 2);
-                    Game.CurrentScene.AddCloud(spell);
-                    _attacktimer= 0;
+                    Spell spell = new Spell(pos, 2);//makes a spell going south (c is south of s)
+                    Game.CurrentScene.AddCloud(spell);//adds it as a cloud
+                    _attacktimer= 0;//resets the attack timer
                 }
             }
-            _attacktimer++;
-            SetPosition(new Vector2f(_sprite.Position.X-22,_sprite.Position.Y+32));
+            _attacktimer++;//increases the thing that track the time between attacks
+            SetPosition(new Vector2f(_sprite.Position.X-22,_sprite.Position.Y+32));//sets the position for rendering at the tile position that the sprite is standing on
         }
     }
 }
