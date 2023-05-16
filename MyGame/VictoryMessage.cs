@@ -40,7 +40,7 @@ namespace MyGame
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
             {
-                GameScene scene = new GameScene();
+                GameScene scene = new GameScene(false);
                 Game.SetScene(scene);
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
