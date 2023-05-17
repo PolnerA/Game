@@ -16,12 +16,12 @@ namespace MyGame
     {
         //attack delay and attack timer for the cooldowns in between attacks (100ms)
 
-        private const int attackdelay = 300;
-        private int _attacktimer;
+        private const int attackdelay = 1000;
+        private int _attacktimer=attackdelay;
         
         //move delay and timer for movement (25 ms)
         private int _movetimer;
-        private const int movedelay = 400;
+        private const int movedelay = 100;
 
         //music delay and timer and music for period in between movment (8 seconds)
         private readonly Sound music = new Sound();
@@ -241,7 +241,7 @@ namespace MyGame
                     //direction  -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
                     Spell spell = new Spell(pos, direction);//creates a new spell with the indicated direction it's travelling and the position it's starting at
                     Game.CurrentScene.AddCloud(spell);//spell is above the game objects (up in the clouds)
-                    _attacktimer= 0;//attack tiemr is reset
+                    _attacktimer= attackdelay;//attack tiemr is reset
                 }
                 if (scene.GetSpellBook())//if the scene indicates that the spellbook is on 
                 {
@@ -296,7 +296,7 @@ namespace MyGame
                     }
                 }
             }
-            if (0<_attacktimer)
+            if (0<_attacktimer&&!Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
                 _attacktimer-=mselapsed;//counts down time till next attack
             }

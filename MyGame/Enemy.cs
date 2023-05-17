@@ -12,8 +12,9 @@ namespace MyGame
 {
     class Enemy : GameObject
     {
-        private int _movetimer;
-        private const int movedelay = 80;
+        
+        private const int movedelay = 1000;
+        private int _movetimer = movedelay;//when enemy spawns it takes a second for them to move
         private readonly Sprite _sprite = new Sprite();
         private List<Vector2f> placedtiles = new List<Vector2f>();
         public Enemy(Vector2f pos,List<Vector2f> tiles)
