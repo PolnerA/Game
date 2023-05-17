@@ -15,7 +15,7 @@ namespace MyGame
     {
         private readonly Text _text = new Text();
         Sound gamewon = new Sound();
-        private int musictimer=5000;
+        private int musictimer;
         private const int musicdelay = 5000;
         public VictoryMessage(int score, int tilesplaced)
         {//Background
@@ -33,10 +33,15 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-            musictimer++;
-            if (musicdelay<=musictimer)
+            int mselapsed = elapsed.AsMilliseconds();
+            if (0<musictimer)
+            {
+                musictimer -= mselapsed;
+            }
+            if (musictimer<=0)
             {
                 gamewon.Play();
+                musictimer=musicdelay;
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
             {

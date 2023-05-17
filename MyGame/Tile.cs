@@ -15,7 +15,7 @@ namespace MyGame
     {
         private readonly Sprite tile = new Sprite();//tile
         private const int revertdelay= 50;
-        private int reverttimer;
+        private int reverttimer=revertdelay;//50 ms until tile is reverted
         public Tile(Vector2f pos)
         {
             tile.Texture = Game.GetTexture("../../../Resources/64X32tile.png");
@@ -40,11 +40,16 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-            if(tile.Texture!= Game.GetTexture("../../../Resources/64X32tile.png")&& revertdelay<=reverttimer)
+            int mselapsed = elapsed.AsMilliseconds();
+            if(tile.Texture!= Game.GetTexture("../../../Resources/64X32tile.png")&& reverttimer<=0)
             {
                 MakeDead();
             }
-            reverttimer++;
+
+            if (0<reverttimer)
+            {
+                reverttimer-=mselapsed;
+            }
         }
     }
 }

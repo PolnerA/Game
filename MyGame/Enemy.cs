@@ -33,6 +33,11 @@ namespace MyGame
             GameScene scene = (GameScene)Game.CurrentScene;
             Vector2f pos = _sprite.Position;
             Vector2f heropos = scene.GetHeroPos();
+            int mselapsed = elapsed.AsMilliseconds();
+            if (0<_movetimer)
+            {
+                _movetimer-=mselapsed;            
+            }
             float x = pos.X;
             float y = pos.Y;
             float hx = heropos.X;//enemy goes to the hero pos
@@ -43,7 +48,7 @@ namespace MyGame
                 scene.DecreaseLives();
 
             }
-            if (movedelay<=_movetimer)
+            if (_movetimer<=0)
             {
                 bool move = false;//checks if it can move if it does only then does it reset the move timer
                 if (hx < x&&hy<y)//if the enemy is to the right and below the hero (south) then it moves north 
@@ -281,7 +286,7 @@ namespace MyGame
 
                 if (move)
                 {
-                    _movetimer =0;//if the character moved it resets the move timer
+                    _movetimer = movedelay;//if the character moved it resets the move timer
                 }
             }
             

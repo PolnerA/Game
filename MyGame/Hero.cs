@@ -16,17 +16,17 @@ namespace MyGame
     {
         //attack delay and attack timer for the cooldowns in between attacks (100ms)
 
-        private const int attackdelay = 100;
+        private const int attackdelay = 300;
         private int _attacktimer;
         
         //move delay and timer for movement (25 ms)
         private int _movetimer;
-        private const int movedelay = 25;
+        private const int movedelay = 400;
 
         //music delay and timer and music for period in between movment (8 seconds)
         private readonly Sound music = new Sound();
         private const int musicdelay = 8000;
-        private int musictimer = musicdelay;
+        private int musictimer;
         
         //sprite for the character and a position for the enemy to know where to move
         private readonly Sprite _sprite = new Sprite();
@@ -64,7 +64,11 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-            musictimer++;
+            int mselapsed = elapsed.AsMilliseconds();
+            if (0<musictimer)
+            {
+                musictimer-=mselapsed;
+            }
             GameScene scene = (GameScene)Game.CurrentScene;
             if (0<scene.GetNumOfEnemies())//if there are enemies on the scene it changes the music playing
             {
@@ -74,10 +78,10 @@ namespace MyGame
             {
                 music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortExploration.wav");
             }
-            if (musicdelay<=musictimer)//if it has been 8000 milliseconds since the last music it plays and restarts count
+            if (musictimer<=0)//if it has been 8000 milliseconds since the last music it plays and restarts count
             {
                 music.Play();
-                musictimer=0;
+                musictimer=musicdelay;
             }
             //boolean values for deciding the direction
             bool up = false;
@@ -120,7 +124,7 @@ namespace MyGame
                 }
                 Y++;
             }
-            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&movedelay<=_movetimer)//if mouse is pressed, and the character is allowed to move
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&_movetimer<=0)//if mouse is pressed, and the character is allowed to move
             {
                 Vector2i intclick = Mouse.GetPosition();//gets the mouses position at the location of the click
                 Vector2f floatclick = new Vector2f(intclick.X,intclick.Y);//typcasts it  into a float (to start the click animation at that position)
@@ -166,7 +170,7 @@ namespace MyGame
                     }
 
                 }
-                _movetimer=0;//move timer gets reset
+                _movetimer = movedelay;//move timer is reset and starts counting down again
             }
             if (up)
             {//movement north 
@@ -226,67 +230,76 @@ namespace MyGame
             }
             _sprite.Position = new Vector2f(x, y);//updates the sprite position for the rendering
             this.pos = _sprite.Position;//updates the position for enemy targeting
-            _movetimer++;//updates the time in between moves
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Space)&&attackdelay<=_attacktimer)//if space is pressed
+            if (0<_movetimer&&!Mouse.IsButtonPressed(Mouse.Button.Left))
             {
-                //direction  -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
-                Spell spell = new Spell(pos, direction);//creates a new spell with the indicated direction it's travelling and the position it's starting at
-                Game.CurrentScene.AddCloud(spell);//spell is above the game objects (up in the clouds)
-                _attacktimer= 0;//attack tiemr is reset
-            }
-            if (scene.GetSpellBook())//if the scene indicates that the spellbook is on 
+                _movetimer-=mselapsed;
+            }//move timer counts down the time to next move
+            if (_attacktimer<=0)
             {
-                //direction  -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
-                if (Keyboard.IsKeyPressed(Keyboard.Key.Q)&&attackdelay<=_attacktimer)//checks if the q key is pressed and if the attack is possible
+                if (Keyboard.IsKeyPressed(Keyboard.Key.Space))//if space is pressed
                 {
-                    Spell spell = new Spell(pos, 0);// makes a new spell going north (q is north of s) (compass is slanted)
-                    Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud
-                    _attacktimer= 0;//resets attack timer
+                    //direction  -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
+                    Spell spell = new Spell(pos, direction);//creates a new spell with the indicated direction it's travelling and the position it's starting at
+                    Game.CurrentScene.AddCloud(spell);//spell is above the game objects (up in the clouds)
+                    _attacktimer= 0;//attack tiemr is reset
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.W)&&attackdelay<=_attacktimer)//checks if the w key is pressed and if the attack is possible
+                if (scene.GetSpellBook())//if the scene indicates that the spellbook is on 
                 {
-                    Spell spell = new Spell(pos, 7);//creates a new spell going northeast (w is northeast of s)
-                    Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud
-                    _attacktimer= 0;//resets the attack timer
-                }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.E)&&attackdelay<=_attacktimer)//checks if the e key is pressed and if the attack is possible
-                {
-                    Spell spell = new Spell(pos, 1);//makes a spell going east (e is east of s)
-                    Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud above game objects
-                    _attacktimer= 0;//attack timer is reset
-                }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.A)&&attackdelay<=_attacktimer)//checks if the a key is pressed and if the attack is possible
-                {
-                    Spell spell = new Spell(pos, 4);//makes a spell going northwest (a is northwest of s)
-                    Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud above the game objects
-                    _attacktimer= 0;//resets the attack timer
-                }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.D)&&attackdelay<=_attacktimer)//checks if the d key is pressed and if the attack is possible (more time in between attacks than the 100)
-                {
-                    Spell spell = new Spell(pos, 6);//makes a spell going southeast (d is southeast of s)
-                    Game.CurrentScene.AddCloud(spell);//adds it as a cloud
-                    _attacktimer= 0;//resets the attack timer
-                }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.Z)&&attackdelay<=_attacktimer)//checks if the z key is pressed and if the attack is possible (more time in between attacks than the 100)
-                {
-                    Spell spell = new Spell(pos, 3);//makes a spell going west (z is west of s)
-                    Game.CurrentScene.AddCloud(spell);//adds it as a cloud
-                    _attacktimer= 0;//resets the attack timer
-                }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.X)&&attackdelay<=_attacktimer)//checks if the x key is pressed and if the attack is possible (more time in between attacks than the 100)
-                {
-                    Spell spell = new Spell(pos, 5);//makes a spell going southwest (x is southwest of s)
-                    Game.CurrentScene.AddCloud(spell);//adds it as a cloud
-                    _attacktimer= 0;//resets the attack timer
-                }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.C)&&attackdelay<=_attacktimer)//checks if the c key is pressed and if the attack is possible (more time in between attacks than the 100)
-                {
-                    Spell spell = new Spell(pos, 2);//makes a spell going south (c is south of s)
-                    Game.CurrentScene.AddCloud(spell);//adds it as a cloud
-                    _attacktimer= 0;//resets the attack timer
+                    //direction  -1: nowehere 0:North 1:east 2:south 3:west 4:northwest 5: southwest 6:southeast 7: northeast
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.Q))//checks if the q key is pressed and if the attack is possible
+                    {
+                        Spell spell = new Spell(pos, 0);// makes a new spell going north (q is north of s) (compass is slanted)
+                        Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud
+                        _attacktimer= attackdelay;//resets attack timer
+                    }
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W))//checks if the w key is pressed and if the attack is possible
+                    {
+                        Spell spell = new Spell(pos, 7);//creates a new spell going northeast (w is northeast of s)
+                        Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud
+                        _attacktimer= attackdelay;//resets the attack timer
+                    }
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.E))//checks if the e key is pressed and if the attack is possible
+                    {
+                        Spell spell = new Spell(pos, 1);//makes a spell going east (e is east of s)
+                        Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud above game objects
+                        _attacktimer= attackdelay;//attack timer is reset
+                    }
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A))//checks if the a key is pressed and if the attack is possible
+                    {
+                        Spell spell = new Spell(pos, 4);//makes a spell going northwest (a is northwest of s)
+                        Game.CurrentScene.AddCloud(spell);//adds the spell as a cloud above the game objects
+                        _attacktimer= attackdelay;//resets the attack timer
+                    }
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D))//checks if the d key is pressed and if the attack is possible (more time in between attacks than the 100)
+                    {
+                        Spell spell = new Spell(pos, 6);//makes a spell going southeast (d is southeast of s)
+                        Game.CurrentScene.AddCloud(spell);//adds it as a cloud
+                        _attacktimer= attackdelay;//resets the attack timer
+                    }
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.Z))//checks if the z key is pressed and if the attack is possible (more time in between attacks than the 100)
+                    {
+                        Spell spell = new Spell(pos, 3);//makes a spell going west (z is west of s)
+                        Game.CurrentScene.AddCloud(spell);//adds it as a cloud
+                        _attacktimer= attackdelay;//resets the attack timer
+                    }
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.X))//checks if the x key is pressed and if the attack is possible (more time in between attacks than the 100)
+                    {
+                        Spell spell = new Spell(pos, 5);//makes a spell going southwest (x is southwest of s)
+                        Game.CurrentScene.AddCloud(spell);//adds it as a cloud
+                        _attacktimer= attackdelay;//resets the attack timer
+                    }
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.C))//checks if the c key is pressed and if the attack is possible (more time in between attacks than the 100)
+                    {
+                        Spell spell = new Spell(pos, 2);//makes a spell going south (c is south of s)
+                        Game.CurrentScene.AddCloud(spell);//adds it as a cloud
+                        _attacktimer= attackdelay;//resets the attack timer
+                    }
                 }
             }
-            _attacktimer++;//increases the thing that track the time between attacks
+            if (0<_attacktimer)
+            {
+                _attacktimer-=mselapsed;//counts down time till next attack
+            }
             SetPosition(new Vector2f(_sprite.Position.X-22,_sprite.Position.Y+32));//sets the position for rendering at the tile position that the sprite is standing on
         }
     }

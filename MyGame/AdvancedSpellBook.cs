@@ -13,8 +13,8 @@ namespace MyGame
     class AdvancedSpellBook: GameObject
     {
         Sprite _sprite = new Sprite();// Creates the sprite for the spell book
-        const int toggledelay = 50;//delay for toggling it every 50 ms
-        private int timer = 50;
+        const int toggledelay = 500;//delay for toggling it every 500 ms
+        private int timer;//timer for counting down for a toggle
         
         public AdvancedSpellBook(bool spellbook)
         {
@@ -41,7 +41,7 @@ namespace MyGame
             if (Mouse.GetPosition().X<_sprite.Position.X+_sprite.Texture.Size.X&&_sprite.Position.X<Mouse.GetPosition().X&& Mouse.GetPosition().Y<_sprite.Position.Y+_sprite.Texture.Size.Y&&_sprite.Position.Y<Mouse.GetPosition().Y)
             {
                 //if the mouse left button is clicked and the timer has reached at least 50
-                if (Mouse.IsButtonPressed(Mouse.Button.Left)&&toggledelay<=timer)
+                if (Mouse.IsButtonPressed(Mouse.Button.Left)&&timer<=0)
                 {
                     GameScene scene = (GameScene)Game.CurrentScene;//toggles the spellbook value, in the gamescene and toggles the texture
                     scene.ToggleSpellBook();
@@ -53,12 +53,16 @@ namespace MyGame
                     {
                         _sprite.Texture = Game.GetTexture("../../../Resources/spell book2.png");
                     }
-                    timer = 0;
+                    timer = toggledelay;
                 }
                 SpellBooktext text = new SpellBooktext(new Vector2f(_sprite.Position.X+_sprite.Texture.Size.X, _sprite.Position.Y));//if the mouse is in position it shows the informational text about the spellbook
                 Game.CurrentScene.AddUserInterface(text);
             }
-            timer++;
+            int mselapsed = elapsed.AsMilliseconds();
+            if (0<timer&&!Mouse.IsButtonPressed(Mouse.Button.Left))
+            {
+                timer-=mselapsed;
+            }
         }
     }
 }

@@ -10,12 +10,15 @@ namespace MyGame
 {
     class Cloud_Spawner : GameObject
     {//TODO spawn clouds isometricly
-        private const int SpawnDelay = 1000;//spawn delay for the clouds
+        private const int SpawnDelay = 1000;//spawn delay for the clouds (every 1000 milliseconds)
         private int _timer;
         public override void Update(Time elapsed)
         {//clouds
             int msElapsed = elapsed.AsMilliseconds();
-            _timer -= msElapsed;
+            if (0<_timer)
+            {
+                _timer -= msElapsed;
+            }
             if (_timer <= 0)
             {
                 _timer = SpawnDelay;

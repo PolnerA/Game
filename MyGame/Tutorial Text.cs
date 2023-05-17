@@ -12,7 +12,7 @@ namespace MyGame
 {
     class Tutorial_Text : GameObject
     {
-        private int clicktimer = 60;//find a way to do tutorial w/o player movement
+        private int clicktimer = 60;//timer until each click (60ms)
         private int tutorialnum;
         private const int clickdelay = 60;
         private readonly Text _text = new Text();
@@ -39,8 +39,8 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-    
-            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clickdelay<=clicktimer&&tutorialnum==0)
+            int mselapsed = elapsed.AsMilliseconds();
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer<=0&&tutorialnum==0)
             {
                 _text.Position = new Vector2f(1000, 200);
                 _text.DisplayedString = "To get rid of them\nPress space to fire a spell\nevery spell you cast decreases your health\nThis is the advanced spellbook it allows you to \ncast spells in all 8 directions";
@@ -48,27 +48,30 @@ namespace MyGame
                 sprite.Texture = Game.GetTexture("../../../Resources/spell book2.png");
                 
                 
-                clicktimer=0;
+                clicktimer=clickdelay;
                 tutorialnum=1;
                 
             }
-            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clickdelay<=clicktimer&&tutorialnum==1)
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer<=0&&tutorialnum==1)
             {
                 tutorialnum=2;
                 _text.Position = new Vector2f(200, 500);
                 sprite.Texture = Game.GetTexture("../../../Resources/64X32tile.png");
                 sprite.Position = new Vector2f(100, 450);
                 _text.DisplayedString ="Click on a nearby tile to teleport there\nMove on every tile to win\nTurn all the pixels green";
-                clicktimer=0;
+                clicktimer=clickdelay;
 
             }
-            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clickdelay<=clicktimer&&tutorialnum==2)
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer <= 0&&tutorialnum==2)
             {
                 GameScene scene = new GameScene(false);
                 Game.SetScene(scene);
                 MakeDead();
             }
-            clicktimer++;
+            if (0<clicktimer&&!Mouse.IsButtonPressed(Mouse.Button.Left))
+            {
+                clicktimer -= mselapsed;
+            }
         }
     }
 }
