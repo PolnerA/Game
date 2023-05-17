@@ -14,8 +14,8 @@ namespace MyGame
     class Tile : GameObject
     {
         private readonly Sprite tile = new Sprite();//tile
-        private const int revertdelay= 50;
-        private int reverttimer=revertdelay;//50 ms until tile is reverted
+        private const int revertdelay= 500;
+        private int reverttimer=revertdelay;//1000 ms until tile is reverted
         public Tile(Vector2f pos)
         {
             tile.Texture = Game.GetTexture("../../../Resources/64X32tile.png");
