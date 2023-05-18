@@ -14,13 +14,13 @@ namespace MyGame
 {
     class Tile_Spawner : GameObject
     {
+        //tiles that are palced at the beginning of the game are added initially to the list of placedtile.
         private List<Vector2f> placedtiles = new List<Vector2f>() { new Vector2f(100,520), new Vector2f(132, 536), new Vector2f(132, 504), new Vector2f(68, 504), new Vector2f(68, 536) };
-        Random rng = new Random();
-        private Vector2f position;
-        private bool music=false;
+        Random rng = new Random();//rng for the spawn of enemies and potions and loot with the tiles
+        private bool music=false;//plays when a new tile is spawned
         public Sound sound = new Sound();
         public Tile_Spawner()
-        {
+        {//sound file for how it will sound
             sound.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortlock.wav");
         }
         public void SpawnThreetiles(Vector2f pos, Vector2f previouspos)
@@ -60,15 +60,14 @@ namespace MyGame
                 }
             }
         }
-        public void SpawnThreetilesNorth(Vector2f pos)
+        public void SpawnThreetilesNorth(Vector2f pos)//spawns from the 4 tiles around the character except for the one north, so it only spwans three
         {
-            position = pos;
             bool down=true;
             bool left = true;
-            bool right = true;
-            GameScene scene = (GameScene)Game.CurrentScene;
+            bool right = true;//all the tiles are set to spawn
+            GameScene scene = (GameScene)Game.CurrentScene;//sets an instance of game scene to add tiles
             for (int i = 0; i<placedtiles.Count; i++)
-            { 
+            { //goes through the list and if the tileposition in the list is similar to one that will be spawned it's set to false
                Vector2f tilepos = placedtiles[i];
                if (tilepos == new Vector2f(pos.X+32, pos.Y+16))
                {
@@ -84,7 +83,7 @@ namespace MyGame
                }
                 
             }
-            if (down)
+            if (down)//if the direction is indicated as true, the tile is created and added to placed tiles, tilehas is also called to see what spawns with it.
             {
                
                 Tile south = new Tile(new Vector2f(pos.X+32, pos.Y+16));
@@ -119,7 +118,6 @@ namespace MyGame
         }
         public void SpawnThreetilesWest(Vector2f pos)
         {
-            position = pos;
             bool down = true;
             bool up = true;
             bool right = true;
@@ -174,7 +172,6 @@ namespace MyGame
         }
         public void SpawnThreetilesSouth(Vector2f pos)
         {
-            position = pos;
             bool left = true;
             bool up = true;
             bool right = true;
@@ -228,7 +225,6 @@ namespace MyGame
         }
         public void SpawnThreetilesEast(Vector2f pos)
         {
-            position = pos;
             bool left = true;
             bool up = true;
             bool down = true;
