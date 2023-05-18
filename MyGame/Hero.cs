@@ -7,8 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 namespace MyGame
 {
@@ -209,7 +211,6 @@ namespace MyGame
                 _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");//faces south
                 direction =2;//indicates direction for an attack
                
-
             }
             if (right) 
             { //movement east
