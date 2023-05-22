@@ -180,7 +180,7 @@ namespace MyGame
                 Game.CurrentScene.AddTile(redtile);
                 x -= 32;//changes the postion of the sprite to be on a tile that is up
                 y -=16;
-                tilespawner.SpawnThreetilesSouth(new Vector2f(x-22, y+32));//spawns three tiles around it excluding the south one (coming from a southern direction)
+                tilespawner.SpawnTiles(new Vector2f(x-22, y+32));//spawns three tiles around it excluding the south one (coming from a southern direction)
                 Tile purpletile = new Tile(new Vector2f(x-22, y+32),"purple");//makes the tile moved to purple
                 Game.CurrentScene.AddTile(purpletile);
                 _sprite.Texture = Game.GetTexture("../../../Resources/John North.png");//changes the sprite to be the texture facing north
@@ -193,7 +193,7 @@ namespace MyGame
                 Game.CurrentScene.AddTile(redtile);
                 x -= 32;//moves to western tile
                 y +=16;
-                tilespawner.SpawnThreetilesEast(new Vector2f(x-22, y+32));//comes from east, spawns three tiles excluding the east
+                tilespawner.SpawnTiles(new Vector2f(x-22, y+32));//comes from east, spawns three tiles excluding the east
                 Tile purpletile = new Tile(new Vector2f(x-22, y+32), "purple");//makes the tile moved to purple
                 Game.CurrentScene.AddTile(purpletile);
                 _sprite.Texture = Game.GetTexture("../../../Resources/John West.png");//changes the texture to the one where he's facing west
@@ -205,7 +205,7 @@ namespace MyGame
                 Game.CurrentScene.AddTile(redtile);
                 x += 32;//moves
                 y +=16;
-                tilespawner.SpawnThreetilesNorth(new Vector2f(x - 22, y + 32));//comes from the north spawns three tiles excluding the north
+                tilespawner.SpawnTiles(new Vector2f(x - 22, y + 32));//comes from the north spawns three tiles excluding the north
                 Tile purpletile = new Tile(new Vector2f(x-22, y+32), "purple");//makes the tile moved to purple
                 Game.CurrentScene.AddTile(purpletile);
                 _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");//faces south
@@ -218,7 +218,7 @@ namespace MyGame
                 Game.CurrentScene.AddTile(redtile);
                 x += 32;//moves there
                 y -=16;
-                tilespawner.SpawnThreetilesWest(new Vector2f(x - 22, y + 32));//comes from the west spawns three tiles excluding the west (already a tile there)
+                tilespawner.SpawnTiles(new Vector2f(x - 22, y + 32));//comes from the west spawns three tiles excluding the west (already a tile there)
                 Tile purpletile = new Tile(new Vector2f(x-22, y+32), "purple");//makes the tile moved to purple
                 Game.CurrentScene.AddTile(purpletile);
                 _sprite.Texture = Game.GetTexture("../../../Resources/John East.png");//facing to the east texture

@@ -9,6 +9,7 @@ using GameEngine;
 using SFML.Audio;
 using SFML.Graphics;
 using SFML.System;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace MyGame
 {
@@ -23,51 +24,51 @@ namespace MyGame
         {//sound file for how it will sound
             sound.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortlock.wav");
         }
-        public void SpawnThreetiles(Vector2f pos, Vector2f previouspos)
+        public void SpawnThreetiles(bool north, bool south, bool west, bool east,Vector2f pos)
         {
-            float x = pos.X;
-            float y = pos.Y;
-            float previousx = previouspos.X;
-            float previousy = previouspos.Y;
-            if (previousx+32==x) 
+            GameScene scene = (GameScene)Game.CurrentScene;//sets an instance of gamescene to add tiles
+            if (north)//if the direction is indicated as true, the tile is created and added to placed tiles, tilehas is also called to see what spawns with it.
             {
-                if (previousy+16==y)//south direction
-                {//spawn south,east,west
-                    Tile south = new Tile(new Vector2f(x+32,y+16));
-                    Tile east = new Tile(new Vector2f(x+32, y-16));
-                    Tile west = new Tile(new Vector2f(x-32, y-16));
-                }
-                else //east direction
-                { //spawn south,north,west
-                    Tile south = new Tile(new Vector2f(x+32, y+16));
-                    Tile north = new Tile(new Vector2f(x-32, y+16));
-                    Tile west = new Tile(new Vector2f(x-32, y-16));
-                }
+                Tile _north = new Tile(new Vector2f(pos.X-32, pos.Y-16));
+                placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
+                scene.AddTile(_north);
+                tilehas(new Vector2f(pos.X-32, pos.Y-16));
+                music= true;
             }
-            if (previousx-32==x) 
+            if (south)
             {
-                if (previousy+16==y)//north direction
-                {//spawn south,east,west
-                    Tile south = new Tile(new Vector2f(x+32, y+16));
-                    Tile east = new Tile(new Vector2f(x+32, y-16));
-                    Tile west = new Tile(new Vector2f(x-32, y-16));
-                }
-                else//west direction
-                {//spawn south,east,north
-                    Tile south = new Tile(new Vector2f(x+32, y+16));
-                    Tile east = new Tile(new Vector2f(x+32, y-16));
-                    Tile north = new Tile(new Vector2f(x-32, y+16));
-                }
+                Tile _south = new Tile(new Vector2f(pos.X+32, pos.Y+16));
+                placedtiles.Add(new Vector2f(pos.X+32, pos.Y+16));
+                scene.AddTile(_south);
+                tilehas(new Vector2f(pos.X + 32, pos.Y + 16));
+                music=true;
             }
+            if (west)
+            {
+                Tile _west = new Tile(new Vector2f(pos.X-32, pos.Y+16));
+                placedtiles.Add(new Vector2f(pos.X-32, pos.Y+16));
+
+                scene.AddTile(_west);
+                tilehas(new Vector2f(pos.X - 32, pos.Y + 16));
+                music=true;
+            }
+            if (east)
+            {
+                Tile _east = new Tile(new Vector2f(pos.X+32, pos.Y-16));
+                placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
+                scene.AddTile(_east);
+                tilehas(new Vector2f(pos.X + 32, pos.Y - 16));
+                music=true;
+            }//music is set to true to play a sound effect every single time you discover a new tile (bool is used to not overlap audio 1 new tile is the same as 2 3 etc..)
         }
-        public void SpawnThreetilesNorth(Vector2f pos)//spawns from the 4 tiles around the character except for the one north, so it only spwans three
+        public void SpawnThreetilesNorth(Vector2f pos)
         {
             bool down=true;
             bool left = true;
-            bool right = true;//all the tiles are set to spawn
-            GameScene scene = (GameScene)Game.CurrentScene;//sets an instance of game scene to add tiles
+            bool right = true;
+            GameScene scene = (GameScene)Game.CurrentScene;
             for (int i = 0; i<placedtiles.Count; i++)
-            { //goes through the list and if the tileposition in the list is similar to one that will be spawned it's set to false
+            { 
                Vector2f tilepos = placedtiles[i];
                if (tilepos == new Vector2f(pos.X+32, pos.Y+16))
                {
@@ -83,221 +84,75 @@ namespace MyGame
                }
                 
             }
-            if (down)//if the direction is indicated as true, the tile is created and added to placed tiles, tilehas is also called to see what spawns with it.
-            {
-               
-                Tile south = new Tile(new Vector2f(pos.X+32, pos.Y+16));
-                placedtiles.Add(new Vector2f(pos.X+32, pos.Y+16));
-                scene.AddTile( south);
-                tilehas(new Vector2f(pos.X + 32, pos.Y + 16));
-                music=true;
-            }
-            if (right)
-            {
-                Tile east = new Tile(new Vector2f(pos.X+32, pos.Y-16));
-                placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
-                scene.AddTile( east);
-                tilehas(new Vector2f(pos.X + 32, pos.Y - 16));
-                music=true;
-            }
-            if (left)
-            {
-                Tile west = new Tile(new Vector2f(pos.X-32, pos.Y+16));
-                placedtiles.Add(new Vector2f(pos.X-32, pos.Y+16));
-
-                scene.AddTile(west);
-                tilehas(new Vector2f(pos.X - 32, pos.Y + 16));
-                music=true;
-            }
+            SpawnThreetiles(false, down, left, right, pos);
+            scene.SetTilesPlaced(placedtiles.Count);//changes tiles placed to the amount of tiles in the list
             if (music)
-            {
+            {//if a new tile is spawned it plays audio
                 sound.Play();
             }
-            music=false;
-            scene.SetTilesPlaced(placedtiles.Count());
+            music=false;//music is reset
         }
-        public void SpawnThreetilesWest(Vector2f pos)
+        public void SpawnTiles(Vector2f pos)
         {
-            bool down = true;
-            bool up = true;
-            bool right = true;
-            GameScene scene = (GameScene)Game.CurrentScene;
-            for (int i = 0; i<placedtiles.Count; i++)
+            bool north=true, south=true, east=true, west = true;//all the tiles are set to spawn
+            GameScene scene = (GameScene)Game.CurrentScene;//sets an instance of game scene to set the tiles placed displayed to sync with the list
+            for (int i=0;i<placedtiles.Count();i++)
             {
                 Vector2f tilepos = placedtiles[i];
+                //goes through the list and if the tileposition in the list is similar to one that will be spawned it's set to false
+                //as there is already a tile there
                 if (tilepos == new Vector2f(pos.X+32, pos.Y+16))
                 {
-                    down=false;
+                    south=false;
+                }
+                if (tilepos == new Vector2f(pos.X-32, pos.Y+16))
+                {
+                    west=false;
                 }
                 if (tilepos == new Vector2f(pos.X+32, pos.Y-16))
                 {
-                    right=false;
+                    east=false;
                 }
                 if (tilepos == new Vector2f(pos.X-32, pos.Y-16))
                 {
-                    up=false;
+                    north=false;
                 }
             }
-            if (down)
-            {
-                Tile south = new Tile(new Vector2f(pos.X+32, pos.Y+16));
-                scene.AddTile(south);
-                placedtiles.Add(new Vector2f(pos.X+32, pos.Y+16));
-                tilehas(new Vector2f(pos.X + 32, pos.Y + 16));
-                music=true;
-            }
-            if (right)
-            {
-                Tile east = new Tile(new Vector2f(pos.X+32, pos.Y-16));
-                scene.AddTile(east);
-                placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
-                tilehas(new Vector2f(pos.X+32, pos.Y-16));
-                music=true;
-            }
-            if (up)
-            {
-                Tile north = new Tile(new Vector2f(pos.X-32, pos.Y-16));
-                placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
-                scene.AddTile(north);
-                tilehas(new Vector2f(pos.X-32, pos.Y-16));
-                music= true;
-            }
-            scene.SetTilesPlaced(placedtiles.Count());
-            if (music)
+            SpawnThreetiles(north,south ,west ,east, pos);//spawns the four tiles if they haven't been set to false
+            scene.SetTilesPlaced(placedtiles.Count());//sets the tiles placed to the correct value
+            if (music)//if at least one tile is spawned music will play
             {
                 sound.Play();
             }
-            music=false;
-
-        }
-        public void SpawnThreetilesSouth(Vector2f pos)
-        {
-            bool left = true;
-            bool up = true;
-            bool right = true;
-            GameScene scene = (GameScene)Game.CurrentScene;
-            for (int i = 0; i<placedtiles.Count(); i++)
-            {
-                Vector2f tilepos = placedtiles[i];
-                if (tilepos == new Vector2f(pos.X-32, pos.Y+16))
-                {
-                    left=false;
-                }
-                if (tilepos == new Vector2f(pos.X+32, pos.Y-16))
-                {
-                    right=false;
-                }
-                if (tilepos == new Vector2f(pos.X-32, pos.Y-16))
-                {
-                    up=false;
-                }
-            }
-            if (up)
-            {
-                Tile north = new Tile(new Vector2f(pos.X-32, pos.Y-16));
-                scene.AddTile(north);
-                placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
-                tilehas(new Vector2f(pos.X-32, pos.Y-16));
-                music=true;
-            }
-            if (right)
-            {
-                Tile east = new Tile(new Vector2f(pos.X+32, pos.Y-16));
-                scene.AddTile(east);
-                placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
-                tilehas(new Vector2f(pos.X+32, pos.Y-16));
-                music=true;
-            }
-            if (left)
-            {
-                Tile west = new Tile(new Vector2f(pos.X-32, pos.Y+16));
-                scene.AddTile(west);
-                placedtiles.Add(new Vector2f(pos.X-32, pos.Y+16));
-                tilehas(new Vector2f(pos.X-32, pos.Y+16));
-                music=true;
-            }
-            scene.SetTilesPlaced(placedtiles.Count());
-            if (music)
-            {
-                sound.Play();
-            }
-            music=false;
-        }
-        public void SpawnThreetilesEast(Vector2f pos)
-        {
-            bool left = true;
-            bool up = true;
-            bool down = true;
-            GameScene scene = (GameScene)Game.CurrentScene;
-            for (int i = 0; i<placedtiles.Count; i++)
-            {
-                Vector2f tilepos = placedtiles[i];
-                if (tilepos == new Vector2f(pos.X-32, pos.Y+16))
-                {
-                    left=false;
-                }
-                if (tilepos == new Vector2f(pos.X+32, pos.Y+16))
-                {
-                    down=false;
-                }
-                if (tilepos == new Vector2f(pos.X-32, pos.Y-16))
-                {
-                    up=false;
-                }
-            }
-            if (down)
-            {
-                Tile south = new Tile(new Vector2f(pos.X+32, pos.Y+16));
-                scene.AddTile(south);
-                placedtiles.Add(new Vector2f(pos.X+32,pos.Y+16));
-                tilehas(new Vector2f(pos.X+32, pos.Y+16));
-                music=true;
-            }
-            if (up)
-            {
-                Tile north = new Tile(new Vector2f(pos.X-32, pos.Y-16));
-                scene.AddTile(north);
-                placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
-                tilehas(new Vector2f(pos.X-32, pos.Y-16));
-                music=true;
-            }
-            if (left)
-            {
-                Tile west = new Tile(new Vector2f(pos.X-32, pos.Y+16));
-                scene.AddTile(west);
-                placedtiles.Add(new Vector2f(pos.X-32, pos.Y+16));
-                tilehas(new Vector2f(pos.X-32,pos.Y+16));
-                music=true;
-            }
-            scene.SetTilesPlaced(placedtiles.Count());
-            if (music)
-            {
-                sound.Play();
-            }
-            music=false;
+            music=false;//music is reset
         }
         public void tilehas(Vector2f spawnpos)
         {
 
             int integer = rng.Next(4);
+            // one in four chance for the tile to have something
             if (integer == 0)
             {
                 int integer2 = rng.Next(4);
+                // one in four for the thing to be a potion or loot/coins
+                // the remaining half of a chance is for an enemy to be on that tile
                 switch (integer2)
                 {
                     default:
                         //spawn enemy using the position of the tile
                         Enemy enemy = new Enemy(spawnpos,placedtiles);//pos is currently stood on tile
-                        GameScene scene = (GameScene)Game.CurrentScene;
+                        GameScene scene = (GameScene)Game.CurrentScene;//1 in 8 chance
+                        //gets the current gamescene to increase the number of enemies in it and to add the enemy
                         scene.IncreaseEnemyNum();
                         scene.AddGameObject(enemy);
                         break;
                     case 0:
-                        Loot loot = new Loot(spawnpos);
+                        Loot loot = new Loot(spawnpos);// 1 in 16 chance
+                        //adds loot to the gamescene using the position of the tile
                         Game.CurrentScene.AddGameObject(loot);
                         break;
                     case 1:
-                        Potion potion = new Potion(spawnpos);
+                        Potion potion = new Potion(spawnpos);// 1 in 16 chance
                         Game.CurrentScene.AddGameObject(potion);
                         break;
                 }
