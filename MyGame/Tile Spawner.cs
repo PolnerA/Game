@@ -61,37 +61,6 @@ namespace MyGame
                 music=true;
             }//music is set to true to play a sound effect every single time you discover a new tile (bool is used to not overlap audio 1 new tile is the same as 2 3 etc..)
         }
-        public void SpawnThreetilesNorth(Vector2f pos)
-        {
-            bool down=true;
-            bool left = true;
-            bool right = true;
-            GameScene scene = (GameScene)Game.CurrentScene;
-            for (int i = 0; i<placedtiles.Count; i++)
-            { 
-               Vector2f tilepos = placedtiles[i];
-               if (tilepos == new Vector2f(pos.X+32, pos.Y+16))
-               {
-                   down=false;
-               }
-               if (tilepos == new Vector2f(pos.X+32, pos.Y-16))
-               {
-                   right=false;
-               }
-               if (tilepos == new Vector2f(pos.X-32, pos.Y+16))
-               {
-                   left=false;
-               }
-                
-            }
-            SpawnThreetiles(false, down, left, right, pos);
-            scene.SetTilesPlaced(placedtiles.Count);//changes tiles placed to the amount of tiles in the list
-            if (music)
-            {//if a new tile is spawned it plays audio
-                sound.Play();
-            }
-            music=false;//music is reset
-        }
         public void SpawnTiles(Vector2f pos)
         {
             bool north=true, south=true, east=true, west = true;//all the tiles are set to spawn
