@@ -13,24 +13,26 @@ namespace MyGame
     class Tutorial_Text : GameObject
     {
         private int clicktimer = 60;//timer until each click (60ms)
-        private int tutorialnum;
-        private const int clickdelay = 60;
-        private readonly Text _text = new Text();
-        private readonly Sprite sprite = new Sprite();
+        private int tutorialnum;//counts where it is in the tutoriial
+        private const int clickdelay = 60;//the time until each click (60 ms)
+        private readonly Text _text = new Text();//text stores information such as where it is & what it looks like
+        private readonly Sprite sprite = new Sprite();// same with sprite except from a png instead of a font
 
         public Tutorial_Text()
         {//UI
             _text.Font = Game.GetFont("../../../Resources/times new roman.ttf");
-            
             _text.Position = new Vector2f(100,500);
             _text.CharacterSize = 40;
             _text.FillColor = Color.White;
-            sprite.Texture = Game.GetTexture("../../../Resources/Background.png");
-            sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");
+            //sets all the original characteristics of the text
+            sprite.Texture = Game.GetTexture("../../../Resources/.png");
+            //sprites texture is set to background as then the space as then the spaces the sprites can exist under are simple (change to use texture rect in a bigger png)
             _text.DisplayedString = "There will be enemies you will encounter on your journey";
+            //shows the text that will be displayed
             sprite.Position = new Vector2f(1900, 1030);
-            
+            //shows the position of the sprite
             tutorialnum=0;
+            //tutorial is set to the very beggining
         }
         public override void Draw()
         {
