@@ -67,6 +67,8 @@ namespace MyGame
                         {
                             if (-30<=y&&0<=x)//if the move is within the game borders
                             {
+                                Tile redtile = new Tile(new Vector2f(x+10, y+48), "red");
+                                scene.AddTile(redtile);
                                 move = true;//it moves
                                 _sprite.Texture = Game.GetTexture("../../../Resources/enemy north.png");//facing to the north texture
                                
@@ -93,8 +95,9 @@ namespace MyGame
                         {
                             if (0<=x&&y<=1030)//if it is within the game borders
                             {
-                            
 
+                                Tile redtile = new Tile(new Vector2f(x+10, y+16), "red");
+                                scene.AddTile(redtile);
                                 move = true;//moves
                                 _sprite.Texture = Game.GetTexture("../../../Resources/enemy west.png");//facing to the west texture
                              
@@ -121,7 +124,8 @@ namespace MyGame
                         {//doesn't equate floats instead equates a range
                             if (x<=1900&&y<=1030)//if it's within the game border
                             {
-                              
+                                Tile redtile = new Tile(new Vector2f(x-54, y + 16), "red");
+                                scene.AddTile(redtile);
                                 move = true;//moves
                                 _sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");//facing to the south
                           
@@ -154,7 +158,8 @@ namespace MyGame
                         {
                             if (x<=1900&&-30<=y)//if it's inside the game window
                             {
-                             
+                                Tile redtile = new Tile(new Vector2f(x - 54, y+48), "red");
+                                scene.AddTile(redtile);
                                 move=true;//moves
                                 _sprite.Texture = Game.GetTexture("../../../Resources/enemy east.png");//facing to the east
                                
@@ -186,7 +191,8 @@ namespace MyGame
                             {
                                 if (-30<=y&&0<=x)//if it is in the game window
                                 {
-                                   
+                                    Tile redtile = new Tile(new Vector2f(x-22, y+64), "red");
+                                    scene.AddTile(redtile);
                                     move = true;//moves
                                     _sprite.Texture = Game.GetTexture("../../../Resources/enemy north.png");//facing to the north texture
                                     
@@ -213,7 +219,8 @@ namespace MyGame
                             {
                                 if (0<=x&&y<=1030)//if the move isn't out of the window
                                 {
-                                   
+                                    Tile redtile = new Tile(new Vector2f(x-22, y), "red");
+                                    scene.AddTile(redtile);
                                     move = true;//moves
                                     _sprite.Texture = Game.GetTexture("../../../Resources/enemy west.png");//facing to the west texture
                                   
@@ -241,7 +248,8 @@ namespace MyGame
                             {
                                 if (-30<=y&&0<=x)//if in game window
                                 {
-                                
+                                    Tile redtile = new Tile(new Vector2f(x+42, y+32), "red");
+                                    scene.AddTile(redtile);
                                     move = true;//moves
                                     _sprite.Texture = Game.GetTexture("../../../Resources/enemy north.png");//facing to the north texture
                                    
@@ -267,7 +275,8 @@ namespace MyGame
                             {//checks a range instead of float==float
                                 if (x<=1900&&y<=1030)
                                 {
-                                 
+                                    Tile redtile = new Tile(new Vector2f(x-86, y+32), "red");
+                                    scene.AddTile(redtile);
                                     move = true;//moves
                                     _sprite.Texture = Game.GetTexture("../../../Resources/enemy south.png");//facing to the south
                                    
@@ -287,6 +296,8 @@ namespace MyGame
 
                 if (move)
                 {
+                    Tile tile = new Tile(new Vector2f(x-22, y+32), "purple");
+                    scene.AddTile(tile);
                     _movetimer = movedelay;//if the character moved it resets the move timer
                 }
             }
