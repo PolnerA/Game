@@ -9,7 +9,7 @@ namespace MyGame
 {
     class GameScene : Scene
     {
-        private int _lives = 1;//keeps track of lives for the lives UI to track
+        private int _lives = 5;//keeps track of lives for the lives UI to track
         private int _score; //keeps track of score for the score UI to track
         private int tilesplaced = 5;//keeps track of tilesplaced for tilesplaced UI to track
         private bool spellbook;//keeps track of the spellbook toggle for what to display, and for different elements to be able to access it.
