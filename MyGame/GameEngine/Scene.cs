@@ -11,7 +11,7 @@ namespace GameEngine
     {
         // These lists hold various game objects -AP
         private readonly List<GameObject> _gameObjects = new List<GameObject>();
-        //_gameObjects renders for the differing y values giving us true isometric 3d -AP
+        //_gameObjects renders for the differing y values giving us true isometric 3d (2.5d) -AP
         private readonly List<GameObject> _tiles = new List<GameObject>();
         //_tiles gameobject list allows for us to alway render the tiles inbetween the character and the background -AP
         private readonly List<GameObject> _background = new List<GameObject>();
@@ -80,7 +80,7 @@ namespace GameEngine
         }
 
         // This method lets game objects respond to collisions.
-        private void HandleCollisions()//handle collisions is only for _gameObjects-AP
+        private void HandleCollisions()//handle collisions is only for _gameObjects and _cloud-AP
         {
             for (int i = 0; i < _gameObjects.Count; i++)
             {
@@ -97,7 +97,9 @@ namespace GameEngine
                 // See if this game object is colliding with any other game object.
                 for (int j = 0; j < _cloud.Count; j++)
                 {
-                    var otherGameObject = _cloud[j];//Spell for this game is part of the clouds as it needs to be below UI and above game objects Only checks for collisions between _gameObjects and _cloud Lists - AP
+                    var otherGameObject = _cloud[j];
+                    //Spell for this game is part of the clouds as it needs to be below UI and above game objects -AP
+                    //Only checks for collisions between _gameObjects and _cloud Lists - AP
 
                     // Don't check an object colliding with itself.
                     if (gameObject == otherGameObject) continue;
