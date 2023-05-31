@@ -1,6 +1,6 @@
 # Resources for My Game
 
-Place artwork and other files needed by your game in this directory. Examples include:
+Placed artwork and other files needed by the game in this directory. Such as:
 
 - Images
 - Sprites
