@@ -91,7 +91,10 @@ namespace MyGame
             scene.SetTilesPlaced(placedtiles.Count());//sets the tiles placed to the correct value
             if (music)//if at least one tile is spawned music will play
             {
-                sound.Play();
+                if (sound.Status!=SoundStatus.Playing)
+                {
+                    sound.Play();
+                }
             }
             music=false;//music is reset
         }

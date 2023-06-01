@@ -27,7 +27,8 @@ namespace MyGame
 
         //music delay and timer and music for period in between movment (8 seconds)
         private readonly Sound music = new Sound();
-        private const int musicdelay = 8000;
+        private readonly Sound music2 = new Sound();
+        private const int musicdelay = 4000;
         private int musictimer;
         
         //sprite for the character and a position for the enemy to know where to move
@@ -52,6 +53,7 @@ namespace MyGame
             _sprite.Texture = Game.GetTexture("../../../Resources/John South.png");
             _sprite.Position = pos;
             this.pos = pos;
+            music2.SoundBuffer=Game.GetSoundBuffer("../../../Resources/shortCreeping.wav");
             music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortExploration.wav");
             //Sets up position, texture, and the sound buffer
         }
@@ -72,17 +74,18 @@ namespace MyGame
                 musictimer-=mselapsed;
             }
             GameScene scene = (GameScene)Game.CurrentScene;
-            if (0<scene.GetNumOfEnemies())//if there are enemies on the scene it changes the music playing
-            {
-                music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortCreeping.wav");
-            }
-            else
-            {
-                music.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortExploration.wav");
-            }
+            
+            
             if (musictimer<=0)//if it has been 8000 milliseconds since the last music it plays and restarts count
             {
-                music.Play();
+                if (0<scene.GetNumOfEnemies())//if there are enemies on the scene it changes the music playing
+                {
+                    music2.Play();
+                }
+                else
+                {
+                    music.Play();
+                }
                 musictimer=musicdelay;
             }
             //boolean values for deciding the direction
