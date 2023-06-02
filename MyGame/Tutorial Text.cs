@@ -30,7 +30,7 @@ namespace MyGame
             //sprites texture is set to a png with all the textures, the texture is set to the first image with an integer rectangle
             _text.DisplayedString = "There will be enemies you will encounter on your journey";
             //shows the text that will be displayed
-            sprite.Position = new Vector2f(90, 500);
+            sprite.Position = new Vector2f(880, 200);
             //shows the position of the sprite
             tutorialnum=0;
             //tutorial is set to the very beggining
