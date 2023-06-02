@@ -43,6 +43,10 @@ namespace MyGame
         public override void Update(Time elapsed)
         {
             int mselapsed = elapsed.AsMilliseconds();//Counts the time that passed as milliseconds
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+            {
+                Game.RenderWindow.Close();
+            }
             if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer<=0&&tutorialnum==0)//if the mouse button (left) is clicked and enough time has passed, 
             {
                 //changes the position of the text and what it shows, 
@@ -50,7 +54,7 @@ namespace MyGame
                 _text.DisplayedString = "To get rid of them\nPress space to fire a spell\nevery spell you cast decreases your health\nThis is the advanced spellbook it allows you to \ncast spells in all 8 directions";
                 //changes the texture rectangle to show a new texture and moves it somewhere else
                 sprite.TextureRect= new IntRect(84, 0, 24, 34);
-                sprite.Position = new Vector2f(900, 200);                
+                sprite.Position = new Vector2f(900, 250);                
                 //the timer till the next click is reset
                 clicktimer=clickdelay;
                 //the current spot in the tutorial is advanced
