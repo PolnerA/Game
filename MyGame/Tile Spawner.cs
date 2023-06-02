@@ -18,10 +18,9 @@ namespace MyGame
         //tiles that are palced at the beginning of the game are added initially to the list of placedtile.
         private List<Vector2f> placedtiles = new List<Vector2f>() { new Vector2f(100,520), new Vector2f(132, 536), new Vector2f(132, 504), new Vector2f(68, 504), new Vector2f(68, 536) };
         Random rng = new Random();//rng for the spawn of enemies and potions and loot with the tiles
-        private bool music=false;//plays when a new tile is spawned
-        public Sound sound = new Sound();
+        public Sound sound = new Sound();//plays when an enemy spawns
         public Tile_Spawner()
-        {//sound file for how it will sound
+        {//sound file for the sound to sound
             sound.SoundBuffer = Game.GetSoundBuffer("../../../Resources/shortlock.wav");
         }
         public void SpawnThreetiles(bool north, bool south, bool west, bool east,Vector2f pos)
@@ -33,7 +32,6 @@ namespace MyGame
                 placedtiles.Add(new Vector2f(pos.X-32, pos.Y-16));
                 scene.AddTile(_north);
                 tilehas(new Vector2f(pos.X-32, pos.Y-16));
-                music= true;
             }
             if (south)
             {
@@ -41,7 +39,6 @@ namespace MyGame
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y+16));
                 scene.AddTile(_south);
                 tilehas(new Vector2f(pos.X + 32, pos.Y + 16));
-                music=true;
             }
             if (west)
             {
@@ -50,7 +47,6 @@ namespace MyGame
 
                 scene.AddTile(_west);
                 tilehas(new Vector2f(pos.X - 32, pos.Y + 16));
-                music=true;
             }
             if (east)
             {
@@ -58,8 +54,7 @@ namespace MyGame
                 placedtiles.Add(new Vector2f(pos.X+32, pos.Y-16));
                 scene.AddTile(_east);
                 tilehas(new Vector2f(pos.X + 32, pos.Y - 16));
-                music=true;
-            }//music is set to true to play a sound effect every single time you discover a new tile (bool is used to not overlap audio 1 new tile is the same as 2 3 etc..)
+            }
         }
         public void SpawnTiles(Vector2f pos)
         {
@@ -89,14 +84,6 @@ namespace MyGame
             }
             SpawnThreetiles(north,south ,west ,east, pos);//spawns the four tiles if they haven't been set to false
             scene.SetTilesPlaced(placedtiles.Count());//sets the tiles placed to the correct value
-            if (music)//if at least one tile is spawned music will play
-            {
-                if (sound.Status!=SoundStatus.Playing)
-                {
-                    sound.Play();
-                }
-            }
-            music=false;//music is reset
         }
         public void tilehas(Vector2f spawnpos)
         {
@@ -117,6 +104,10 @@ namespace MyGame
                         //gets the current gamescene to increase the number of enemies in it and to add the enemy
                         scene.IncreaseEnemyNum();
                         scene.AddGameObject(enemy);
+                        if (sound.Status != SoundStatus.Playing)//if the sound isn't playing it plays it
+                        {
+                            sound.Play();
+                        }
                         break;
                     case 0:
                         Loot loot = new Loot(spawnpos);// 1 in 16 chance
