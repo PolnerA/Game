@@ -321,18 +321,8 @@ namespace MyGame
                 GameScene scene = (GameScene)Game.CurrentScene;
                 scene.IncreaseScore();//increases the score
                 scene.DecreaseEnemyNum();//decreases the number of enemies read by the game
-                int num = rng.Next(2);//50-50 choice between having a potion or coins when the enemy dies
-                switch (num)
-                {
-                    case 0:
-                        Potion potion = new Potion(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));//the sprites position is +22X -32Y so it gets the tile it needs to spawn on
-                        scene.AddGameObject(potion);
-                        break;
-                    case 1:
-                        Loot loot = new Loot(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));//gets the spawn tile and spawns loot there
-                        scene.AddGameObject(loot);
-                        break;
-                }   
+                Potion potion = new Potion(new Vector2f(_sprite.Position.X-22, _sprite.Position.Y+32));//the sprites position is +22X -32Y so it gets the tile it needs to spawn on
+                scene.AddGameObject(potion);//if you hit the enemy it gives your life that it cost for the spell back  
             }
             MakeDead();
         }
