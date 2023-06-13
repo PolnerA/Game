@@ -312,7 +312,6 @@ namespace MyGame
         {//gets the collision rectangle 
             return _sprite.GetGlobalBounds();// if called upon it gives the sprite's bounds
         }
-        Random rng = new Random();
         public override void HandleCollision(GameObject otherGameObject)//in case of collision
         {
             if (otherGameObject.HasTag("spell"))//if it gets it by a spell
