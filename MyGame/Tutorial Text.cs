@@ -17,7 +17,6 @@ namespace MyGame
         private const int clickdelay = 60;//the time until each click (60 ms)
         private readonly Text _text = new Text();//text stores information such as where it is & what it looks like
         private readonly Sprite sprite = new Sprite();// same with sprite except from a png instead of a font
-
         public Tutorial_Text()
         {//UI
             _text.Font = Game.GetFont("../../../Resources/times new roman.ttf");
@@ -28,9 +27,9 @@ namespace MyGame
             sprite.Texture = Game.GetTexture("../../../Resources/TutorialRect.png");
             sprite.TextureRect = new IntRect(64, 0, 20, 35);
             //sprites texture is set to a png with all the textures, the texture is set to the first image with an integer rectangle
-            _text.DisplayedString = "There will be enemies you will encounter on your journey";
+            _text.DisplayedString = "There will be enemies you will encounter on your journey,\n if they're defeated they drop health potions";
             //shows the text that will be displayed
-            sprite.Position = new Vector2f(880, 200);
+            sprite.Position = new Vector2f(860, 200);
             //shows the position of the sprite
             tutorialnum=0;
             //tutorial is set to the very beggining
@@ -75,7 +74,21 @@ namespace MyGame
                 clicktimer=clickdelay;
 
             }
-            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer <= 0&&tutorialnum==2)
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer<=0&&tutorialnum==2)
+            {//if the left mouse button is pressed and if the click timer indicated enough time has passed and the current position in the tutorial is one
+                //changes the current spot in the tutorial
+                tutorialnum=3;
+                //changes the position of the text, and the texture of the sprite, along with it's position
+                _text.Position = new Vector2f(200, 500);
+                sprite.TextureRect = new IntRect(172, 0,20 ,50);
+                sprite.Position = new Vector2f(100, 450);
+                //changse what the text shows
+                _text.DisplayedString ="This is your character, The only moves he can do are diagonal\nif the sides of the tile are touching, he can move there.";
+                //timer till the next click is reset
+                clicktimer=clickdelay;
+
+            }
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer <= 0&&tutorialnum==3)
             {//if the mouse button is pressed and the clicktimer is done counting, and the current spot in the tutorial is 2
                 //creates a new gamescene for the game
                 GameScene scene = new GameScene(false);//spellbook is set to false by default
