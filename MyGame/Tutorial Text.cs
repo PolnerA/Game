@@ -88,7 +88,35 @@ namespace MyGame
                 clicktimer=clickdelay;
 
             }
-            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer <= 0&&tutorialnum==3)
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer<=0&&tutorialnum==3)
+            {//if the left mouse button is pressed and if the click timer indicated enough time has passed and the current position in the tutorial is one
+                //changes the current spot in the tutorial
+                tutorialnum=4;
+                //changes the position of the text, and the texture of the sprite, along with it's position
+                _text.Position = new Vector2f(200, 500);
+                sprite.TextureRect = new IntRect(195, 0, 60, 50);
+                sprite.Position = new Vector2f(100, 450);
+                //changse what the text shows
+                _text.DisplayedString ="These are coins, they are sometimes on the tiles\nthey increase your score by 10";
+                //timer till the next click is reset
+                clicktimer=clickdelay;
+
+            }
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer<=0&&tutorialnum==4)
+            {//if the left mouse button is pressed and if the click timer indicated enough time has passed and the current position in the tutorial is one
+                //changes the current spot in the tutorial
+                tutorialnum=5;
+                //changes the position of the text, and the texture of the sprite, along with it's position
+                _text.Position = new Vector2f(200, 500);
+                sprite.TextureRect = new IntRect(0, 36, 12, 20);
+                sprite.Position = new Vector2f(100, 450);
+                //changse what the text shows
+                _text.DisplayedString ="These are potions, they are sometimes on the tiles\nthey increase your health by 1";
+                //timer till the next click is reset
+                clicktimer=clickdelay;
+
+            }
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)&&clicktimer <= 0&&tutorialnum==5)
             {//if the mouse button is pressed and the clicktimer is done counting, and the current spot in the tutorial is 2
                 //creates a new gamescene for the game
                 GameScene scene = new GameScene(false);//spellbook is set to false by default
